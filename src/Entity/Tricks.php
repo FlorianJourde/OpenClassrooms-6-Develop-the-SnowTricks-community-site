@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\TrickRepository;
+use App\Repository\TricksRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TrickRepository::class)
+ * @ORM\Entity(repositoryClass=TricksRepository::class)
  */
-class Trick
+class Tricks
 {
     /**
      * @ORM\Id
@@ -21,12 +21,12 @@ class Trick
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name = null;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?DateTimeInterface $createdDate = null;
+    private ?DateTimeInterface $creation_date;
 
     public function getId(): ?int
     {
@@ -45,14 +45,14 @@ class Trick
         return $this;
     }
 
-    public function getCreatedDate(): ?DateTimeInterface
+    public function getCreationDate(): ?DateTimeInterface
     {
-        return $this->createdDate;
+        return $this->creation_date;
     }
 
-    public function setCreatedDate(DateTimeInterface $createdDate): self
+    public function setCreationDate(DateTimeInterface $creation_date): self
     {
-        $this->createdDate = $createdDate;
+        $this->creation_date = $creation_date;
 
         return $this;
     }

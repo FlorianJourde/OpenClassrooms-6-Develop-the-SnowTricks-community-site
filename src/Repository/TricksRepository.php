@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Trick;
+use App\Entity\Tricks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Trick>
+ * @extends ServiceEntityRepository<Tricks>
  *
- * @method Trick|null find($id, $lockMode = null, $lockVersion = null)
- * @method Trick|null findOneBy(array $criteria, array $orderBy = null)
- * @method Trick[]    findAll()
- * @method Trick[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Tricks|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Tricks|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Tricks[]    findAll()
+ * @method Tricks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrickRepository extends ServiceEntityRepository
+class TricksRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Trick::class);
+        parent::__construct($registry, Tricks::class);
     }
 
-    public function add(Trick $entity, bool $flush = false): void
+    public function add(Tricks $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TrickRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Trick $entity, bool $flush = false): void
+    public function remove(Tricks $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TrickRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Trick[] Returns an array of Trick objects
+//     * @return Tricks[] Returns an array of Tricks objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TrickRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Trick
+//    public function findOneBySomeField($value): ?Tricks
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')
