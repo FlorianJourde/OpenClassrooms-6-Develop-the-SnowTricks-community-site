@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\TricksRepository;
+use App\Repository\TrickRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TricksRepository::class)
+ * @ORM\Entity(repositoryClass=TrickRepository::class)
  */
-class Tricks
+class Trick
 {
     /**
      * @ORM\Id
