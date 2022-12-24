@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\UserFixtures;
 use App\Repository\CommentRepository;
 use App\Repository\TrickRepository;
 use App\Repository\UserRepository;
@@ -21,10 +20,21 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $tricksRepository, UserRepository $usersRepository, CommentRepository $commentsRepository): Response
     {
+        $isAuthenticated = false;
+
+        session_start();
+
+        if (!empty($_SESSION)) {
+            var_dump($_SESSION['_sf2_attributes']['_security_main']);
+            $isAuthenticated = true;
+        } else {
+            $isAuthenticated = false;
+        }
+
         $tricks = $tricksRepository->findAll();
         $users = $usersRepository->findAll();
         $comments = $commentsRepository->findAll();
 
-        return $this->render('homepage.html.twig', ['tricks'=>count($tricks), 'users'=>count($users), 'comments'=>count($comments)]);
+        return $this->render('homepage.html.twig', ['tricks'=>count($tricks), 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
     }
 }
