@@ -24,12 +24,7 @@ class HomeController extends AbstractController
 
         session_start();
 
-        if (!empty($_SESSION)) {
-            var_dump($_SESSION['_sf2_attributes']['_security_main']);
-            $isAuthenticated = true;
-        } else {
-            $isAuthenticated = false;
-        }
+        echo '<pre>', var_dump($_SESSION), '</pre>';
 
         $tricks = $tricksRepository->findAll();
         $users = $usersRepository->findAll();
