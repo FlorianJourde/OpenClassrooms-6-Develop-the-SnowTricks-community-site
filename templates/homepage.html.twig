@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {%if is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+    {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <a href="/logout">Déconnexion</a>
     {% else %}
         <a href="/login">Connexion</a>
