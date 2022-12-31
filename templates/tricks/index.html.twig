@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TRICK</h1>
+    <h2><a href="/">Home</a></h2>
+    {% for trick in tricks %}
+        <div>
+{#            <a href="/trick/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+            <a href="{{ path('trick_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>
+        </div>
+    {% endfor %}
+{% endblock %}
