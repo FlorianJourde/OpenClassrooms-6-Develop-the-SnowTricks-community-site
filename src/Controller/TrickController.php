@@ -25,6 +25,7 @@ class TrickController extends AbstractController
         $tricks = $trickRepository->findAll();
         return $this->render('tricks/index.html.twig', ['tricks' => $tricks]);
     }
+
     /**
      * @Route("/tricks/{id}", name="trick_details")
      */
@@ -48,5 +49,17 @@ class TrickController extends AbstractController
         }
 
         return $this->render('tricks/details.html.twig', ['trick' => $trick, 'commentForm' => $commentForm->createView()]);
+    }
+
+    /**
+     * @Route("/admin/tricks/add", name="add_trick")
+     */
+    public function addTrick(Request $request, ManagerRegistry $doctrine): Response
+    {
+//        if(is_granted('IS_AUTHENTICATED_REMEMBERED')) {
+//            return $this->redirectToRoute('app_login');
+//        }
+
+        return $this->render('/admin/add_trick.html.twig'/*, ['addTrickForm' => $addTrickForm->createView()]*/);
     }
 }
