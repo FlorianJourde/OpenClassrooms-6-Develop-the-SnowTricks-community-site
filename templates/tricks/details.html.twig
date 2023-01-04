@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TRICK DETAILS</h1>
+    <h2><a href="/tricks">Tricks</a></h2>
+    <p>{{ trick.id }}</p>
+    <p>{{ trick.name }}</p>
+    <h2>Comments</h2>
+    {% for comment in trick.comments %}
+        <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
+    {% endfor %}
+    {% if is_granted('ROLE_USER') %}
+        {{ form(commentForm) }}
+    {% endif %}
+{% endblock %}

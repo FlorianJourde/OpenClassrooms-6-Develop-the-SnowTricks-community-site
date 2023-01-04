@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Admin !{% endblock %}
+
+{% block body %}
+    <h1>Users list</h1>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+{#        {{ dump(users) }}#}
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                {% for role in user.roles %}
+                    {{ role }}
+                {% endfor %}
+                </td>
+                <td><a href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">Modifier</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Il n'y a pas d'utilisateurs inscrits.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    {{ dump(users) }}#}
+{% endblock %}

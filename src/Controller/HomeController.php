@@ -24,12 +24,12 @@ class HomeController extends AbstractController
 
         session_start();
 
-        echo '<pre>', var_dump($_SESSION), '</pre>';
+//        echo '<pre>', var_dump($_SESSION), '</pre>';
 
         $tricks = $tricksRepository->findAll();
         $users = $usersRepository->findAll();
         $comments = $commentsRepository->findAll();
 
-        return $this->render('homepage.html.twig', ['tricks'=>count($tricks), 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
+        return $this->render('homepage.html.twig', ['tricks'=>$tricks, 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
     }
 }

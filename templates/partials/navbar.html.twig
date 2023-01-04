@@ -1,0 +1,7 @@
+<h1><a href="/">Accueil</a></h1>
+{%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <a href="/logout">Déconnexion</a>
+{% else %}
+    <a href="/login">Connexion</a>
+    <a href="/register">Inscription</a>
+{% endif %}

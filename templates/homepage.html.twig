@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <a href="/logout">Déconnexion</a>
-    {% else %}
-        <a href="/login">Connexion</a>
-        <a href="/register">Inscription</a>
-    {% endif %}
     <h1>Hello !</h1>
-    <h2>{{ tricks }} tricks</h2>
+    <h2><a href="/tricks">Tricks</a></h2>
+    {{ dump(tricks) }}
+    {% for trick in tricks %}
+        <div>
+            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>
+        </div>
+    {% endfor %}
     <h2>{{ users }} users</h2>
     <h2>{{ comments }} comments</h2>
 {% endblock %}
