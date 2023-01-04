@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +53,7 @@ class TrickController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/admin/tricks/add", name="add_trick")
      */
     public function addTrick(Request $request, ManagerRegistry $doctrine): Response
