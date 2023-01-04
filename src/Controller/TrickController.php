@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @Route("/tricks", name="app_tricks_")
  */
-class TricksController extends AbstractController
+class TrickController extends AbstractController
 {
     /**
      * @Route(name="index")

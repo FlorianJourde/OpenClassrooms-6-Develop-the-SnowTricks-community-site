@@ -6,6 +6,7 @@ namespace App\Controller;
 //use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Form\AddTrickType;
 use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use DateTime;
@@ -22,15 +23,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EditorController extends AbstractController
 {
     /**
-     * @IsGranted("ROLE_EDITOR")
+//     * @IsGranted("ROLE_EDITOR")
      * @Route("/tricks/add", name="add_trick")
      */
     public function addTrick(Request $request, ManagerRegistry $doctrine): Response
     {
-//        if(is_granted('IS_AUTHENTICATED_REMEMBERED')) {
-//            return $this->redirectToRoute('app_login');
-//        }
+//        dd($request);
+//        die('test');
+        $trick = new Trick();
+        $form = $this->createForm(AddTrickType::class, $trick);
+        $form->handleRequest($request);
+//
+        if ($form->isSubmitted() && $form->isValid()) {
+//            dd($request);
+//            dd($trick->getName());
+            $trick->setName($trick->getName());
+            $trick->setCreationDate(new DateTime());
+            $em = $doctrine->getManager();
+            $em->persist($trick);
+            $em->flush();
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($trick);
+//            $em->flush();
 
-        return $this->render('/editor/add_trick.html.twig'/*, ['addTrickForm' => $addTrickForm->createView()]*/);
+            $this->addFlash('message', 'Trick ajouté avec succès.');
+            return $this->redirectToRoute('app_tricks_index');
+        }
+
+        return $this->render('/editor/add_trick.html.twig', ['addTrickForm' => $form->createView()]);
     }
 }
