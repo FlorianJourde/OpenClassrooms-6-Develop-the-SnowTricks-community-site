@@ -6,7 +6,8 @@
     {{ dump(tricks) }}
     {% for trick in tricks %}
         <div>
-            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>
+            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>
+{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
         </div>
     {% endfor %}
     <h2>{{ users }} users</h2>
