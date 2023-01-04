@@ -6,8 +6,10 @@
     <p>{{ trick.id }}</p>
     <p>{{ trick.name }}</p>
     <h2>Comments</h2>
-    {{ form(commentForm) }}
     {% for comment in trick.comments %}
         <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
     {% endfor %}
+    {% if is_granted('ROLE_USER') %}
+        {{ form(commentForm) }}
+    {% endif %}
 {% endblock %}
