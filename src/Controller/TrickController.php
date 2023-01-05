@@ -16,10 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/tricks", name="app_tricks_")
+ */
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/tricks", name="tricks")
+     * @Route(name="index")
      */
     public function index(TrickRepository $trickRepository): Response
     {
@@ -28,7 +31,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/tricks/{id}", name="trick_details")
+     * @Route("/{id}", name="details")
      */
     public function details(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -50,18 +53,5 @@ class TrickController extends AbstractController
         }
 
         return $this->render('tricks/details.html.twig', ['trick' => $trick, 'commentForm' => $commentForm->createView()]);
-    }
-
-    /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/admin/tricks/add", name="add_trick")
-     */
-    public function addTrick(Request $request, ManagerRegistry $doctrine): Response
-    {
-//        if(is_granted('IS_AUTHENTICATED_REMEMBERED')) {
-//            return $this->redirectToRoute('app_login');
-//        }
-
-        return $this->render('/admin/add_trick.html.twig'/*, ['addTrickForm' => $addTrickForm->createView()]*/);
     }
 }

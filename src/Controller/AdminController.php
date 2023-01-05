@@ -28,7 +28,7 @@ class AdminController extends AbstractController
 
     /**
      * Users list
-     * @route("/users", name="users")
+     * @Route("/users", name="users")
      */
     public function usersList(UserRepository $users)
     {

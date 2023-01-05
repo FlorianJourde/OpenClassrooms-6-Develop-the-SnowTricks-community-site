@@ -1,7 +1,13 @@
 <h1><a href="/">Accueil</a></h1>
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin_users') }}">Utilisateurs</a>
+{% endif %}
+{% if is_granted('ROLE_EDITOR') %}
+    <a href="{{ path('app_editor_add_trick') }}">Ajouter un trick</a>
+{% endif %}
 {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    <a href="/logout">Déconnexion</a>
+    <a href="{{ path('app_logout') }}">Déconnexion</a>
 {% else %}
-    <a href="/login">Connexion</a>
-    <a href="/register">Inscription</a>
+    <a href="{{ path('app_login') }}">Connexion</a>
+    <a href="{{ path('app_register') }}">Inscription</a>
 {% endif %}
