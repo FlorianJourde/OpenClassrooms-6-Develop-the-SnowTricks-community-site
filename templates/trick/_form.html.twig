@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{#    {{ dump(trick) }}#}
+{#    {{ dump(trick.images) }}#}
+    {% if app.request.attributes.get('_route') == 'app_trick_edit' %}
+        {{ include('trick/_images.html.twig') }}
+    {% endif %}
+
+{{ form_end(form) }}

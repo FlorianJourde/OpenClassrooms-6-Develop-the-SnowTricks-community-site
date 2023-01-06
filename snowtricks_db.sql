@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 04 jan. 2023 à 21:04
+-- Généré le : ven. 06 jan. 2023 à 15:08
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -79,7 +79,23 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20221223213659', '2022-12-23 21:37:08', 37),
 ('DoctrineMigrations\\Version20221223215032', '2022-12-23 21:50:48', 33),
 ('DoctrineMigrations\\Version20221223215149', '2022-12-23 21:59:59', 37),
-('DoctrineMigrations\\Version20221230235837', '2022-12-30 23:58:48', 106);
+('DoctrineMigrations\\Version20221230235837', '2022-12-30 23:58:48', 106),
+('DoctrineMigrations\\Version20230106142406', '2023-01-06 14:24:34', 93);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE IF NOT EXISTS `image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trick_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_C53D045FB281BE2E` (`trick_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -114,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
@@ -125,7 +141,9 @@ INSERT INTO `trick` (`id`, `name`, `creation_date`) VALUES
 (92, 'Trick 1', '2022-12-24 01:12:33'),
 (93, 'Trick 2', '2022-12-24 01:12:33'),
 (94, 'Trick 3', '2022-12-24 01:12:33'),
-(95, 'Trick 4', '2022-12-24 01:12:33');
+(95, 'Trick 4', '2022-12-24 01:12:33'),
+(96, 'Trick 5', '2023-01-04 22:56:29'),
+(97, 'Trick 6', '2023-01-04 22:57:11');
 
 -- --------------------------------------------------------
 
@@ -149,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 (39, 'admin@admin.com', '[\"ROLE_ADMIN\"]', '$2y$13$c1uI0SoKnul3MgEkuVMp9uCsntTPgjrJsgBeidHBoMHc5SpMDCiLK'),
-(40, 'user@user.com', '[\"ROLE_EDITOR\", \"ROLE_USER\"]', '$2y$13$Cyf4Q3HAoVLxN4sL8I6K5OQKgGg2LETdwKrb7luCTn.DkVPX8JNYu');
+(40, 'user@user.com', '{\"1\": \"ROLE_USER\", \"2\": \"ROLE_EDITOR\"}', '$2y$13$Cyf4Q3HAoVLxN4sL8I6K5OQKgGg2LETdwKrb7luCTn.DkVPX8JNYu');
 
 --
 -- Contraintes pour les tables déchargées
@@ -161,6 +179,12 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 ALTER TABLE `comment`
   ADD CONSTRAINT `FK_9474526C727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `comment` (`id`),
   ADD CONSTRAINT `FK_9474526CB281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
+
+--
+-- Contraintes pour la table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `FK_C53D045FB281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

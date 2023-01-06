@@ -1,0 +1,8 @@
+<h2>Images</h2>
+
+{% for image in trick.images %}
+    <div>
+        <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image">
+        <a href="{{ path('app_trick_delete_image', { 'id': image.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
+    </div>
+{% endfor %}

@@ -2,11 +2,13 @@
 
 {% block body %}
     <h1>Hello !</h1>
-    <h2><a href="/tricks">Tricks</a></h2>
+{#    <h2><a href="/tricks">Tricks</a></h2>#}
+    <h2><a href="{{ path('app_trick_index') }}">Tricks</a></h2>
 {#    {{ dump(tricks) }}#}
     {% for trick in tricks %}
         <div>
-            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>
+            <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} ({{ trick.id }})</a>
+{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
 {#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
         </div>
     {% endfor %}
