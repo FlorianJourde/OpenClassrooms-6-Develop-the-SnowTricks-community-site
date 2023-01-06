@@ -27,4 +27,16 @@
     <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
 
     {{ include('trick/_delete_form.html.twig') }}
+    {{ include('trick/_images.html.twig') }}
+
+{#    {{ dump(trick) }}#}
+{#    {{ dump(trick.images) }}#}
+
+    {% for comment in trick.comments %}
+        <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
 {% endblock %}

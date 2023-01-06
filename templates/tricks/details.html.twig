@@ -1,16 +1,16 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>TRICK DETAILS</h1>
-    <h2><a href="{{ path('app_tricks_index') }}">Tricks</a></h2>
-    <p>{{ trick.id }}</p>
-    <p>{{ trick.name }}</p>
-    <p>{{ trick.creationDate|date("m/d/Y") }}</p>
-    <h2>Comments</h2>
-    {% for comment in trick.comments %}
-        <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
-    {% endfor %}
-    {% if is_granted('ROLE_USER') %}
-        {{ form(commentForm) }}
-    {% endif %}
-{% endblock %}
+{#{% block body %}#}
+{#    <h1>TRICK DETAILS</h1>#}
+{#    <h2><a href="{{ path('app_tricks_index') }}">Tricks</a></h2>#}
+{#    <p>{{ trick.id }}</p>#}
+{#    <p>{{ trick.name }}</p>#}
+{#    <p>{{ trick.creationDate|date("m/d/Y") }}</p>#}
+{#    <h2>Comments</h2>#}
+{#    {% for comment in trick.comments %}#}
+{#        <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>#}
+{#    {% endfor %}#}
+{#    {% if is_granted('ROLE_USER') %}#}
+{#        {{ form(commentForm) }}#}
+{#    {% endif %}#}
+{#{% endblock %}#}

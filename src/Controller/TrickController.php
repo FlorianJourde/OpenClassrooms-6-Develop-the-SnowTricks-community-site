@@ -2,10 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Entity\Image;
 use App\Entity\Trick;
+use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use DateTime;
+use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,6 +58,30 @@ class TrickController extends AbstractController
     /**
      * @Route("/", name="app_trick_index", methods={"GET"})
      */
+    public function details(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment->setCreationDate(new DateTime());
+            $comment->setTrick($trick);
+            $comment->setStatus(true);
+            $em = $doctrine->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('app_trick_index', ['id' => $trick->getId()]);
+//            dd($comment);
+        }
+
+        return $this->render('trick/index.html.twig', ['trick' => $trick, 'commentForm' => $commentForm->createView()]);
+    }
+
+    /**
+     * @Route("/", name="app_trick_index", methods={"GET"})
+     */
     public function index(TrickRepository $trickRepository): Response
     {
         return $this->render('trick/index.html.twig', [
@@ -68,6 +99,20 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setCreationDate(new DateTime());
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+                $file = uniqid() . '.' . $image->guessExtension ();
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $file
+                );
+                $img = new Image();
+                $img->setName($file);
+                $trick->addImage($img);
+            }
+
             $trickRepository->add($trick, true);
 
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
@@ -84,6 +129,8 @@ class TrickController extends AbstractController
      */
     public function show(Trick $trick): Response
     {
+//        dd($trick->getImages());
+
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
         ]);
@@ -98,9 +145,23 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setCreationDate(new DateTime());
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image) {
+                $file = uniqid() . '.' . $image->guessExtension ();
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $file
+                );
+                $img = new Image();
+                $img->setName($file);
+                $trick->addImage($img);
+            }
+
             $trickRepository->add($trick, true);
 
-            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_edit', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
@@ -119,5 +180,26 @@ class TrickController extends AbstractController
         }
 
         return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/image/delete", name="app_trick_delete_image", methods={"DELETE"})
+     */
+    public function deleteImage(Image $image, Request $request, ManagerRegistry $doctrine): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if ($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])) {
+            $name = $image->getName();
+            unlink($this->getParameter('images_directory') . '/' . $name);
+
+            $em = $doctrine->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token invalide.'], 400);
+        }
     }
 }
