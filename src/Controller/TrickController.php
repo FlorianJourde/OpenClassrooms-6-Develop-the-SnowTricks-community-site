@@ -41,6 +41,7 @@ class TrickController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);
@@ -48,7 +49,7 @@ class TrickController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('trick_details', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('app_tricks_details', ['id' => $trick->getId()]);
 //            dd($comment);
         }
 
