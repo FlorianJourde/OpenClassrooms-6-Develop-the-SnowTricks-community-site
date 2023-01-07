@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 07 jan. 2023 à 13:24
+-- Généré le : sam. 07 jan. 2023 à 13:39
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526C727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -54,7 +54,8 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (11, 'Test', 1, '2023-01-07 02:52:24', 92, NULL),
 (14, '!!!!!', 1, '2023-01-07 02:56:36', 92, NULL),
 (15, '!!!!', 1, '2023-01-07 12:47:02', 92, NULL),
-(17, '?!', 1, '2023-01-07 13:23:17', 92, NULL);
+(17, '?!', 1, '2023-01-07 13:23:17', 92, NULL),
+(18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20221223215032', '2022-12-23 21:50:48', 33),
 ('DoctrineMigrations\\Version20221223215149', '2022-12-23 21:59:59', 37),
 ('DoctrineMigrations\\Version20221230235837', '2022-12-30 23:58:48', 106),
-('DoctrineMigrations\\Version20230106142406', '2023-01-06 14:24:34', 93);
+('DoctrineMigrations\\Version20230106142406', '2023-01-06 14:24:34', 93),
+('DoctrineMigrations\\Version20230107133407', '2023-01-07 13:34:20', 104);
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -120,7 +122,8 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (32, 107, '63b968916a081.jpg'),
 (33, 107, '63b968aa69913.jpg'),
 (34, 107, '63b968aa6aefa.jpg'),
-(35, 107, '63b968aa6b242.jpg');
+(35, 107, '63b968aa6b242.jpg'),
+(36, 108, '63b975daf26b8.jpg');
 
 -- --------------------------------------------------------
 
@@ -154,24 +157,26 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
-INSERT INTO `trick` (`id`, `name`, `creation_date`) VALUES
-(92, 'Trick 1', '2023-01-07 12:41:30'),
-(93, 'Trick 2', '2022-12-24 01:12:33'),
-(96, 'Trick 5', '2023-01-04 22:56:29'),
-(97, 'Trick 6', '2023-01-04 22:57:11'),
-(98, 'Trick 7', '2023-01-06 19:01:00'),
-(99, 'Trick 8', '2023-01-06 17:53:50'),
-(100, 'Trick 10', '2023-01-07 01:02:56'),
-(102, 'Trick 12', '2023-01-07 12:08:15'),
-(106, 'Trick 13', '2023-01-07 12:31:59'),
-(107, 'Trick 14', '2023-01-07 12:42:18');
+INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`) VALUES
+(92, 'Trick 1', '2023-01-07 13:36:09', 'This is my description blkdfkvjbdfkvjbdkjvbdskvjbkj'),
+(93, 'Trick 2', '2022-12-24 01:12:33', NULL),
+(96, 'Trick 5', '2023-01-04 22:56:29', NULL),
+(97, 'Trick 6', '2023-01-04 22:57:11', NULL),
+(98, 'Trick 7', '2023-01-06 19:01:00', NULL),
+(99, 'Trick 8', '2023-01-06 17:53:50', NULL),
+(100, 'Trick 10', '2023-01-07 01:02:56', NULL),
+(102, 'Trick 12', '2023-01-07 12:08:15', NULL),
+(106, 'Trick 13', '2023-01-07 12:31:59', NULL),
+(107, 'Trick 14', '2023-01-07 12:42:18', NULL),
+(108, 'Trick 15', '2023-01-07 13:38:34', 'Add description to trick 15');
 
 -- --------------------------------------------------------
 

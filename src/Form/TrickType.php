@@ -14,7 +14,7 @@ class TrickType extends AbstractType
     {
         $builder
             ->add('name')
-//            ->add('creation_date')
+            ->add('description')
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,

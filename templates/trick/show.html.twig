@@ -16,6 +16,10 @@
                 <td>{{ trick.name }}</td>
             </tr>
             <tr>
+                <th>Description</th>
+                <td>{{ trick.description }}</td>
+            </tr>
+            <tr>
                 <th>Creation_date</th>
                 <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
