@@ -17,10 +17,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/trick")
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_EDITOR")
  */
 class TrickController extends AbstractController
 {
+    private function addImages($form, $trick, TrickRepository $trickRepository)
+    {
+        $trick->setCreationDate(new DateTime());
+        $images = $form->get('images')->getData();
+
+        foreach ($images as $image) {
+            $file = uniqid() . '.' . $image->guessExtension ();
+            $image->move(
+                $this->getParameter('images_directory'),
+                $file
+            );
+            $img = new Image();
+            $img->setName($file);
+            $trick->addImage($img);
+        }
+
+        $trickRepository->add($trick, true);
+    }
+
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
@@ -31,21 +50,7 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trick->setCreationDate(new DateTime());
-            $images = $form->get('images')->getData();
-
-            foreach ($images as $image) {
-                $file = uniqid() . '.' . $image->guessExtension ();
-                $image->move(
-                    $this->getParameter('images_directory'),
-                    $file
-                );
-                $img = new Image();
-                $img->setName($file);
-                $trick->addImage($img);
-            }
-
-            $trickRepository->add($trick, true);
+            $this->addImages($form, $trick, $trickRepository);
 
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -65,22 +70,8 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $trick->setCreationDate(new DateTime());
-            $images = $form->get('images')->getData();
-
-            foreach ($images as $image) {
-                $file = uniqid() . '.' . $image->guessExtension ();
-                $image->move(
-                    $this->getParameter('images_directory'),
-                    $file
-                );
-                $img = new Image();
-                $img->setName($file);
-                $trick->addImage($img);
-            }
-
-            $trickRepository->add($trick, true);
-
+            $this->addImages($form, $trick, $trickRepository);
+//
             return $this->redirectToRoute('app_trick_edit', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 

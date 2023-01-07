@@ -24,20 +24,30 @@
 
     <a href="{{ path('app_trick_index') }}">back to list</a>
 
-    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+    {% if is_granted('ROLE_EDITOR') %}
+        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+    {% endif %}
 
-    {{ include('trick/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_EDITOR') %}
+        {{ include('trick/_delete_form.html.twig') }}
+    {% endif %}
+
     {{ include('trick/_images.html.twig') }}
 
-    <h2>Comments</h2>
+    {% if trick.comments is not empty %}
+        <h2>Comments</h2>
 
-    {% for comment in trick.comments %}
-        <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
-    {% endfor %}
+        {% for comment in trick.comments %}
+            <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
+        {% endfor %}
+    {% endif %}
 
     {% if is_granted('ROLE_USER') %}
         {{ include('trick/_add_comment_form.html.twig') }}
+    {% else %}
+        <h3>Veuillez vous connecter pour laisser un commentaire.</h3>
     {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}

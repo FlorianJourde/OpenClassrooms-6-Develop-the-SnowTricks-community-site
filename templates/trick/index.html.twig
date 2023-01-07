@@ -22,7 +22,9 @@
                 <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -33,5 +35,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_trick_new') }}">Create new</a>
+    {% if is_granted('ROLE_EDITOR') %}
+        <a href="{{ path('app_trick_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}
