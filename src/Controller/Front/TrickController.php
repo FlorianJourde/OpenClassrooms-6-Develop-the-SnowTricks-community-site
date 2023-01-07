@@ -33,24 +33,14 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_trick_show", methods={"GET", "POST"})
+     * @Route("/{id}", name="app_trick_show")
      */
     public function show(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
     {
-//        dd($trick->getImages());
-
-//        $comment = new Comment();
-//        $commentForm = $this->createForm(CommentType::class, $comment);
-//        $commentForm->handleRequest($request);
-
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-
-//        if ($commentForm->isSubmitted()) {
-
-//            dd($request);
         if ($form->isSubmitted() && $form->isValid()) {
             dd($form);
             $comment->setCreationDate(new DateTime());
@@ -60,10 +50,7 @@ class TrickController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-
-//            return $this->redirectToRoute('app_trick_index', ['id' => $trick->getId()]);
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()]);
-//            dd($comment);
         }
 
         return $this->render('trick/show.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
