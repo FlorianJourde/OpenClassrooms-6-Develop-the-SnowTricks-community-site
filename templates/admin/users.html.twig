@@ -22,7 +22,10 @@
                     {{ role }}
                 {% endfor %}
                 </td>
-                <td><a href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">Modifier</a></td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td><a href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">Modifier</a></td>
+                    <td>{{ include('admin/_delete_user.html.twig') }}</td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
