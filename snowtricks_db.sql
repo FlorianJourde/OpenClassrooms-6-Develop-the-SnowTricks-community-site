@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 07 jan. 2023 à 13:39
+-- Généré le : sam. 07 jan. 2023 à 19:32
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526C727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -55,7 +55,8 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (14, '!!!!!', 1, '2023-01-07 02:56:36', 92, NULL),
 (15, '!!!!', 1, '2023-01-07 12:47:02', 92, NULL),
 (17, '?!', 1, '2023-01-07 13:23:17', 92, NULL),
-(18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, NULL);
+(18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, NULL),
+(19, '???', 1, '2023-01-07 18:00:34', 106, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,10 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20221223215149', '2022-12-23 21:59:59', 37),
 ('DoctrineMigrations\\Version20221230235837', '2022-12-30 23:58:48', 106),
 ('DoctrineMigrations\\Version20230106142406', '2023-01-06 14:24:34', 93),
-('DoctrineMigrations\\Version20230107133407', '2023-01-07 13:34:20', 104);
+('DoctrineMigrations\\Version20230107133407', '2023-01-07 13:34:20', 104),
+('DoctrineMigrations\\Version20230107180054', '2023-01-07 18:01:03', 31),
+('DoctrineMigrations\\Version20230107180920', '2023-01-07 18:09:24', 49),
+('DoctrineMigrations\\Version20230107181755', '2023-01-07 18:18:02', 35);
 
 -- --------------------------------------------------------
 
@@ -102,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -149,6 +153,35 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `specificity`
+--
+
+DROP TABLE IF EXISTS `specificity`;
+CREATE TABLE IF NOT EXISTS `specificity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trick_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_EA204E50B281BE2E` (`trick_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `specificity`
+--
+
+INSERT INTO `specificity` (`id`, `name`, `description`, `icon`, `trick_id`) VALUES
+(1, 'Niveau 1', 'Facile', NULL, NULL),
+(2, 'Niveau 2', 'Facile', NULL, NULL),
+(3, 'Niveau 3', 'Moyen', NULL, NULL),
+(4, 'Niveau 4', 'Moyen', NULL, NULL),
+(5, 'Niveau 5', 'dvdfvfd', NULL, NULL),
+(8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `trick`
 --
 
@@ -159,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `creation_date` datetime NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
@@ -219,6 +252,12 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `image`
   ADD CONSTRAINT `FK_C53D045FB281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
+
+--
+-- Contraintes pour la table `specificity`
+--
+ALTER TABLE `specificity`
+  ADD CONSTRAINT `FK_EA204E50B281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
