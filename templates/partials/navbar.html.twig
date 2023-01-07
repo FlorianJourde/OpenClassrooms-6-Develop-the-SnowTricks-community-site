@@ -3,7 +3,8 @@
     <a href="{{ path('app_admin_users') }}">Utilisateurs</a>
 {% endif %}
 {% if is_granted('ROLE_EDITOR') %}
-    <a href="{{ path('app_trick_new') }}">Ajouter un nouveau trick</a>
+    <a href="{{ path('app_trick_index') }}">Tricks</a>
+    <a href="{{ path('app_specificity_index') }}">Decriptions techniques</a>
 {#    <a href="{{ path('app_editor_add_trick') }}">Ajouter un trick</a>#}
 {% endif %}
 {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

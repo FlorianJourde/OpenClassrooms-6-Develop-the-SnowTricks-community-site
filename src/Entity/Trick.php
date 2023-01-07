@@ -45,10 +45,16 @@ class Trick
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Specificity::class, mappedBy="trick", orphanRemoval=true)
+     */
+    private $specificities;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->specificities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +154,36 @@ class Trick
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Specificity>
+     */
+    public function getSpecificities(): Collection
+    {
+        return $this->specificities;
+    }
+
+    public function addSpecificity(Specificity $specificity): self
+    {
+        if (!$this->specificities->contains($specificity)) {
+            $this->specificities[] = $specificity;
+            $specificity->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecificity(Specificity $specificity): self
+    {
+        if ($this->specificities->removeElement($specificity)) {
+            // set the owning side to null (unless already changed)
+            if ($specificity->getTrick() === $this) {
+                $specificity->setTrick(null);
+            }
+        }
 
         return $this;
     }

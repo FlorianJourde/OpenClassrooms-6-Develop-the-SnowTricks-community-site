@@ -21,25 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TrickController extends AbstractController
 {
-    private function addImages($form, $trick, TrickRepository $trickRepository)
-    {
-        $trick->setCreationDate(new DateTime());
-        $images = $form->get('images')->getData();
-
-        foreach ($images as $image) {
-            $file = uniqid() . '.' . $image->guessExtension ();
-            $image->move(
-                $this->getParameter('images_directory'),
-                $file
-            );
-            $img = new Image();
-            $img->setName($file);
-            $trick->addImage($img);
-        }
-
-        $trickRepository->add($trick, true);
-    }
-
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
@@ -102,7 +83,7 @@ class TrickController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])) {
             $name = $image->getName();
-            unlink($this->getParameter('images_directory') . '/' . $name);
+            unlink($this->getParameter('images_directory') . '/tricks/' . $name);
 
             $em = $doctrine->getManager();
             $em->remove($image);
@@ -112,5 +93,24 @@ class TrickController extends AbstractController
         } else {
             return new JsonResponse(['error' => 'Token invalide.'], 400);
         }
+    }
+
+    private function addImages($form, $trick, TrickRepository $trickRepository)
+    {
+        $trick->setCreationDate(new DateTime());
+        $images = $form->get('images')->getData();
+
+        foreach ($images as $image) {
+            $file = uniqid() . '.' . $image->guessExtension ();
+            $image->move(
+                $this->getParameter('images_directory') . "/tricks/",
+                $file
+            );
+            $img = new Image();
+            $img->setName($file);
+            $trick->addImage($img);
+        }
+
+        $trickRepository->add($trick, true);
     }
 }
