@@ -46,7 +46,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Specificity::class, mappedBy="trick", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick")
      */
     private $specificities;
 
@@ -170,7 +170,7 @@ class Trick
     {
         if (!$this->specificities->contains($specificity)) {
             $this->specificities[] = $specificity;
-            $specificity->setTrick($this);
+            $specificity->addTrick($this);
         }
 
         return $this;
@@ -179,10 +179,7 @@ class Trick
     public function removeSpecificity(Specificity $specificity): self
     {
         if ($this->specificities->removeElement($specificity)) {
-            // set the owning side to null (unless already changed)
-            if ($specificity->getTrick() === $this) {
-                $specificity->setTrick(null);
-            }
+            $specificity->removeTrick($this);
         }
 
         return $this;

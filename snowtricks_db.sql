@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 07 jan. 2023 à 19:32
+-- Généré le : sam. 07 jan. 2023 à 20:17
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -91,7 +91,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230107133407', '2023-01-07 13:34:20', 104),
 ('DoctrineMigrations\\Version20230107180054', '2023-01-07 18:01:03', 31),
 ('DoctrineMigrations\\Version20230107180920', '2023-01-07 18:09:24', 49),
-('DoctrineMigrations\\Version20230107181755', '2023-01-07 18:18:02', 35);
+('DoctrineMigrations\\Version20230107181755', '2023-01-07 18:18:02', 35),
+('DoctrineMigrations\\Version20230107194513', '2023-01-07 19:45:29', 79),
+('DoctrineMigrations\\Version20230107195139', '2023-01-07 19:51:57', 58);
 
 -- --------------------------------------------------------
 
@@ -162,22 +164,36 @@ CREATE TABLE IF NOT EXISTS `specificity` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `trick_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_EA204E50B281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `specificity`
 --
 
-INSERT INTO `specificity` (`id`, `name`, `description`, `icon`, `trick_id`) VALUES
-(1, 'Niveau 1', 'Facile', NULL, NULL),
-(2, 'Niveau 2', 'Facile', NULL, NULL),
-(3, 'Niveau 3', 'Moyen', NULL, NULL),
-(4, 'Niveau 4', 'Moyen', NULL, NULL),
-(5, 'Niveau 5', 'dvdfvfd', NULL, NULL),
-(8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg', NULL);
+INSERT INTO `specificity` (`id`, `name`, `description`, `icon`) VALUES
+(1, 'Niveau 1', 'Facile', NULL),
+(2, 'Niveau 2', 'Facile', NULL),
+(3, 'Niveau 3', 'Moyen', NULL),
+(4, 'Niveau 4', 'Moyen', NULL),
+(5, 'Niveau 5', 'dvdfvfd', NULL),
+(8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg'),
+(11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `specificity_trick`
+--
+
+DROP TABLE IF EXISTS `specificity_trick`;
+CREATE TABLE IF NOT EXISTS `specificity_trick` (
+  `specificity_id` int(11) NOT NULL,
+  `trick_id` int(11) NOT NULL,
+  PRIMARY KEY (`specificity_id`,`trick_id`),
+  KEY `IDX_BDC251155F69A929` (`specificity_id`),
+  KEY `IDX_BDC25115B281BE2E` (`trick_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -254,10 +270,11 @@ ALTER TABLE `image`
   ADD CONSTRAINT `FK_C53D045FB281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
 
 --
--- Contraintes pour la table `specificity`
+-- Contraintes pour la table `specificity_trick`
 --
-ALTER TABLE `specificity`
-  ADD CONSTRAINT `FK_EA204E50B281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
+ALTER TABLE `specificity_trick`
+  ADD CONSTRAINT `FK_BDC251155F69A929` FOREIGN KEY (`specificity_id`) REFERENCES `specificity` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_BDC25115B281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

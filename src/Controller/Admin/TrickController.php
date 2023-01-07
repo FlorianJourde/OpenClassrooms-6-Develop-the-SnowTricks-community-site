@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Image;
+use App\Entity\Specificity;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
@@ -24,7 +25,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, TrickRepository $trickRepository): Response
+    public function new(Request $request, TrickRepository $trickRepository, ManagerRegistry $doctrine): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
