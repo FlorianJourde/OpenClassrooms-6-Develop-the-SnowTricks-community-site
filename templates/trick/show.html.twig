@@ -32,9 +32,15 @@
 {#    {{ dump(trick) }}#}
 {#    {{ dump(trick.images) }}#}
 
+    <h2>Comments</h2>
+
     {% for comment in trick.comments %}
         <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.content }}</span></p>
     {% endfor %}
+
+    {% if is_granted('ROLE_USER') %}
+        {{ form(form) }}
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
