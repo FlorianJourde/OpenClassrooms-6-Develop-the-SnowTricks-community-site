@@ -3,16 +3,12 @@
 namespace App\Controller\Front;
 
 use App\Entity\Comment;
-use App\Entity\Image;
 use App\Entity\Trick;
 use App\Form\CommentType;
-use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
-use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,22 +23,32 @@ class TrickController extends AbstractController
      */
     public function index(TrickRepository $trickRepository): Response
     {
+//        dd($request);
+//        dd($trick->getId());
+
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_trick_show")
+     * @Route("/{id}", name="app_trick_show", methods={"GET", "POST"})
      */
-    public function show(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
+    public function addComment(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
     {
+//        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
+//            $trickRepository->remove($trick, true);
+//        }
+//
+//        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+//        dd($trick);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form);
+//            dd($comment, $form);
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);
@@ -50,11 +56,62 @@ class TrickController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
+
+//            return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('trick/show.html.twig', ['trick' => $trick, 'form' => $form->createView()]);
+//        return $this->renderForm('trick/_add_comment_form.html.twig', [
+//            'trick' => $trick,
+//            'commentForm' => $form,
+//        ]);
+
+        return $this->render('trick/show.html.twig', ['id' => $trick->getId(), 'trick' => $trick, 'commentForm' => $form->createView()]);
     }
+
+//    /**
+//     * @Route("/{id}", name="app_trick_show")
+//     */
+//    public function show(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
+//    {
+////        $comment = new Comment();
+////        $commentForm = $this->createForm(CommentType::class, $comment);
+////        $commentForm->handleRequest($request);
+////
+////        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+////            dd($commentForm);
+////            $comment->setCreationDate(new DateTime());
+////            $comment->setTrick($trick);
+////            $comment->setStatus(true);
+////            $em = $doctrine->getManager();
+////            $em->persist($comment);
+////            $em->flush();
+////
+////            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()]);
+////        }
+//
+////        $comment = new Comment();
+////        $commentForm = $this->createForm(CommentType::class, $comment);
+////        $commentForm->handleRequest($request);
+//
+////        dd($trick->getId());
+//
+////        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+////            dd($commentForm->getData());
+////            $comment->setCreationDate(new DateTime());
+////            $comment->setTrick($trick);
+////            $comment->setStatus(true);
+////            $em = $doctrine->getManager();
+////            $em->persist($comment);
+////            $em->flush();
+////
+////            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()]);
+////        }
+//
+//        return $this->render('trick/show.html.twig', ['id' => $trick->getId(), 'trick' => $trick]);
+//
+////        return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId(), 'commentForm' => $form->createView()], Response::HTTP_SEE_OTHER);
+//    }
 
 //    /**
 //     * @Route(name="index")

@@ -94,7 +94,7 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_trick_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="app_trick_delete", methods={"POST"})
      */
     public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
