@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 07 jan. 2023 à 20:17
+-- Généré le : dim. 08 jan. 2023 à 18:04
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526C727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -56,7 +56,8 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (15, '!!!!', 1, '2023-01-07 12:47:02', 92, NULL),
 (17, '?!', 1, '2023-01-07 13:23:17', 92, NULL),
 (18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, NULL),
-(19, '???', 1, '2023-01-07 18:00:34', 106, NULL);
+(19, '???', 1, '2023-01-07 18:00:34', 106, NULL),
+(20, 'ddd', 1, '2023-01-08 17:02:32', 92, NULL);
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -124,7 +125,6 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (20, 100, '63b8c4c015d81.jpg'),
 (23, 102, '63b960af9ea34.jpg'),
 (29, 106, '63b9663fe71a4.jpg'),
-(30, 92, '63b9687a0ed8c.jpg'),
 (32, 107, '63b968916a081.jpg'),
 (33, 107, '63b968aa69913.jpg'),
 (34, 107, '63b968aa6aefa.jpg'),
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `specificity` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `specificity`
@@ -178,7 +178,8 @@ INSERT INTO `specificity` (`id`, `name`, `description`, `icon`) VALUES
 (4, 'Niveau 4', 'Moyen', NULL),
 (5, 'Niveau 5', 'dvdfvfd', NULL),
 (8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg'),
-(11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg');
+(11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg'),
+(12, 'Niveau 9', 'Difficile', '63baf73e8f7aa.jpg');
 
 -- --------------------------------------------------------
 
@@ -195,6 +196,18 @@ CREATE TABLE IF NOT EXISTS `specificity_trick` (
   KEY `IDX_BDC25115B281BE2E` (`trick_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `specificity_trick`
+--
+
+INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
+(1, 96),
+(4, 92),
+(8, 92),
+(8, 93),
+(11, 92),
+(11, 93);
+
 -- --------------------------------------------------------
 
 --
@@ -208,14 +221,14 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `creation_date` datetime NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
 INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`) VALUES
-(92, 'Trick 1', '2023-01-07 13:36:09', 'This is my description blkdfkvjbdfkvjbdkjvbdskvjbkj'),
+(92, 'Trick 1', '2023-01-08 17:01:44', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj'),
 (93, 'Trick 2', '2022-12-24 01:12:33', NULL),
 (96, 'Trick 5', '2023-01-04 22:56:29', NULL),
 (97, 'Trick 6', '2023-01-04 22:57:11', NULL),
@@ -241,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
