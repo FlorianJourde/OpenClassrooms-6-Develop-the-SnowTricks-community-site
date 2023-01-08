@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use DateTime;
@@ -31,16 +32,18 @@ class TrickController extends AbstractController
     /**
      * @Route("/{id}", name="app_trick_show")
      */
-    public function show(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
+    public function show(Trick $trick, Request $request, /*User $user, */ManagerRegistry $doctrine): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);
+            $comment->setUser($this->getUser());
+
             $em = $doctrine->getManager();
             $em->persist($comment);
             $em->flush();
@@ -48,6 +51,6 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('trick/show.html.twig', ['id' => $trick->getId(), 'trick' => $trick, 'commentForm' => $form->createView()]);
+        return $this->render('trick/show.html.twig', ['id' => $trick->getId(), 'trick' => $trick, 'commentForm' => $commentForm->createView()]);
     }
 }

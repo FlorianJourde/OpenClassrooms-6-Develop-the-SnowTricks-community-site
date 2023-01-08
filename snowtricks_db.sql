@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 08 jan. 2023 à 18:04
+-- Généré le : dim. 08 jan. 2023 à 18:41
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -34,30 +34,33 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `status` tinyint(1) NOT NULL,
   `creation_date` datetime NOT NULL,
   `trick_id` int(11) NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
-  KEY `IDX_9474526C727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `IDX_9474526CA76ED395` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
-INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `parent_id`) VALUES
-(1, 'Hello !', 1, '2022-12-31 00:30:27', 93, NULL),
-(2, 'Hello !', 1, '2022-12-31 00:31:29', 93, NULL),
-(3, 'Pardon ?', 1, '2022-12-31 00:31:52', 93, NULL),
-(5, '???', 1, '2023-01-03 21:26:40', 92, NULL),
-(8, '!', 1, '2023-01-07 00:59:28', 93, NULL),
-(10, '!!!', 1, '2023-01-07 02:50:47', 92, NULL),
-(11, 'Test', 1, '2023-01-07 02:52:24', 92, NULL),
-(14, '!!!!!', 1, '2023-01-07 02:56:36', 92, NULL),
-(15, '!!!!', 1, '2023-01-07 12:47:02', 92, NULL),
-(17, '?!', 1, '2023-01-07 13:23:17', 92, NULL),
-(18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, NULL),
-(19, '???', 1, '2023-01-07 18:00:34', 106, NULL),
-(20, 'ddd', 1, '2023-01-08 17:02:32', 92, NULL);
+INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `user_id`) VALUES
+(1, 'Hello !', 1, '2022-12-31 00:30:27', 93, 39),
+(2, 'Hello !', 1, '2022-12-31 00:31:29', 93, 40),
+(3, 'Pardon ?', 1, '2022-12-31 00:31:52', 93, 39),
+(5, '???', 1, '2023-01-03 21:26:40', 92, 39),
+(8, '!', 1, '2023-01-07 00:59:28', 93, 40),
+(10, '!!!', 1, '2023-01-07 02:50:47', 92, 40),
+(11, 'Test', 1, '2023-01-07 02:52:24', 92, 40),
+(14, '!!!!!', 1, '2023-01-07 02:56:36', 92, 41),
+(15, '!!!!', 1, '2023-01-07 12:47:02', 92, 39),
+(17, '?!', 1, '2023-01-07 13:23:17', 92, 41),
+(18, 'Add comment to trick 15', 1, '2023-01-07 13:38:53', 108, 41),
+(19, '???', 1, '2023-01-07 18:00:34', 106, 41),
+(20, 'ddd', 1, '2023-01-08 17:02:32', 92, 41),
+(21, 'sdcds', 1, '2023-01-08 18:19:39', 102, 39),
+(22, 'Sympaaa !', 1, '2023-01-08 18:20:54', 98, 39),
+(23, 'Ok...', 1, '2023-01-08 18:26:20', 98, 39);
 
 -- --------------------------------------------------------
 
@@ -94,7 +97,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230107180920', '2023-01-07 18:09:24', 49),
 ('DoctrineMigrations\\Version20230107181755', '2023-01-07 18:18:02', 35),
 ('DoctrineMigrations\\Version20230107194513', '2023-01-07 19:45:29', 79),
-('DoctrineMigrations\\Version20230107195139', '2023-01-07 19:51:57', 58);
+('DoctrineMigrations\\Version20230107195139', '2023-01-07 19:51:57', 58),
+('DoctrineMigrations\\Version20230108180906', '2023-01-08 18:09:11', 120),
+('DoctrineMigrations\\Version20230108181302', '2023-01-08 18:13:08', 103);
 
 -- --------------------------------------------------------
 
@@ -120,7 +125,6 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (3, 99, '63b8602e88ec9.jpg'),
 (14, 98, '63b86fdf8fbcd.jpg'),
 (15, 98, '63b86fecaa88b.jpg'),
-(16, 98, '63b86fecabef4.jpg'),
 (19, 100, '63b8bc0666326.jpg'),
 (20, 100, '63b8c4c015d81.jpg'),
 (23, 102, '63b960af9ea34.jpg'),
@@ -165,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `specificity` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `specificity`
@@ -179,7 +183,8 @@ INSERT INTO `specificity` (`id`, `name`, `description`, `icon`) VALUES
 (5, 'Niveau 5', 'dvdfvfd', NULL),
 (8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg'),
 (11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg'),
-(12, 'Niveau 9', 'Difficile', '63baf73e8f7aa.jpg');
+(12, 'Niveau 9', 'Difficile', '63baf73e8f7aa.jpg'),
+(13, 'Niveau 9', 'Description', '63bb0c8b425d1.png');
 
 -- --------------------------------------------------------
 
@@ -202,11 +207,14 @@ CREATE TABLE IF NOT EXISTS `specificity_trick` (
 
 INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
 (1, 96),
-(4, 92),
-(8, 92),
+(1, 98),
+(3, 98),
+(5, 108),
 (8, 93),
 (11, 92),
-(11, 93);
+(11, 93),
+(12, 108),
+(13, 92);
 
 -- --------------------------------------------------------
 
@@ -273,7 +281,7 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 -- Contraintes pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_9474526C727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `comment` (`id`),
+  ADD CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_9474526CB281BE2E` FOREIGN KEY (`trick_id`) REFERENCES `trick` (`id`);
 
 --
