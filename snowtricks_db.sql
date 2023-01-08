@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 08 jan. 2023 à 18:41
+-- Généré le : dim. 08 jan. 2023 à 18:51
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -176,11 +176,11 @@ CREATE TABLE IF NOT EXISTS `specificity` (
 --
 
 INSERT INTO `specificity` (`id`, `name`, `description`, `icon`) VALUES
-(1, 'Niveau 1', 'Facile', NULL),
-(2, 'Niveau 2', 'Facile', NULL),
-(3, 'Niveau 3', 'Moyen', NULL),
-(4, 'Niveau 4', 'Moyen', NULL),
-(5, 'Niveau 5', 'dvdfvfd', NULL),
+(1, 'Niveau 1', 'Facile', '63bb10402c951.png'),
+(2, 'Niveau 2', 'Facile', '63bb104aaec63.png'),
+(3, 'Niveau 3', 'Moyen', '63bb1052680bf.png'),
+(4, 'Niveau 4', 'Moyen', '63bb10107b08a.png'),
+(5, 'Niveau 5', 'dvdfvfd', '63bb10584e238.png'),
 (8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg'),
 (11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg'),
 (12, 'Niveau 9', 'Difficile', '63baf73e8f7aa.jpg'),
@@ -206,13 +206,16 @@ CREATE TABLE IF NOT EXISTS `specificity_trick` (
 --
 
 INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
+(1, 93),
 (1, 96),
 (1, 98),
+(2, 93),
+(3, 93),
 (3, 98),
 (5, 108),
-(8, 93),
 (11, 92),
 (11, 93),
+(12, 92),
 (12, 108),
 (13, 92);
 
@@ -237,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `trick` (
 
 INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`) VALUES
 (92, 'Trick 1', '2023-01-08 17:01:44', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj'),
-(93, 'Trick 2', '2022-12-24 01:12:33', NULL),
+(93, 'Trick 2', '2023-01-08 18:50:21', NULL),
 (96, 'Trick 5', '2023-01-04 22:56:29', NULL),
 (97, 'Trick 6', '2023-01-04 22:57:11', NULL),
 (98, 'Trick 7', '2023-01-06 19:01:00', NULL),
