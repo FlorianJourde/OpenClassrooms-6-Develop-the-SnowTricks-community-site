@@ -57,7 +57,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("users/delete/{id}", name="delete_user")
+     * @Route("/users/delete/{id}", name="delete_user")
      */
     public function delete(User $user, UserRepository $userRepository, Request $request): Response
     {
