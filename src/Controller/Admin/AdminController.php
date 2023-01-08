@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\EditUserType;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin", name="app_admin_")
+ * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController
 {
@@ -27,12 +29,10 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Users list
      * @Route("/users", name="users")
      */
     public function usersList(UserRepository $users)
     {
-//        dd($users->findAll());
         return $this->render('admin/users.html.twig', ['users' => $users->findAll()]);
     }
 
@@ -41,7 +41,7 @@ class AdminController extends AbstractController
      */
     public function editUser(User $user, Request $request, ManagerRegistry $doctrine)
     {
-        $form = $this->createForm(EditUserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,5 +54,17 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/edit_user.html.twig', [ 'userForm' => $form->createView() ]);
+    }
+
+    /**
+     * @Route("/users/delete/{id}", name="delete_user")
+     */
+    public function delete(User $user, UserRepository $userRepository, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $userRepository->remove($user, true);
+        }
+
+        return $this->redirectToRoute('app_admin_users', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Repository\CommentRepository;
 use App\Repository\TrickRepository;
@@ -23,8 +23,6 @@ class HomeController extends AbstractController
         $isAuthenticated = false;
 
         session_start();
-
-//        echo '<pre>', var_dump($_SESSION), '</pre>';
 
         $tricks = $tricksRepository->findAll();
         $users = $usersRepository->findAll();
