@@ -111,37 +111,11 @@ class TrickController extends AbstractController
             }
         }
 
-//        dump($selectedSpecificitiesId);
-//        dump($selectedSpecificities);
-//        dump($unselectedSpecificities);
-//        die();
-
-//        dd($selectedSpecificities, $unselectedSpecificities);
-//        dd();
-//        dd($allSpecificities, $currentSpecificities);
-//        $specificitiesArray = [];
-//        $trick = $trickRepository->findBy()
-
-//        $em = $doctrine->createQueryBuilder()->select('trick.id');
-
-//        $trick = new Trick();
-//        $currentSpecificities = new Specificity();
-//        $trick->getName();
-
-//        foreach ($specificities as $specificity) {
-//           $specificitiesArray[] = $specificity->getTrick();
-//            dd($specificity->getTrick());
-//        }
-
-//        dd($specificitiesArray);
-//        dd($specificities, $trick->getSpecificities());
-//        dd($trick);
-//        dd($em);
-//        dd($trick->getSpecificities());
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
-//
+//            dd($trick->getVideo());
+            $this->addVideo($form, $trick, $trickRepository);
+
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
@@ -203,5 +177,15 @@ class TrickController extends AbstractController
         }
 
         $trickRepository->add($trick, true);
+    }
+
+    private function addVideo($form, $trick, TrickRepository $trickRepository)
+    {
+            $videoLink = $form->get('video')->getData();
+            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/' )+1);
+//            dd($videoLink);
+            $trick->setVideo($videoLink);
+
+            $trickRepository->add($trick, true);
     }
 }

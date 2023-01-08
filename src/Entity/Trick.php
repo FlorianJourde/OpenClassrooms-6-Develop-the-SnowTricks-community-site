@@ -51,6 +51,11 @@ class Trick
      */
     private $specificities;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $video;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -182,6 +187,18 @@ class Trick
         if ($this->specificities->removeElement($specificity)) {
             $specificity->removeTrick($this);
         }
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }

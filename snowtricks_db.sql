@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 08 jan. 2023 à 18:51
+-- Généré le : dim. 08 jan. 2023 à 19:39
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -99,7 +99,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230107194513', '2023-01-07 19:45:29', 79),
 ('DoctrineMigrations\\Version20230107195139', '2023-01-07 19:51:57', 58),
 ('DoctrineMigrations\\Version20230108180906', '2023-01-08 18:09:11', 120),
-('DoctrineMigrations\\Version20230108181302', '2023-01-08 18:13:08', 103);
+('DoctrineMigrations\\Version20230108181302', '2023-01-08 18:13:08', 103),
+('DoctrineMigrations\\Version20230108190704', '2023-01-08 19:07:10', 86);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -133,7 +134,8 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (33, 107, '63b968aa69913.jpg'),
 (34, 107, '63b968aa6aefa.jpg'),
 (35, 107, '63b968aa6b242.jpg'),
-(36, 108, '63b975daf26b8.jpg');
+(36, 108, '63b975daf26b8.jpg'),
+(37, 92, '63bb1a43e8246.jpg');
 
 -- --------------------------------------------------------
 
@@ -231,6 +233,7 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `creation_date` datetime NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci,
+  `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -238,18 +241,18 @@ CREATE TABLE IF NOT EXISTS `trick` (
 -- Déchargement des données de la table `trick`
 --
 
-INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`) VALUES
-(92, 'Trick 1', '2023-01-08 17:01:44', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj'),
-(93, 'Trick 2', '2023-01-08 18:50:21', NULL),
-(96, 'Trick 5', '2023-01-04 22:56:29', NULL),
-(97, 'Trick 6', '2023-01-04 22:57:11', NULL),
-(98, 'Trick 7', '2023-01-06 19:01:00', NULL),
-(99, 'Trick 8', '2023-01-06 17:53:50', NULL),
-(100, 'Trick 10', '2023-01-07 01:02:56', NULL),
-(102, 'Trick 12', '2023-01-07 12:08:15', NULL),
-(106, 'Trick 13', '2023-01-07 12:31:59', NULL),
-(107, 'Trick 14', '2023-01-07 12:42:18', NULL),
-(108, 'Trick 15', '2023-01-07 13:38:34', 'Add description to trick 15');
+INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`) VALUES
+(92, 'Trick 1', '2023-01-08 19:37:15', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj', 'JCjmmlvVnc8'),
+(93, 'Trick 2', '2023-01-08 19:31:31', NULL, '8KotvBY28Mo'),
+(96, 'Trick 5', '2023-01-04 22:56:29', NULL, NULL),
+(97, 'Trick 6', '2023-01-04 22:57:11', NULL, NULL),
+(98, 'Trick 7', '2023-01-06 19:01:00', NULL, NULL),
+(99, 'Trick 8', '2023-01-06 17:53:50', NULL, NULL),
+(100, 'Trick 10', '2023-01-07 01:02:56', NULL, NULL),
+(102, 'Trick 12', '2023-01-07 12:08:15', NULL, NULL),
+(106, 'Trick 13', '2023-01-07 12:31:59', NULL, NULL),
+(107, 'Trick 14', '2023-01-07 12:42:18', NULL, NULL),
+(108, 'Trick 15', '2023-01-07 13:38:34', 'Add description to trick 15', NULL);
 
 -- --------------------------------------------------------
 

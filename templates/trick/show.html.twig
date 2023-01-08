@@ -35,6 +35,14 @@
                     </td>
                 {% endfor %}
             </tr>
+            {% if trick.video is not null and trick.video is not empty %}
+                <tr>
+                    <th>Vidéo</th>
+                    <td>
+                        <iframe src="https://www.youtube.com/embed/{{ trick.video }}"></iframe>
+                    </td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
