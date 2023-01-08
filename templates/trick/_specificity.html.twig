@@ -1,0 +1,27 @@
+{% if trick.id is not null %}
+    {#{{ dump(unselectedSpecificities) }}#}
+    {#{{ dump(selectedSpecificities) }}#}
+
+    {% for unselectedSpecificity in unselectedSpecificities %}
+        <div>
+            <form method="post" action="{{ path('app_trick_add_specificity', { 'id_1': trick.id, 'id_2': unselectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to add this specificity ?');"#}>
+                <span> {{ unselectedSpecificity.name }} </span>
+                <span> {{ unselectedSpecificity.description }} </span>
+                <button class="btn" type="submit">Ajouter</button>
+            </form>
+        </div>
+    {% endfor %}
+
+    <br>
+
+    {% for selectedSpecificity in selectedSpecificities %}
+        <div>
+            <form method="post" action="{{ path('app_trick_remove_specificity', { 'id_1': trick.id, 'id_2': selectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to remove this specificity ?');"#}>
+                <span> {{ selectedSpecificity.name }} </span>
+                <span> {{ selectedSpecificity.description }} </span>
+                <button class="btn" type="submit">Supprimer</button>
+            </form>
+        </div>
+    {% endfor %}
+
+{% endif %}

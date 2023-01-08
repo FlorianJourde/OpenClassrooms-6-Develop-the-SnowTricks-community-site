@@ -46,7 +46,8 @@ class Trick
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick")
+     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinTable(name="specificity_trick")
      */
     private $specificities;
 

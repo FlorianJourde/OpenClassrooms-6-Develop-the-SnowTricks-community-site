@@ -5,11 +5,15 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Entity\Specificity;
 use App\Entity\Trick;
+use App\Form\SpecificityType;
 use App\Form\TrickType;
+use App\Repository\SpecificityRepository;
 use App\Repository\TrickRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +29,11 @@ class TrickController extends AbstractController
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, TrickRepository $trickRepository, ManagerRegistry $doctrine): Response
+    public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
     {
         $trick = new Trick();
-        $form = $this->createForm(TrickType::class, $trick);
+        $specificities = $specificityRepository->findAll();
+        $form = $this->createForm(TrickType::class, $trick/*, ['specificities' => $specificities]*/);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,16 +45,99 @@ class TrickController extends AbstractController
         return $this->renderForm('trick/new.html.twig', [
             'trick' => $trick,
             'form' => $form,
+            'specificities' => $specificities
         ]);
+    }
+
+    /**
+     * @Route("/{id_1}/add-specificity/{id_2}", name="app_trick_add_specificity", methods={"POST"})
+     * @ParamConverter("id_1", options={"mapping": {" id_1 " : "trick.id"}})
+     * @ParamConverter("id_2", options={"mapping": {" id_2 " : "specificity.id"}})
+     * @Template()
+     */
+    public function addSpecificity(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $trick = $em->getRepository(Trick::class)->find($request->get('id_1'));
+        $specificity = $em->getRepository(Specificity::class)->find($request->get('id_2'));
+        $specificity->addTrick($trick);
+        $em->persist($specificity);
+        $em->persist($trick);
+        $em->flush();
+
+        return $this->redirectToRoute('app_trick_edit', ['id' => $request->get('id_1')], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id_1}/remove-specificity/{id_2}", name="app_trick_remove_specificity", methods={"POST"})
+     * @ParamConverter("id_1", options={"mapping": {" id_1 " : "trick.id"}})
+     * @ParamConverter("id_2", options={"mapping": {" id_2 " : "specificity.id"}})
+     * @Template()
+     */
+    public function removeSpecificity(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $trick = $em->getRepository(Trick::class)->find($request->get('id_1'));
+        $specificity = $em->getRepository(Specificity::class)->find($request->get('id_2'));
+        $specificity->removeTrick($trick);
+        $em->persist($specificity);
+        $em->flush();
+
+        return $this->redirectToRoute('app_trick_edit', ['id' => $request->get('id_1')], Response::HTTP_SEE_OTHER);
     }
 
     /**
      * @Route("/{id}/edit", name="app_trick_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository): Response
+    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        $specificities = $specificityRepository->findAll();
+        $currentSpecificities = $trick->getSpecificities();
+        $selectedSpecificitiesId = [];
+        $selectedSpecificities = [];
+        $unselectedSpecificities = [];
+
+        foreach ($currentSpecificities as $currentSpecificity) {
+            $selectedSpecificitiesId[] = $currentSpecificity->getId();
+        }
+
+        foreach ($specificities as $specificity) {
+            if (!(in_array($specificity->getId(), $selectedSpecificitiesId))) {
+                $unselectedSpecificities[] = $specificity;
+            } else {
+                $selectedSpecificities[] = $specificity;
+            }
+        }
+
+//        dump($selectedSpecificitiesId);
+//        dump($selectedSpecificities);
+//        dump($unselectedSpecificities);
+//        die();
+
+//        dd($selectedSpecificities, $unselectedSpecificities);
+//        dd();
+//        dd($allSpecificities, $currentSpecificities);
+//        $specificitiesArray = [];
+//        $trick = $trickRepository->findBy()
+
+//        $em = $doctrine->createQueryBuilder()->select('trick.id');
+
+//        $trick = new Trick();
+//        $currentSpecificities = new Specificity();
+//        $trick->getName();
+
+//        foreach ($specificities as $specificity) {
+//           $specificitiesArray[] = $specificity->getTrick();
+//            dd($specificity->getTrick());
+//        }
+
+//        dd($specificitiesArray);
+//        dd($specificities, $trick->getSpecificities());
+//        dd($trick);
+//        dd($em);
+//        dd($trick->getSpecificities());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
@@ -60,6 +148,8 @@ class TrickController extends AbstractController
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form,
+            'unselectedSpecificities' => $unselectedSpecificities,
+            'selectedSpecificities' => $selectedSpecificities,
         ]);
     }
 

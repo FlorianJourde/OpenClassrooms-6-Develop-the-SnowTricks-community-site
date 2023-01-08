@@ -35,7 +35,8 @@ class Specificity
     private $icon;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Trick::class, inversedBy="specificities")
+     * @ORM\ManyToMany(targetEntity=Trick::class, inversedBy="specificities", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinTable(name="specificity_trick")
      */
     private $trick;
 
