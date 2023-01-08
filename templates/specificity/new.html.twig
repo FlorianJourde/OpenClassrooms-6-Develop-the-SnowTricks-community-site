@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Specificity{% endblock %}
+
+{% block body %}
+    <h1>Create new Specificity</h1>
+
+    {{ include('specificity/_form.html.twig') }}
+
+    <a href="{{ path('app_specificity_index') }}">back to list</a>
+{% endblock %}

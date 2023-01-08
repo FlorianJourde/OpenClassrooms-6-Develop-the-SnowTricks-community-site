@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trick index{% endblock %}
+
+{% block body %}
+    <h1>Trick index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Creation_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trick in tricks %}
+            <tr>
+                <td>{{ trick.id }}</td>
+                <td>{{ trick.name }}</td>
+                <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_EDITOR') %}
+        <a href="{{ path('app_trick_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

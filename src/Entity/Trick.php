@@ -35,9 +35,32 @@ class Trick
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick", cascade={"persist"}, fetch="EAGER")
+     * @ORM\JoinTable(name="specificity_trick")
+     */
+    private $specificities;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $video;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->specificities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +118,87 @@ class Trick
                 $comment->setTrick(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Specificity>
+     */
+    public function getSpecificities(): Collection
+    {
+        return $this->specificities;
+    }
+
+    public function addSpecificity(Specificity $specificity): self
+    {
+        if (!$this->specificities->contains($specificity)) {
+            $this->specificities[] = $specificity;
+            $specificity->addTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecificity(Specificity $specificity): self
+    {
+        if ($this->specificities->removeElement($specificity)) {
+            $specificity->removeTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }

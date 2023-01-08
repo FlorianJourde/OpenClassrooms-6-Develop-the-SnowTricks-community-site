@@ -42,19 +42,9 @@ class Comment
     private $trick;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="replies")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      */
-    private $parent;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
-     */
-    private $replies;
-
-    public function __construct()
-    {
-        $this->replies = new ArrayCollection();
-    }
+    private $user;
 
     public function getId(): ?int
     {
@@ -109,44 +99,14 @@ class Comment
         return $this;
     }
 
-    public function getParent(): ?self
+    public function getUser(): ?User
     {
-        return $this->parent;
+        return $this->user;
     }
 
-    public function setParent(?self $parent): self
+    public function setUser(?User $user): self
     {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, self>
-     */
-    public function getReplies(): Collection
-    {
-        return $this->replies;
-    }
-
-    public function addReply(self $reply): self
-    {
-        if (!$this->replies->contains($reply)) {
-            $this->replies[] = $reply;
-            $reply->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReply(self $reply): self
-    {
-        if ($this->replies->removeElement($reply)) {
-            // set the owning side to null (unless already changed)
-            if ($reply->getParent() === $this) {
-                $reply->setParent(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }
