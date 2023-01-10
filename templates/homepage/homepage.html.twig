@@ -22,37 +22,47 @@
 		<div class="wrapper">
 			<div class="title">
 				<h2 class="section-title">Tous les tricks</h2>
-				<div class="posts">
-					<div class="post">
-						<img loading="lazy" class="thumbnail" src="/ressources/images/posts/634bfdddabbdc6.47285436.jpg" alt="">
-						<div class="actions icon-spacing white">
-							<a href="/article/modification/55">
-								<i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
-							<a href="/article/suppression/55">
-								<i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
-						</div>
-						<div class="content">
-							<h3 class="title">7 astuces pour exceller en design</h3>
-							<p class="description">Remarque
-																
-																Le contenu de cet article n'est pas original. Il est utilisé à titre d'exemple, dans l'att...</p>
-							<a class="button-secondary rotate-icon button-white" href="/article/55">Lire l'article<i class="fas fa-arrow-right" aria-hidden="true"></i>
+				<div
+					class="tricks">
+					{# {{ dump(images) }} #}
+					{% for trick in tricks %}
+						{# {{ dump(trick.id) }} #}
+						<div class="trick">
+                            {% for image in images %}
+                                {% if image.trick.id is same as trick.id %}
+                                    {{ dump(image.trick.id) }}
+                                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}" style="'background: url()'">
+                                {% endif %}
+                            {% endfor %}
+								<div class="content">
+									<h3 class="title">{{ trick.name }}
+										{{ trick.id }}</h3>
+									<p class="description"></p>
+								</div>
 							</a>
-						</div>
-					</div>
-				</div>
-				{#    {{ dump(tricks) }}#}
-				{% for trick in tricks %}
-					<div>
-						<a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }}
-							({{ trick.id }})</a>
-						{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
-						{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+						{# <img
+												loading="lazy" class="thumbnail" src="/ressources/images/posts/634bfdddabbdc6.47285436.jpg" alt=""> #}
+						{# <div class="actions icon-spacing white">
+																                            <a href="/article/modification/55">
+																                                <i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
+																                            <a href="/article/suppression/55">
+																                                <i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
+																                        </div> #}
+
 					</div>
 				{% endfor %}
-				{# <h2>{{ users }} users</h2> #}
-				{# <h2>{{ comments }} comments</h2> #}
 			</div>
+			{#    {{ dump(tricks) }}#}
+		{# {% for trick in tricks %} #}
+			{# <div> #}
+			{# <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} #}
+			{# ({{ trick.id }})</a> #}
+			{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
+			{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+			{# </div> #}
+			{# {% endfor %} #}
+			{# <h2>{{ users }} users</h2> #}
+			{# <h2>{{ comments }} comments</h2> #}
 		</div>
-	</section>
-{% endblock %}
+	</div>
+</section>{% endblock %}
