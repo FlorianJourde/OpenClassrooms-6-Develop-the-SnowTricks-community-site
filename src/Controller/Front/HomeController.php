@@ -28,6 +28,6 @@ class HomeController extends AbstractController
         $users = $usersRepository->findAll();
         $comments = $commentsRepository->findAll();
 
-        return $this->render('homepage.html.twig', ['tricks'=>$tricks, 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
+        return $this->render('homepage/homepage.html.twig', ['tricks'=>$tricks, 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
     }
 }
