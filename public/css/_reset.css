@@ -51,7 +51,7 @@ body {
   width: 100%;
   font-family: var(--ff-primary);
   background-color: var(--clr-white);
-  color: var(--clr-very-dark-grey);
+  color: var(--clr-dark-grey);
   word-break: break-word;
 }
 

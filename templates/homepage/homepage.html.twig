@@ -1,21 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="wrapper">
-        {# {% block body %} #}
-            <h1>Hello !</h1>
-        {#    <h2><a href="/tricks">Tricks</a></h2>#}
-            <h2><a href="{{ path('app_trick_index') }}">Tricks</a></h2>
-        {#    {{ dump(tricks) }}#}
-            {% for trick in tricks %}
-                <div>
-                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} ({{ trick.id }})</a>
-        {#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
-        {#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
-                </div>
-            {% endfor %}
-            <h2>{{ users }} users</h2>
-            <h2>{{ comments }} comments</h2>
-        {# {% endblock %} #}
-    </div>
+	<section class="banner home" style="background-image: url('{{ asset('images/mountains-3.jpg') }}');">
+		<div class="wrapper">
+			<div class="title">
+				<h1>Snowtricks</h1>
+				<h2>Partagez votre passion du snowboard avec une communauté de passionnés !</h2>
+			</div>
+		</div>
+	</section>
+	<main class="introduction">
+		<div class="wrapper">
+			<h2 class="section-title">Bienvenue sur Snowtricks !</h2>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui deleniti voluptatem amet sapiente ullam voluptas delectus, quia ipsa consequatur aliquam expedita explicabo, praesentium deserunt! Porro amet animi voluptatum perspiciatis. Veritatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae corrupti, officiis veniam quasi, minima recusandae pariatur qui accusamus adipisci, facere maiores culpa labore animi hic consectetur. Distinctio animi accusantium perferendis.</p>
+			<br>
+			<p>Quod odio praesentium similique numquam fugit, blanditiis mollitia exercitationem dolorem cum officia voluptatum magnam reiciendis perferendis quibusdam repellendus adipisci eum maiores sint doloribus officiis molestias nemo distinctio. Cum, non natus.</p>
+		</div>
+	</main>
+
+	<section class="tricks">
+		<div class="wrapper">
+			<div class="title">
+				<h2 class="section-title">Tous les tricks</h2>
+				<div class="posts">
+					<div class="post">
+						<img loading="lazy" class="thumbnail" src="/ressources/images/posts/634bfdddabbdc6.47285436.jpg" alt="">
+						<div class="actions icon-spacing white">
+							<a href="/article/modification/55">
+								<i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
+							<a href="/article/suppression/55">
+								<i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
+						</div>
+						<div class="content">
+							<h3 class="title">7 astuces pour exceller en design</h3>
+							<p class="description">Remarque
+																
+																Le contenu de cet article n'est pas original. Il est utilisé à titre d'exemple, dans l'att...</p>
+							<a class="button-secondary rotate-icon button-white" href="/article/55">Lire l'article<i class="fas fa-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				{#    {{ dump(tricks) }}#}
+				{% for trick in tricks %}
+					<div>
+						<a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }}
+							({{ trick.id }})</a>
+						{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
+						{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+					</div>
+				{% endfor %}
+				{# <h2>{{ users }} users</h2> #}
+				{# <h2>{{ comments }} comments</h2> #}
+			</div>
+		</div>
+	</section>
 {% endblock %}

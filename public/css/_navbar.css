@@ -14,7 +14,7 @@ nav {
   width: 100%;
   padding-bottom: 20px;
   padding-top: 20px;
-  box-shadow: var(--bs-secondary);
+  /* box-shadow: var(--bs-secondary); */
   align-items: center;
 }
 
@@ -28,6 +28,9 @@ nav {
   align-items: center;
   gap: 10px 20px;
   transition: .4s;
+  text-transform: uppercase;
+  font-family: var(--ff-secondary);
+  font-weight: 600;
 }
 
 .open-menu, .close-menu {
@@ -64,7 +67,7 @@ nav {
   font-family: var(--ff-secondary);
   font-size: var(--fs-title);
   line-height: 1em;
-  color: var(--clr-black);
+  color: var(--clr-dark-grey);
   /* width: 200px; */
 }
 

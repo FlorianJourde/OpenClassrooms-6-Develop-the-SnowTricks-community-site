@@ -1,29 +1,49 @@
-<div class="navbar">
-    <div class="wrapper">
-        <div class="logo">
-            <a href="/">
-            <img src="{{ asset('images/snowtricks-logo.svg') }}" alt="">
-                Accueil
-            </a>
-        </div>
-        <div class="menu">
-            <div class="navigation-links">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_admin_users') }}">Utilisateurs</a>
-                {% endif %}
-                {% if is_granted('ROLE_EDITOR') %}
-                    <a href="{{ path('app_trick_index') }}">Tricks</a>
-                    <a href="{{ path('app_specificity_index') }}">Decriptions techniques</a>
-                {% endif %}
+<nav>
+    <div class="navbar">
+        <div class="wrapper">
+            <div class="logo">
+                <a href="{{ path('homepage') }}">
+                    <img src="{{ asset('images/snowtricks-logo.svg') }}" alt="">
+                    Snow<span style="color: var(--clr-dark-blue); font-weight: 300;">tricks</span>
+                </a>
             </div>
-            <div class="navigation-users">
-                {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Connexion</a>
-                    <a href="{{ path('app_register') }}">Inscription</a>
-                {% endif %}
+            <div class="menu">
+                <ul class="navigation-links">
+                    <li>
+                        <a class="button-tertiary button-black" href="{{ path('app_trick_index') }}">Tricks</a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a class="button-tertiary button-black" href="{{ path('app_admin_users') }}">Utilisateurs</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <li>
+                            <a class="button-tertiary button-black" href="{{ path('app_specificity_index') }}">Decriptions techniques</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navigation-user">
+                    {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li>
+                            <a class="button-secondary button-black" href="{{ path('app_logout') }}">
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Déconnexion
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="button-secondary button-black" href="{{ path('app_register') }}">
+                                <i class="fas fa-user-plus" aria-hidden="true"></i>Inscription
+                            </a>
+                        </li>
+                        <li>
+                            <a class="button-primary button-blue" href="{{ path('app_login') }}">
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i>Connexion
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
-</div>
+</nav>
