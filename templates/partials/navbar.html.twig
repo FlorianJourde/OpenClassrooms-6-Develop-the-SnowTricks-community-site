@@ -26,7 +26,7 @@
                 <ul class="navigation-user">
                     {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li>
-                            <a class="button-secondary button-black" href="{{ path('app_logout') }}">
+                            <a class="button-primary button-black" href="{{ path('app_logout') }}">
                                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Déconnexion
                             </a>
                         </li>

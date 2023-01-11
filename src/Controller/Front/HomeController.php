@@ -21,35 +21,16 @@ class HomeController extends AbstractController
      * @param CommentRepository $commentsRepository
      * @return Response
      */
-    public function index(TrickRepository $tricksRepository, ImageRepository $imagesRepository, UserRepository $usersRepository, CommentRepository $commentsRepository): Response
+    public function index(TrickRepository $tricksRepository, UserRepository $usersRepository, CommentRepository $commentsRepository): Response
     {
         $isAuthenticated = false;
 
         session_start();
 
         $tricks = $tricksRepository->findAll();
-        $images = $imagesRepository->findAll();
-        
-        // dd($tricks);
-        // foreach ($tricks as $trick) {
-            // dump($trick);
-            // foreach ($images as $image) {
-
-                // if ($trick->getId() === $image->getId()) {
-
-                // }
-                // dump($image);
-            // }
-        // }
-
-
-
-        // die();
-        // dd($tricks, $images);
-
         $users = $usersRepository->findAll();
         $comments = $commentsRepository->findAll();
 
-        return $this->render('homepage/homepage.html.twig', ['tricks'=>$tricks, 'images'=>$images, 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
+        return $this->render('homepage/homepage.html.twig', ['tricks'=>$tricks, 'users'=>count($users), 'comments'=>count($comments), 'is_authenticated'=>$isAuthenticated]);
     }
 }

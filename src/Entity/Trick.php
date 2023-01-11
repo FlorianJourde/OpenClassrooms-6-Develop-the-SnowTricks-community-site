@@ -36,7 +36,7 @@ class Trick
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
      */
     private $images;
 

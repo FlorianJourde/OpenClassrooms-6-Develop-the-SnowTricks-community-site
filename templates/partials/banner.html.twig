@@ -1,0 +1,10 @@
+<section class="banner {{ is_home ? 'home' }}" style="background-image: url('{{ asset('images/' ~ background_image) }}');">
+  <div class="wrapper">
+    <div class="title">
+      <h1>{{ title }}</h1>
+      {% if description is defined %}
+        <h2>{{ description }}</h2>
+      {% endif %}
+    </div>
+  </div>
+</section>

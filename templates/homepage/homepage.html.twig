@@ -1,15 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<section class="banner home" style="background-image: url('{{ asset('images/mountains-3.jpg') }}');">
-		<div class="wrapper">
-			<div class="title">
-				<h1>Snowtricks</h1>
-				<h2>Partagez votre passion du snowboard avec une communauté de passionnés !</h2>
-			</div>
-		</div>
-	</section>
-	<main class="introduction">
+
+	{% include 'partials/banner.html.twig' with { is_home: true, background_image: 'mountains-3.jpg', title: 'Snowtricks', description: 'Partagez votre passion du snowboard avec une communauté de passionnés !' } %}
+
+	<main class="introduction" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
 		<div class="wrapper">
 			<h2 class="section-title">Bienvenue sur Snowtricks !</h2>
 			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui deleniti voluptatem amet sapiente ullam voluptas delectus, quia ipsa consequatur aliquam expedita explicabo, praesentium deserunt! Porro amet animi voluptatum perspiciatis. Veritatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae corrupti, officiis veniam quasi, minima recusandae pariatur qui accusamus adipisci, facere maiores culpa labore animi hic consectetur. Distinctio animi accusantium perferendis.</p>
@@ -18,51 +13,42 @@
 		</div>
 	</main>
 
-	<section class="tricks">
+	<section class="archive">
 		<div class="wrapper">
-			<div class="title">
-				<h2 class="section-title">Tous les tricks</h2>
-				<div
-					class="tricks">
-					{# {{ dump(images) }} #}
-					{% for trick in tricks %}
-						{# {{ dump(trick.id) }} #}
-						<div class="trick">
-                            {% for image in images %}
-                                {% if image.trick.id is same as trick.id %}
-                                    {{ dump(image.trick.id) }}
-                                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}" style="'background: url()'">
-                                {% endif %}
-                            {% endfor %}
-								<div class="content">
-									<h3 class="title">{{ trick.name }}
-										{{ trick.id }}</h3>
-									<p class="description"></p>
-								</div>
-							</a>
-						{# <img
-												loading="lazy" class="thumbnail" src="/ressources/images/posts/634bfdddabbdc6.47285436.jpg" alt=""> #}
-						{# <div class="actions icon-spacing white">
-																                            <a href="/article/modification/55">
-																                                <i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
-																                            <a href="/article/suppression/55">
-																                                <i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
-																                        </div> #}
+			<h2 class="section-title">Tous les tricks</h2>
+			<div class="tricks">
+				{% for trick in tricks %}
 
-					</div>
-				{% endfor %}
+						{% if trick.images|first %}
+							<a class="trick" href="{{ path('app_trick_show', {'id': trick.id}) }}" style="background-image: url('{{ asset('uploads/tricks/' ~ trick.images|first.name) }}');">
+						{% else %}
+							<a class="trick" href="{{ path('app_trick_show', {'id': trick.id}) }}" style="background-image: url('{{ asset('images/mountains-5-small.jpg') }}');">
+						{% endif %}
+						
+							{# <div class="actions icon-spacing white">
+								<a href="/article/modification/55">
+									<i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
+								<a href="/article/suppression/55">
+									<i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
+							</div> #}
+
+							<div class="content">
+								<h3 class="title">{{ trick.name }}</h3>
+								<p class="description">{{ trick.id }}</p>
+							</div>
+						</a>
+
+					{% endfor %}
+				</div>
+				{#    {{ dump(tricks) }}#}
+				{# {% for trick in tricks %} #}
+				{# <div> #}
+				{# <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} #}
+				{# ({{ trick.id }})</a> #}
+				{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
+				{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+				{# </div> #}
+				{# {% endfor %} #}
 			</div>
-			{#    {{ dump(tricks) }}#}
-		{# {% for trick in tricks %} #}
-			{# <div> #}
-			{# <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} #}
-			{# ({{ trick.id }})</a> #}
-			{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
-			{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
-			{# </div> #}
-			{# {% endfor %} #}
-			{# <h2>{{ users }} users</h2> #}
-			{# <h2>{{ comments }} comments</h2> #}
-		</div>
-	</div>
-</section>{% endblock %}
+		</section>
+	{% endblock %}

@@ -135,7 +135,7 @@
   color: var(--clr-white);
 }
 
-.button-dark-orange:hover, .button-blue:hover, .button-very-dark-purple:hover, .button-very-dark-green:hover, .button-dark-pink:hover, .button-very-dark-yellow:hover, .button-very-dark-blue:hover, ::-webkit-file-upload-button:hover {
+.button-dark-orange:hover, .button-blue:hover, .button-orange:hover, .button-very-dark-purple:hover, .button-very-dark-green:hover, .button-dark-pink:hover, .button-dark-red:hover,.button-primary.button-dark-red:hover, .button-very-dark-yellow:hover, .button-very-dark-blue:hover, ::-webkit-file-upload-button:hover {
   background-color: var(--clr-very-dark-grey);
 }
 
@@ -148,9 +148,21 @@
   color: var(--clr-white);
 }
 
+.button-dark-red {
+  background-color: var(--clr-dark-red);
+  color: var(--clr-white);
+}
+
+.button-orange {
+  background-color: var(--clr-orange);
+  color: var(--clr-white);
+}
+
 .button-primary.button-blue {
   background-color: var(--clr-dark-blue);
-  /* border: 3px solid var(--clr-dark-blue); */
+}
+.button-primary.button-red {
+  background-color: var(--clr-dark-red);
 }
 
 .button-primary.button-green {

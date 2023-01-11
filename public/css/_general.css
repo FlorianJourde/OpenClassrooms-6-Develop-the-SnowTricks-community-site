@@ -22,7 +22,7 @@
   top: 0;
   left: 0;
   position: absolute;
-  opacity: 0.25;
+  opacity: 0.5;
   background-color: var(--clr-dark-grey);
   pointer-events: none;
 }
@@ -42,13 +42,25 @@
 .introduction {
   padding-top: 150px;
   padding-bottom: 150px;
-  background-color: var(--clr-white);
+  background-repeat: no-repeat;
+  background-size: 1000px;
+  background-position: bottom 0 right -300px;
 }
 
-.tricks {
+.archive, section.users {
   padding-top: 150px;
   padding-bottom: 150px;
+}
+
+section.archive {
   background-color: var(--clr-very-light-blue);
+}
+
+.archive .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 50px;
+  margin-bottom: 50px;
 }
 
 .introduction p {
@@ -63,4 +75,56 @@
   font-size: var(--fs-big-title);
   font-family: var(--ff-secondary);
   font-weight: 600;
+}
+
+.tricks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 80px 50px;
+  grid-auto-rows: 1fr;
+}
+
+.trick {
+  display: flex;
+  flex-direction: column;
+  padding: 120px 40px 0 40px;
+  /* background: var(--clr-radial-very-dark-grey); */
+  color: var(--clr-dark-grey);
+  background-size: cover;
+  background-position: center;
+}
+
+.trick .content {
+  background-color: var(--clr-white);
+  box-shadow: var(--bs-secondary);
+  padding: 20px;
+  transform: translateY(40px);
+}
+
+.table {
+  width: 100%;
+  background-color: var(--clr-white);
+}
+
+.table tbody {
+  text-align: center;
+}
+
+.table th, .table td {
+  padding: 10px;
+}
+
+.table th:has(.button-primary), .table td:has(.button-primary) {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.table thead tr {
+  background-color: var(--clr-dark-blue);
+  color: var(--clr-white);
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--clr-very-light-blue);
 }

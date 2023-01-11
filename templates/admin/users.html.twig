@@ -1,38 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Admin !{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Users list</h1>
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Rôles</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-{#        {{ dump(users) }}#}
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                {% for role in user.roles %}
-                    {{ role }}
+
+	{% include 'partials/banner.html.twig' with { is_home: false, background_image: 'mountains-2.jpg', title: block('title') } %}
+
+	<section class="users">
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Rôles</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+        {#        {{ dump(users) }}#}
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                {{ (role == 'ROLE_USER') ? 'Utilisateur' }}
+                                {{ (role == 'ROLE_EDITOR') ? 'Editeur' }}
+                                {{ (role == 'ROLE_ADMIN') ? 'Administrateur' }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            {{ include('admin/_delete_user.html.twig') }}
+                        </td>
+                    </tr>
                 {% endfor %}
-                </td>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <td><a href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">Modifier</a></td>
-                    <td>{{ include('admin/_delete_user.html.twig') }}</td>
-                {% endif %}
-            </tr>
-        {% else %}
-            <tr>
-                <td>Il n'y a pas d'utilisateurs inscrits.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{#    {{ dump(users) }}#}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
 {% endblock %}
