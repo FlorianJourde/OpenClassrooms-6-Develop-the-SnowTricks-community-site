@@ -29,7 +29,7 @@ input, textarea, ::-webkit-file-upload-button {
   box-shadow: var(--bs-primary);
 }
 
-input[type=submit] {
+button, input[type=submit] {
   cursor: pointer;
 }
 
@@ -59,7 +59,7 @@ body {
   word-break: break-word;
 }
 
-a, input {
+a, input, button {
   text-decoration: none;
   transition: background-color .4s, color .4s, border .4s;
 }

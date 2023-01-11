@@ -4,18 +4,18 @@
 
 {% block body %}
 
-	{% include 'partials/banner.html.twig' with { is_home: false, background_image: 'mountains-4.jpg', title: block('title') } %}
+	{% include 'partials/banner.html.twig' with { background_image: 'mountains-4.jpg', title: block('title') } %}
 
 	<main class="archive">
         <div class="wrapper">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Nom</th>
                         <th>Description</th>
-                        <th>Icon</th>
-                        <th>actions</th>
+                        <th>Icône</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,10 +27,10 @@
                         <td>{{ specificity.icon }}</td>
                         <td>
                             <a class="button-primary button-blue" href="{{ path('app_specificity_show', {'id': specificity.id}) }}">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Voir
                             </a>
                             <a class="button-primary button-black" href="{{ path('app_specificity_edit', {'id': specificity.id}) }}">
-                                <i class="fas fa-pencil-alt"></i>
+                                <i class="fas fa-pencil-alt"></i> Modifier
                             </a>
                         </td>
                     </tr>

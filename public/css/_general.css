@@ -10,9 +10,14 @@
   background-color: var(--clr-very-dark-grey);
 }
 
-.banner.home {
+.banner.wide {
   padding-top: 250px;
-  padding-bottom: 250px;
+  padding-bottom: 150px;
+}
+
+.banner.very-wide {
+  padding-top: 350px;
+  padding-bottom: 150px;
 }
 
 .banner::before {
@@ -47,12 +52,16 @@
   background-position: bottom 0 right -300px;
 }
 
-.archive, section.users {
+.archive,
+.single,
+section.users,
+section.login {
   padding-top: 150px;
   padding-bottom: 150px;
 }
 
-section.archive {
+section.archive,
+section.login {
   background-color: var(--clr-very-light-blue);
 }
 
@@ -75,6 +84,28 @@ section.archive {
   font-size: var(--fs-big-title);
   font-family: var(--ff-secondary);
   font-weight: 600;
+  z-index: 1;
+}
+
+.section-title::before {
+  content: "";
+  width: 200px;
+  height: 120px;
+  background-size: contain;
+  top: -40px;
+  left: 0;
+  transform: translateX(-50%);
+  background-image: url(../images/snowtricks-logo-very-light-blue.svg);
+  z-index: -1;
+  opacity: 1;
+  background-position: top;
+  background-repeat: no-repeat;
+  position: absolute;
+  pointer-events: none;
+}
+
+.section-title.white-logo::before {
+  background-image: url(../images/snowtricks-logo-white.svg);
 }
 
 .tricks {
@@ -87,11 +118,33 @@ section.archive {
 .trick {
   display: flex;
   flex-direction: column;
-  padding: 120px 40px 0 40px;
+  padding: 200px 40px 0 40px;
   /* background: var(--clr-radial-very-dark-grey); */
   color: var(--clr-dark-grey);
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+.trick::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.25;
+  background-color: var(--clr-dark-grey);
+  pointer-events: none;
+  transition: opacity .4s;
+}
+
+.tricks .trick:hover::before {
+  opacity: 0;
+}
+
+.tricks .trick:hover .content {
+  transform: translateY(-40px);
 }
 
 .trick .content {
@@ -99,6 +152,7 @@ section.archive {
   box-shadow: var(--bs-secondary);
   padding: 20px;
   transform: translateY(40px);
+  transition: transform .4s;
 }
 
 .table {
@@ -110,11 +164,13 @@ section.archive {
   text-align: center;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 10px;
 }
 
-.table th:has(.button-primary), .table td:has(.button-primary) {
+.table th:has(.button-primary),
+.table td:has(.button-primary) {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -127,4 +183,26 @@ section.archive {
 
 .table tbody tr:nth-child(odd) {
   background-color: var(--clr-very-light-blue);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-field .title,
+form[name=registration_form]>div label {
+  font-size: var(--fs-big-text);
+  display: inline-block;
+  font-weight: 600;
+}
+
+form[name=registration_form]>div label {
+  margin-bottom: 10px;
+}
+
+form>div:has(input[type=checkbox]) input[type=checkbox] {
+  width: unset;
+  margin-left: 20px;
 }

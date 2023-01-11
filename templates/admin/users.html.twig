@@ -4,7 +4,7 @@
 
 {% block body %}
 
-	{% include 'partials/banner.html.twig' with { is_home: false, background_image: 'mountains-2.jpg', title: block('title') } %}
+	{% include 'partials/banner.html.twig' with { background_image: 'mountains-2.jpg', title: block('title') } %}
 
 	<section class="users">
         <div class="wrapper">
@@ -30,7 +30,7 @@
                         </td>
                         <td>
                             <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
-                                <i class="fas fa-pencil-alt"></i>
+                                <i class="fas fa-pencil-alt"></i> Modifier
                             </a>
                             {{ include('admin/_delete_user.html.twig') }}
                         </td>

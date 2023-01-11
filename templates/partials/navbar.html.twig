@@ -9,15 +9,15 @@
             </div>
             <div class="menu">
                 <ul class="navigation-links">
-                    <li>
-                        <a class="button-tertiary button-black" href="{{ path('app_trick_index') }}">Tricks</a>
-                    </li>
                     {% if is_granted('ROLE_ADMIN') %}
                         <li>
                             <a class="button-tertiary button-black" href="{{ path('app_admin_users') }}">Utilisateurs</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_EDITOR') %}
+                        <li>
+                            <a class="button-tertiary button-black" href="{{ path('app_trick_index') }}">Tricks</a>
+                        </li>
                         <li>
                             <a class="button-tertiary button-black" href="{{ path('app_specificity_index') }}">Decriptions techniques</a>
                         </li>

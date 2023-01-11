@@ -27,6 +27,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
+     * @Route("/", name="app_trick_index", methods={"GET"})
+     */
+    public function index(TrickRepository $trickRepository): Response
+    {
+        return $this->render('trick/index.html.twig', [
+            'tricks' => $trickRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
     public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
