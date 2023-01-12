@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Admin !{% endblock %}
+{% block title %}Modifier un utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Modifier l'utilisateur</h1>
-    {{  form(userForm) }}
+    {% include 'partials/banner.html.twig' with { background_image: 'mountains-2.jpg', title: block('title') } %}
+
+
+    <section class="edit-section">
+        <div class="wrapper wrapper-small">
+
+            <div class="actions">
+                <a class="button-primary button-black" href="{{ path('app_admin_users') }}"><i class="fas fa-arrow-left"></i>Retour</a>
+            </div>
+
+            {#        {{  form(userForm) }}#}
+
+        {{ form_start(userForm) }}
+            {{ form_row(userForm.email) }}
+            {{ form_row(userForm.roles) }}
+            {{ form_row(userForm.submit) }}
+{#            <button class="button-primary button-black button-large">Mettre à jour</button>#}
+        {{ form_end(userForm) }}
+{#        <h1>Modifier l'utilisateur</h1>#}
+
+        </div>
+    </section>
+
 {% endblock %}

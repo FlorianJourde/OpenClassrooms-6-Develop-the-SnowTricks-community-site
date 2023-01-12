@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Trick{% endblock %}
+{% block title %}Ajouter un trick{% endblock %}
 
 {% block body %}
-    <h1>Create new Trick</h1>
 
-    {{ include('trick/_form.html.twig') }}
+    {% include 'partials/banner.html.twig' with { background_image: 'mountains-1.jpg', title: block('title') } %}
 
-    <a href="{{ path('app_trick_index') }}">back to list</a>
+    <section class="edit-section">
+        <div class="wrapper wrapper-small">
+
+        <div class="actions">
+            <a class="button-primary button-black" href="{{ path('app_trick_index') }}"><i class="fas fa-arrow-left"></i>Retour</a>
+        </div>
+
+        {{ include('trick/_trick_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+        </div>
+    </section>
+
 {% endblock %}

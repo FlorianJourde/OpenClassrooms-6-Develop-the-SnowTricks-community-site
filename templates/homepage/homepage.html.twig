@@ -33,9 +33,9 @@
 								</div>
 							{% endif %}
 
-							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="content">
-								<h3 class="title">{{ trick.name }}</h3>
-								<p class="description">{{ trick.id }}</p>
+							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
+								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
+{#								<p class="description">{{ trick.id }}</p>#}
 							</a>
 						</div>
 					{% else %}

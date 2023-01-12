@@ -17,6 +17,7 @@
             <div class="wrapper">
                 <div class="actions">
 
+                    <a class="button-primary button-blue" href="{{ path('app_trick_index') }}"><i class="fas fa-snowboarding"></i>Tricks</a>
                     <a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
                         <i class="fas fa-pencil-alt"></i> Modifier
                     </a>
@@ -32,7 +33,7 @@
     {% if trick.images is not empty %}
         <section class="images-section" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
             <div class="wrapper">
-
+                <h2 class="section-title white-logo">Images</h2>
 {#                {% if trick.images is not empty %}#}
                     <div class="images">
                         {% for image in trick.images %}
@@ -58,7 +59,7 @@
         <section class="description-section">
             <div class="wrapper wrapper-small">
                 <h2 class="section-title white-logo">Détails</h2>
-                <p>{{ trick.description }}</p>
+                <p>{{ trick.description|raw }}</p>
             </div>
         </section>
     {% endif %}
@@ -70,8 +71,8 @@
                 {% if trick.specificities %}
                     <div class="specificities">
                         {% for specificity in trick.specificities %}
-                            <div class="specificity">
-                                <img src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="" width="50px" height="50px">
+                            <div class="specificity background-image">
+                                <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="">
                                 <div class="description">
                                     <h3 class="title">{{ specificity.name }}</h3>
                                     <p>{{ specificity.description }}</p>
@@ -134,7 +135,7 @@
 
                     <div class="information">
     {#                    <h3>Veuillez vous connecter pour laisser un commentaire.</h3>#}
-                        <h3>Veuillez vous connecter pour laisser un commentaire.</h3>
+                        <p>Veuillez vous connecter pour laisser un commentaire.</p>
                     </div>
                 {% endif %}
 

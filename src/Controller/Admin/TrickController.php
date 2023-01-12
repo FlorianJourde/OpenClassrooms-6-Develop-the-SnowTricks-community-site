@@ -48,13 +48,14 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
+            $this->addVideo($trick, $trickRepository);
 
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/new.html.twig', [
             'trick' => $trick,
-            'form' => $form,
+            'trickForm' => $form,
             'specificities' => $specificities
         ]);
     }
@@ -101,6 +102,8 @@ class TrickController extends AbstractController
      */
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
     {
+
+        $currentVideoLink = $trick->getVideo();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         $specificities = $specificityRepository->findAll();
@@ -108,6 +111,7 @@ class TrickController extends AbstractController
         $selectedSpecificitiesId = [];
         $selectedSpecificities = [];
         $unselectedSpecificities = [];
+
 
         foreach ($currentSpecificities as $currentSpecificity) {
             $selectedSpecificitiesId[] = $currentSpecificity->getId();
@@ -123,15 +127,17 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
-//            dd($trick->getVideo());
-            $this->addVideo($form, $trick, $trickRepository);
+
+            if ($currentVideoLink !== $form->get('video')->getData()) {
+                $this->addVideo($trick, $trickRepository);
+            }
 
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
-            'form' => $form,
+            'trickForm' => $form,
             'unselectedSpecificities' => $unselectedSpecificities,
             'selectedSpecificities' => $selectedSpecificities,
         ]);
@@ -189,13 +195,13 @@ class TrickController extends AbstractController
         $trickRepository->add($trick, true);
     }
 
-    private function addVideo($form, $trick, TrickRepository $trickRepository)
+    private function addVideo($trick, TrickRepository $trickRepository)
     {
-            $videoLink = $form->get('video')->getData();
-            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/' )+1);
-//            dd($videoLink);
-            $trick->setVideo($videoLink);
+        if ($trick->getVideo()) {
+            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/') + 1);
 
+            $trick->setVideo($videoLink);
             $trickRepository->add($trick, true);
+        }
     }
 }

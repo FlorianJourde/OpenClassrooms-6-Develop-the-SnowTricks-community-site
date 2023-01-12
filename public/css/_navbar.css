@@ -78,6 +78,7 @@ nav {
   font-size: var(--fs-title);
   line-height: 1em;
   color: var(--clr-dark-grey);
+  word-break: keep-all;
   /* width: 200px; */
 }
 

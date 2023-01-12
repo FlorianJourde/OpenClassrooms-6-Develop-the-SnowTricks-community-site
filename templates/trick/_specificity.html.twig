@@ -1,27 +1,34 @@
 {% if trick.id is not null %}
-    {#{{ dump(unselectedSpecificities) }}#}
-    {#{{ dump(selectedSpecificities) }}#}
+    <h2 class="section-title white-logo">Descriptif technique</h2>
+    <div class="specificities-wrapper">
+        <div class="specificities">
+            {% for unselectedSpecificity in unselectedSpecificities %}
+                    <form class="specificity" method="post" action="{{ path('app_trick_add_specificity', { 'id_1': trick.id, 'id_2': unselectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to add this specificity ?');"#}>
+                        <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ unselectedSpecificity.icon ) }}" alt="">
+                        <div class="description">
+                            <h3 class="title">{{ unselectedSpecificity.name }}</h3>
+                            <p>{{ unselectedSpecificity.description }}</p>
+                        </div>
+                        <button class="button-primary button-black" type="submit">Ajouter</button>
 
-    {% for unselectedSpecificity in unselectedSpecificities %}
-        <div>
-            <form method="post" action="{{ path('app_trick_add_specificity', { 'id_1': trick.id, 'id_2': unselectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to add this specificity ?');"#}>
-                <span> {{ unselectedSpecificity.name }} </span>
-                <span> {{ unselectedSpecificity.description }} </span>
-                <button class="btn" type="submit">Ajouter</button>
-            </form>
+                    </form>
+    {#            </div>#}
+            {% endfor %}
         </div>
-    {% endfor %}
 
-    <br>
+        <div class="specificities">
+            {% for selectedSpecificity in selectedSpecificities %}
+                <form class="specificity" method="post" action="{{ path('app_trick_remove_specificity', { 'id_1': trick.id, 'id_2': selectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to remove this specificity ?');"#}>
 
-    {% for selectedSpecificity in selectedSpecificities %}
-        <div>
-            <form method="post" action="{{ path('app_trick_remove_specificity', { 'id_1': trick.id, 'id_2': selectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to remove this specificity ?');"#}>
-                <span> {{ selectedSpecificity.name }} </span>
-                <span> {{ selectedSpecificity.description }} </span>
-                <button class="btn" type="submit">Supprimer</button>
-            </form>
+                    <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ selectedSpecificity.icon ) }}" alt="">
+                    <div class="description">
+                        <h3 class="title">{{ selectedSpecificity.name }}</h3>
+                        <p>{{ selectedSpecificity.description }}</p>
+                    </div>
+                    <button class="button-primary button-red" type="submit">Supprimer</button>
+                </form>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 
 {% endif %}

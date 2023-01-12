@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Specificity{% endblock %}
+{% block title %}Ajouter un descriptif technique{% endblock %}
 
 {% block body %}
-    <h1>Create new Specificity</h1>
 
-    {{ include('specificity/_form.html.twig') }}
+    {% include 'partials/banner.html.twig' with { background_image: 'mountains-4.jpg', title: block('title') } %}
 
-    <a href="{{ path('app_specificity_index') }}">back to list</a>
+    <section class="edit-section">
+        <div class="wrapper wrapper-small">
+
+        <div class="actions">
+            <a class="button-primary button-black" href="{{ path('app_specificity_index') }}"><i class="fas fa-arrow-left"></i>Retour</a>
+        </div>
+
+        {{ include('specificity/_specificity_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+        </div>
+    </section>
+
 {% endblock %}
