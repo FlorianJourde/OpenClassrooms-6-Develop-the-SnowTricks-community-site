@@ -8,6 +8,7 @@
     flex-direction: column;
     position: relative;
     background-color: var(--clr-very-dark-grey);
+    gap: 50px;
 }
 
 .fa-check-circle {
@@ -94,6 +95,7 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
     display: flex;
     justify-content: flex-end;
     gap: 20px;
+    flex-wrap: wrap;
     /*margin-bottom: 50px;*/
     z-index: 0;
 }
@@ -102,6 +104,10 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
     border: 2px solid var(--clr-white);
     box-shadow: var(--bs-secondary);
     background-color: var(--clr-transparent);
+}
+
+.actions-section .button-primary.button-dark-red:hover {
+    background-color: var(--clr-dark-red);
 }
 
 .actions-section .actions {
@@ -183,6 +189,7 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
 
 .trick .actions {
     margin-bottom: auto;
+
 }
 
 .images {
@@ -209,7 +216,7 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
 }
 
 
-.images .image .actions {
+.images .image .actions, .trick .actions {
     display: flex;
     justify-content: flex-end;
     font-size: var(--fs-small-text);

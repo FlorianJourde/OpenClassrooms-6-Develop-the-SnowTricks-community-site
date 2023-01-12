@@ -7,6 +7,7 @@ nav {
 
 .admin-navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 30px;
   background-color: var(--clr-very-dark-grey);
@@ -19,6 +20,7 @@ nav {
 
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 30px;
   background-color: var(--clr-white);
@@ -37,6 +39,7 @@ nav {
 
 .menu {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px 20px;
   transition: .4s;
@@ -56,6 +59,7 @@ nav {
 
 .navigation-links, .navigation-user {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px 20px;
 }
@@ -107,10 +111,10 @@ nav {
   text-align: center;
 }
 
-.navbar-notification-success {
-  background-color: var(--clr-dark-green);
-}
+/*.navbar-notification-success {*/
+/*  background-color: var(--clr-dark-green);*/
+/*}*/
 
-.navbar-notification-error {
-  background-color: var(--clr-dark-pink);
-}
+/*.navbar-notification-error {*/
+/*  background-color: var(--clr-dark-pink);*/
+/*}*/
