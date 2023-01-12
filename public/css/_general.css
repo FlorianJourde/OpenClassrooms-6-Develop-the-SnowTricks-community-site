@@ -19,7 +19,7 @@
     padding-bottom: 150px;
 }
 
-.banner.very-wide {
+.banner.very-wide, .banner.wide:has(.actions) {
     padding-top: 150px;
     padding-bottom: 150px;
     gap: 150px;
@@ -94,13 +94,19 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
     display: flex;
     justify-content: flex-end;
     gap: 20px;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     z-index: 0;
 }
 
+.actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
+    border: 2px solid var(--clr-white);
+    box-shadow: var(--bs-secondary);
+    background-color: var(--clr-transparent);
+}
+
 .actions-section .actions {
-    margin-top: 50px;
-    margin-bottom: unset;
+    /*margin-top: 50px;*/
+    /*margin-bottom: unset;*/
 }
 
 .introduction p, .description-section p {

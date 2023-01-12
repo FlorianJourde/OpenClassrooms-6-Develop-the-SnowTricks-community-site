@@ -4,15 +4,24 @@
 
 {% block body %}
 
+    {% set actions %}
+        <section class="actions-section">
+            <div class="actions">
+                <a class="button-primary button-black" href="{{ path('app_specificity_index') }}"><i class="fas fa-arrow-left"></i>Retour</a>
+                {{ include('specificity/_delete_form.html.twig') }}
+            </div>
+        </section>
+    {% endset %}
+
     {% include 'partials/banner.html.twig' with { background_image: 'mountains-4.jpg', title: block('title') } %}
 
     <section class="edit-section">
         <div class="wrapper wrapper-small">
 
-        <div class="actions">
-            <a class="button-primary button-black" href="{{ path('app_specificity_index') }}"><i class="fas fa-arrow-left"></i>Retour</a>
-            {{ include('specificity/_delete_form.html.twig') }}
-        </div>
+{#        <div class="actions">#}
+{#            <a class="button-primary button-black" href="{{ path('app_specificity_index') }}"><i class="fas fa-arrow-left"></i>Retour</a>#}
+{#            {{ include('specificity/_delete_form.html.twig') }}#}
+{#        </div>#}
 
         {{ include('specificity/_specificity_form.html.twig') }}
 

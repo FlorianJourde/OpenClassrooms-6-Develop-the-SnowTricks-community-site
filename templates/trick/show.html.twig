@@ -10,30 +10,26 @@
         {% set banner_image, has_image = placeholder, false %}
     {% endif %}
 
-    {% include 'partials/banner.html.twig' with { wide: 'wide', background_image: banner_image, title: block('title'), has_image: has_image } %}
-
-    {% if is_granted('ROLE_EDITOR') %}
-        <section class="actions-section">
-            <div class="wrapper">
+    {% set actions %}
+        {% if is_granted('ROLE_EDITOR') %}
+            <section class="actions-section">
                 <div class="actions">
-
                     <a class="button-primary button-blue" href="{{ path('app_trick_index') }}"><i class="fas fa-snowboarding"></i>Tricks</a>
-                    <a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
-                        <i class="fas fa-pencil-alt"></i> Modifier
-                    </a>
+                    <a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a>
                     {{ include('trick/_delete_form.html.twig') }}
                 </div>
-            </div>
-        </section>
-    {% endif %}
+            </section>
+        {% endif %}
+    {% endset %}
+
+    {% include 'partials/banner.html.twig' with { wide: 'wide', background_image: banner_image, title: block('title'), has_image: has_image } %}
 
 {#    <a href="{{ path('app_trick_index') }}">back to list</a>#}
-
 
     {% if trick.images is not empty %}
         <section class="images-section" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
             <div class="wrapper">
-                <h2 class="section-title white-logo">Images</h2>
+                <h2 class="section-title blue-logo">Images</h2>
 {#                {% if trick.images is not empty %}#}
                     <div class="images">
                         {% for image in trick.images %}
