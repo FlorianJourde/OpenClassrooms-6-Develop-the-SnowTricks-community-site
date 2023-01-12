@@ -1,4 +1,28 @@
 <nav>
+
+    {% if is_granted('ROLE_EDITOR') %}
+        <div class="admin-navbar">
+            <div class="wrapper">
+                <div class="menu">
+                    <ul class="navigation-links">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a class="button-tertiary button-white" href="{{ path('app_admin_users') }}">Utilisateurs</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_EDITOR') %}
+                            <li>
+                                <a class="button-tertiary button-white" href="{{ path('app_trick_index') }}">Tricks</a>
+                            </li>
+                            <li>
+                                <a class="button-tertiary button-white" href="{{ path('app_specificity_index') }}">Decriptifs techniques</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="navbar">
         <div class="wrapper">
             <div class="logo">
@@ -8,21 +32,6 @@
                 </a>
             </div>
             <div class="menu">
-                <ul class="navigation-links">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a class="button-tertiary button-black" href="{{ path('app_admin_users') }}">Utilisateurs</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_EDITOR') %}
-                        <li>
-                            <a class="button-tertiary button-black" href="{{ path('app_trick_index') }}">Tricks</a>
-                        </li>
-                        <li>
-                            <a class="button-tertiary button-black" href="{{ path('app_specificity_index') }}">Decriptions techniques</a>
-                        </li>
-                    {% endif %}
-                </ul>
                 <ul class="navigation-user">
                     {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li>

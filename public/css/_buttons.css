@@ -1,9 +1,8 @@
-.button-primary, .button-secondary, .button-tertiary {
+.button-primary, .button-secondary, .button-tertiary, form button[type=submit] {
   width: fit-content;
   text-transform: uppercase;
   font-family: var(--ff-secondary);
   font-weight: 600;
-  
 }
 
 ::-webkit-file-upload-button {
@@ -18,7 +17,7 @@
   border-radius: 20px;
 }
 
-.button-primary, .button-secondary {
+.button-primary, .button-secondary, form button[type=submit] {
   padding: 8px 16px;
   border: unset;
   color: var(--clr-white);
@@ -28,7 +27,7 @@
   justify-content: center;
 }
 
-.button-primary.button-black {
+.button-primary.button-black, form button[type=submit] {
   background-color: var(--clr-very-dark-grey);
 }
 
@@ -62,7 +61,7 @@
 }
 
 .button-tertiary.button-white:hover {
-  color: var(--clr-yellow);
+  color: var(--clr-light-blue);
 }
 
 .button-tertiary.button-black {
@@ -143,13 +142,13 @@
   color: var(--clr-white);
 } */
 
-.button-dark-orange:hover, .button-orange:hover, .button-very-dark-purple:hover, .button-very-dark-green:hover, .button-dark-pink:hover, .button-dark-red:hover,.button-primary.button-dark-red:hover, .button-very-dark-yellow:hover, .button-very-dark-blue:hover, ::-webkit-file-upload-button:hover {
+.button-dark-orange:hover, .button-orange:hover, .button-very-dark-purple:hover, .button-very-dark-green:hover, .button-dark-pink:hover, .button-dark-red:hover,.button-primary.button-red:hover, .button-primary.button-dark-red:hover, .button-very-dark-yellow:hover, .button-very-dark-blue:hover, ::-webkit-file-upload-button:hover {
   background-color: var(--clr-very-dark-grey);
 }
 
-.button-very-dark-grey:hover {
-  background-color: var(--clr-very-dark-yellow);
-}
+/*.button-very-dark-grey:hover {*/
+/*  background-color: var(--clr-very-dark-yellow);*/
+/*}*/
 
 /* .button-blue { */
   /* background-color: var(--clr-blue); */

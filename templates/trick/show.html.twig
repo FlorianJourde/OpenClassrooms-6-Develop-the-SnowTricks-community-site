@@ -12,80 +12,201 @@
 
     {% include 'partials/banner.html.twig' with { wide: 'wide', background_image: banner_image, title: block('title'), has_image: has_image } %}
 
-	<main class="single">
-        <div class="wrapper">
+    {% if is_granted('ROLE_EDITOR') %}
+        <section class="actions-section">
+            <div class="wrapper">
+                <div class="actions">
 
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <td>{{ trick.id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td>{{ trick.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ trick.description }}</td>
-                    </tr>
-                    <tr>
-                        <th>Creation_date</th>
-                        <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Descriptif technique</th>
-        {#                {{ dump(trick) }}#}
-                        {% for specificity in trick.specificities %}
-                            <td>
-                                <p><b>{{ specificity.name }}</b></p>
-                                <p>{{ specificity.description }}</p>
-        {#                        <p>{{ specificity.icon }}</p>#}
-                                <img src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="" width="50px" height="50px">
-                            </td>
+                    <a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+                        <i class="fas fa-pencil-alt"></i> Modifier
+                    </a>
+                    {{ include('trick/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+{#    <a href="{{ path('app_trick_index') }}">back to list</a>#}
+
+
+    {% if trick.images is not empty %}
+        <section class="images-section" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
+            <div class="wrapper">
+
+{#                {% if trick.images is not empty %}#}
+                    <div class="images">
+                        {% for image in trick.images %}
+                            <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')">
+{#                                <img class="image" src="{{ asset('/uploads/tricks/' ~ image.name) }}" alt="Image">#}
+                                {% if is_granted('ROLE_EDITOR') %}
+                                    <div class="actions">
+                                        <a class="button-primary button-dark-red" href="{{ path('app_trick_delete_image', { 'id': image.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"><i class="fas fa-trash-alt"></i> Supprimer</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+
                         {% endfor %}
-                    </tr>
-                    {% if trick.video is not null and trick.video is not empty %}
-                        <tr>
-                            <th>Vidéo</th>
-                            <td>
-                                <iframe src="https://www.youtube.com/embed/{{ trick.video }}"></iframe>
-                            </td>
-                        </tr>
-                    {% endif %}
-                </tbody>
-            </table>
+                    </div>
+                    {#                <h2>Images</h2>#}
+{#                {% endif %}#}
 
-            <a href="{{ path('app_trick_index') }}">back to list</a>
+            </div>
+        </section>
+    {% endif %}
 
-            {% if is_granted('ROLE_EDITOR') %}
-                <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-            {% endif %}
+    {% if trick.description is not null %}
+        <section class="description-section">
+            <div class="wrapper wrapper-small">
+                <h2 class="section-title white-logo">Détails</h2>
+                <p>{{ trick.description }}</p>
+            </div>
+        </section>
+    {% endif %}
 
-            {% if is_granted('ROLE_EDITOR') %}
-                {{ include('trick/_delete_form.html.twig') }}
-            {% endif %}
+    {% if trick.specificities is not empty %}
+        <section class="specificities-section">
+            <div class="wrapper">
+                <h2 class="section-title no-logo">Descriptif technique</h2>
+                {% if trick.specificities %}
+                    <div class="specificities">
+                        {% for specificity in trick.specificities %}
+                            <div class="specificity">
+                                <img src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="" width="50px" height="50px">
+                                <div class="description">
+                                    <h3 class="title">{{ specificity.name }}</h3>
+                                    <p>{{ specificity.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    {% endif %}
 
-            {{ include('trick/_images.html.twig') }}
+    {% if trick.video is not null and trick.video is not empty %}
+        <section class="video-section">
+            <div class="wrapper">
+                <h2 class="section-title white-logo">Vidéo</h2>
+                <div>
+                    <iframe src="https://www.youtube.com/embed/{{ trick.video }}"></iframe>
+                </div>
+            </div>
+        </section>
+    {% endif %}
 
-            {% if trick.comments is not empty %}
-                <h2>Comments</h2>
+        <section class="comments-section" style="background-image: url('{{ asset('images/pine-trees-very-dark-blue-2.svg')}}');">
+            <div class="wrapper wrapper-small">
+                <h2 class="section-title white-title very-dark-blue-logo">Commentaires</h2>
 
-        {#        {{ dump(trick.comments) }}#}
+                {% if trick.comments is not empty %}
+                    <div class="comments">
+                        {% for comment in trick.comments %}
+                            <div class="comment">
+                                <div class="header">
+                                    <p class="username icon-spacing"><i class="fas fa-user" aria-hidden="true"></i>{{ comment.user.email|split('@')[0]|capitalize }}</p>
+                                </div>
+                                <p class="date">Le {{ comment.creationDate|date("d/m/Y") }}</p>
+{#                                <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.user.email|split('@')[0]|capitalize }}</span></p>#}
+{#                                <p>{{ comment.content }}</p>#}
 
-                {% for comment in trick.comments %}
-                    <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.user.email|split('@')[0]|capitalize }}</span></p>
-                    <p>{{ comment.content }}</p>
-                {% endfor %}
-            {% endif %}
 
-            {% if is_granted('ROLE_USER') %}
-                {{ include('trick/_add_comment_form.html.twig') }}
-            {% else %}
-                <h3>Veuillez vous connecter pour laisser un commentaire.</h3>
-            {% endif %}
-        </div>
-    </main>
+                                <p class="content">
+                                    {{ comment.content }}
+                                </p>
+
+                            </div>
+{#                                <p class="date">16/10/2022 à 15:22:43</p>#}
+{#                                <div class="content">#}
+{#                                    <p>Sympa, plus qu'à les appliquer, maintenant...</p>#}
+{#                                </div>#}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="information">
+                        <h3>Il n'y a pas de commentaires à afficher.</h3>
+                    </div>
+                {% endif %}
+
+                {% if is_granted('ROLE_USER') %}
+                    {{ include('trick/_add_comment_form.html.twig') }}
+                {% else %}
+
+                    <div class="information">
+    {#                    <h3>Veuillez vous connecter pour laisser un commentaire.</h3>#}
+                        <h3>Veuillez vous connecter pour laisser un commentaire.</h3>
+                    </div>
+                {% endif %}
+
+            </div>
+        </section>
+
+
+{#            <table class="table">#}
+{#                <tbody>#}
+{#                    <tr>#}
+{#                        <th>Id</th>#}
+{#                        <td>{{ trick.id }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Name</th>#}
+{#                        <td>{{ trick.name }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Description</th>#}
+{#                        <td>{{ trick.description }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Creation_date</th>#}
+{#                        <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Descriptif technique</th>#}
+{#                        {{ dump(trick) }}#}
+{#                        {% for specificity in trick.specificities %}#}
+{#                            <td>#}
+{#                                <p><b>{{ specificity.name }}</b></p>#}
+{#                                <p>{{ specificity.description }}</p>#}
+{#                                <p>{{ specificity.icon }}</p>#}
+{#                                <img src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="" width="50px" height="50px">#}
+{#                            </td>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
+{#                    {% if trick.video is not null and trick.video is not empty %}#}
+{#                        <tr>#}
+{#                            <th>Vidéo</th>#}
+{#                            <td>#}
+{#                                <iframe src="https://www.youtube.com/embed/{{ trick.video }}"></iframe>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endif %}#}
+{#                </tbody>#}
+{#            </table>#}
+
+
+{#            {% if is_granted('ROLE_EDITOR') %}#}
+{#                <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>#}
+{#            {% endif %}#}
+
+{#            {% if is_granted('ROLE_EDITOR') %}#}
+{#                {{ include('trick/_delete_form.html.twig') }}#}
+{#            {% endif %}#}
+
+{#            {% if trick.images is not empty %}#}
+{#                <h2>Images</h2>#}
+
+{#                {% for image in trick.images %}#}
+{#                    <div>#}
+{#                        <img src="{{ asset('/uploads/tricks/' ~ image.name) }}" alt="Image">#}
+{#                        {% if is_granted('ROLE_EDITOR') %}#}
+{#                            <a href="{{ path('app_trick_delete_image', { 'id': image.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+
+{#        </div>#}
+{#    </main>#}
 
 {% endblock %}
 

@@ -101,7 +101,7 @@ hr {
 }
 
 .wrapper-small {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .page {
@@ -124,4 +124,8 @@ hr {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+
+.icon-spacing .fas {
+  margin-right: 10px;
 }
