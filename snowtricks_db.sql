@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 08 jan. 2023 à 19:59
+-- Généré le : ven. 13 jan. 2023 à 08:47
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -60,7 +60,12 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (20, 'ddd', 1, '2023-01-08 17:02:32', 92, 41),
 (21, 'sdcds', 1, '2023-01-08 18:19:39', 102, 39),
 (22, 'Sympaaa !', 1, '2023-01-08 18:20:54', 98, 39),
-(23, 'Ok...', 1, '2023-01-08 18:26:20', 98, 39);
+(23, 'Ok...', 1, '2023-01-08 18:26:20', 98, 39),
+(24, 'vdfff', 1, '2023-01-12 01:35:05', 92, 39),
+(25, 'vdfff', 1, '2023-01-12 01:35:06', 92, 39),
+(26, '?????????????', 1, '2023-01-12 01:35:15', 92, 39),
+(27, '?', 1, '2023-01-12 12:54:03', 110, 39),
+(28, '!!!', 1, '2023-01-12 15:37:55', 110, 39);
 
 -- --------------------------------------------------------
 
@@ -116,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -136,7 +141,21 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (34, 107, '63b968aa6aefa.jpg'),
 (35, 107, '63b968aa6b242.jpg'),
 (36, 108, '63b975daf26b8.jpg'),
-(37, 92, '63bb1a43e8246.jpg');
+(38, 99, '63bf540a0490c.webp'),
+(39, 109, '63bff57309309.jpg'),
+(40, 109, '63bff5730a77f.jpg'),
+(41, 109, '63bff5730ab09.jpg'),
+(47, 109, '63bff5dac34b3.jpg'),
+(48, 109, '63bff5dac494b.jpg'),
+(52, 110, '63c029858ebf0.jpg'),
+(53, 110, '63c029858ee5b.jpg'),
+(54, 110, '63c029858f0f6.jpg'),
+(55, 111, '63c02aa79cb18.jpg'),
+(56, 111, '63c02aa79df84.jpg'),
+(57, 111, '63c02aa79e353.jpg'),
+(58, 92, '63c035ea298c4.jpg'),
+(59, 92, '63c035ea2ad40.jpg'),
+(60, 92, '63c035ea2b0fd.jpg');
 
 -- --------------------------------------------------------
 
@@ -182,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
   `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   PRIMARY KEY (`id`),
   KEY `IDX_7CE748AA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -204,14 +223,14 @@ CREATE TABLE IF NOT EXISTS `specificity` (
 --
 
 INSERT INTO `specificity` (`id`, `name`, `description`, `icon`) VALUES
-(1, 'Niveau 1', 'Facile', '63bb10402c951.png'),
+(1, 'Niveau 1', 'Facile', '63c01c5974f43.png'),
 (2, 'Niveau 2', 'Facile', '63bb104aaec63.png'),
 (3, 'Niveau 3', 'Moyen', '63bb1052680bf.png'),
 (4, 'Niveau 4', 'Moyen', '63bb10107b08a.png'),
 (5, 'Niveau 5', 'dvdfvfd', '63bb10584e238.png'),
-(8, 'Niveau 7', 'dfbdfb', '63b9bdb2e9da1.jpg'),
-(11, 'Niveau 8', 'sdvdvdf', '63b9ce2f15e09.jpg'),
-(12, 'Niveau 9', 'Difficile', '63baf73e8f7aa.jpg'),
+(8, 'Niveau 7', 'dfbdfb', '63c01cd6f0f50.png'),
+(11, 'Niveau 8', 'sdvdvdf', '63c01ce377520.png'),
+(12, 'Niveau 9', 'Difficile', '63c01ceec9625.png'),
 (13, 'Niveau 9', 'Description', '63bb0c8b425d1.png');
 
 -- --------------------------------------------------------
@@ -234,18 +253,34 @@ CREATE TABLE IF NOT EXISTS `specificity_trick` (
 --
 
 INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
+(1, 92),
 (1, 93),
 (1, 96),
 (1, 98),
+(1, 116),
 (2, 93),
+(2, 107),
+(2, 117),
 (3, 93),
 (3, 98),
+(3, 116),
+(3, 118),
+(4, 92),
+(4, 110),
+(5, 107),
 (5, 108),
+(5, 118),
+(8, 96),
+(8, 107),
+(8, 110),
 (11, 92),
 (11, 93),
 (12, 92),
+(12, 107),
 (12, 108),
-(13, 92);
+(13, 92),
+(13, 96),
+(13, 118);
 
 -- --------------------------------------------------------
 
@@ -261,24 +296,34 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `description` longtext COLLATE utf8mb4_unicode_ci,
   `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
 INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`) VALUES
-(92, 'Trick 1', '2023-01-08 19:37:15', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj', 'JCjmmlvVnc8'),
+(92, 'Trick 1', '2023-01-12 16:31:38', 'This is my description dscsdcdcsddscsdcdsblkdfkvjbdfkvjbdkjvbdskvjbkj <br><br><br> Test', 'oq6h7AI57_0'),
 (93, 'Trick 2', '2023-01-08 19:31:31', NULL, '8KotvBY28Mo'),
 (96, 'Trick 5', '2023-01-04 22:56:29', NULL, NULL),
 (97, 'Trick 6', '2023-01-04 22:57:11', NULL, NULL),
 (98, 'Trick 7', '2023-01-06 19:01:00', NULL, NULL),
-(99, 'Trick 8', '2023-01-06 17:53:50', NULL, NULL),
+(99, 'Trick 8', '2023-01-12 15:42:34', NULL, 'sdvsdv'),
 (100, 'Trick 10', '2023-01-07 01:02:56', NULL, NULL),
 (102, 'Trick 12', '2023-01-07 12:08:15', NULL, NULL),
 (106, 'Trick 13', '2023-01-07 12:31:59', NULL, NULL),
 (107, 'Trick 14', '2023-01-07 12:42:18', NULL, NULL),
-(108, 'Trick 15', '2023-01-07 13:38:34', 'Add description to trick 15', NULL);
+(108, 'Trick 15', '2023-01-07 13:38:34', 'Add description to trick 15', NULL),
+(109, 'Trick 16', '2023-01-12 11:58:38', '<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui deleniti voluptatem amet sapiente ullam voluptas delectus, quia ipsa consequatur aliquam expedita explicabo, praesentium deserunt! Porro amet animi voluptatum perspiciatis. Veritatis!\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Quae corrupti, officiis veniam quasi, minima recusandae pariatur qui accusamus adipisci, facere maiores culpa labore animi hic consectetur. Distinctio animi accusantium perferendis.</p>\r\n			<br>\r\n			<p>Quod odio praesentium similique numquam fugit, blanditiis mollitia exercitationem dolorem cum officia voluptatum magnam reiciendis perferendis quibusdam repellendus adipisci eum maiores sint doloribus officiis molestias nemo distinctio. Cum, non natus.</p>', ''),
+(110, 'Trick 17', '2023-01-12 15:38:45', 'dsvsdsdvsvddvv', ''),
+(111, 'Trick 18', '2023-01-12 15:43:35', 'Test', 'https://youtu.be/oq6h7AI57_0'),
+(112, 'Trick 19', '2023-01-12 15:46:28', 'dscsdc', 'https://youtu.be/oq6h7AI57_0'),
+(113, 'Trick 19', '2023-01-12 15:46:49', 'dscsdc', 'https://youtu.be/oq6h7AI57_0'),
+(114, 'Trick 19', '2023-01-12 15:46:51', 'dscsdc', 'https://youtu.be/oq6h7AI57_0'),
+(115, 'Trick 19', '2023-01-12 15:46:58', 'dscsdc', 'https://youtu.be/oq6h7AI57_0'),
+(116, 'Trick 19', '2023-01-12 16:11:28', NULL, 'aPhYdeitDtA'),
+(117, 'Trick 20', '2023-01-12 16:15:42', 'Bla bla bla...', '_OMar04NRZw'),
+(118, 'Trick 21', '2023-01-12 17:05:47', NULL, 'fbqHK8i-HdA');
 
 -- --------------------------------------------------------
 
@@ -294,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -302,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
 (39, 'admin@admin.com', '{\"1\": \"ROLE_USER\", \"2\": \"ROLE_EDITOR\", \"3\": \"ROLE_ADMIN\"}', '$2y$13$c1uI0SoKnul3MgEkuVMp9uCsntTPgjrJsgBeidHBoMHc5SpMDCiLK'),
-(40, 'user@user.com', '{\"1\": \"ROLE_USER\"}', '$2y$13$Cyf4Q3HAoVLxN4sL8I6K5OQKgGg2LETdwKrb7luCTn.DkVPX8JNYu'),
+(40, 'user@user.com', '{\"3\": \"ROLE_USER\"}', '$2y$13$Cyf4Q3HAoVLxN4sL8I6K5OQKgGg2LETdwKrb7luCTn.DkVPX8JNYu'),
 (41, 'editor@editor.com', '{\"0\": \"ROLE_USER\", \"2\": \"ROLE_EDITOR\"}', '$2y$13$kF815nzfGAr4KQ5.ZR/Z9enNUKofm4bEZJSQSUrhyEjPP0mBQYWGG');
 
 --

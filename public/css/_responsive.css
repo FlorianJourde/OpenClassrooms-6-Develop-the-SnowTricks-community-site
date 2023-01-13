@@ -71,6 +71,10 @@
         justify-content: center;
     }
 
+    .banner.wide {
+        padding-top: 250px;
+    }
+
     .banner.very-wide, .banner.wide:has(.actions) {
         gap: 50px;
     }
