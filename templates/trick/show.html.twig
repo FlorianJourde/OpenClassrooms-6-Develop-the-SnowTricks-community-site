@@ -121,14 +121,13 @@
                     </div>
                 {% else %}
                     <div class="information">
-                        <h3>Il n'y a pas de commentaires à afficher.</h3>
+                        <p>Il n'y a pas de commentaires à afficher.</p>
                     </div>
                 {% endif %}
 
                 {% if is_granted('ROLE_USER') %}
                     {{ include('trick/_add_comment_form.html.twig') }}
                 {% else %}
-
                     <div class="information">
     {#                    <h3>Veuillez vous connecter pour laisser un commentaire.</h3>#}
                         <p>Veuillez vous connecter pour laisser un commentaire.</p>

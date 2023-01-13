@@ -84,7 +84,7 @@
     background-position: bottom 0 right -300px;
 }
 
-section.archive, .comments-section {
+section.archive, .comments-section, .register, .login  {
     background-repeat: no-repeat;
     background-size: 800px;
     background-position: bottom 0 right 50px;
@@ -253,19 +253,23 @@ section.archive, section.login, section.register, .description-section, .video-s
     background-color: var(--clr-very-light-blue);
 }
 
-.specificity.background-image {
+.background-image {
     background-image: url(../images/pine-trees-very-dark-blue-2.svg);
     background-repeat: no-repeat;
-    background-size: 300px;
+    background-size: 800px;
     background-position: bottom 0 right 50px;
     position: relative;
 }
 
-.specificity.background-image > * {
+.specificity.background-image {
+    background-size: 300px;
+}
+
+.background-image > * {
     z-index: 0;
 }
 
-.specificity.background-image::before {
+.background-image::before {
     content: "";
     width: 100%;
     height: 100%;
@@ -491,6 +495,7 @@ table .actions {
 form[name=registration_form] > div label,
 form[name=trick] > div label,
 form[name=specificity] > div label,
+form[name=reset_password_request_form] > div label,
 form[name=user] > div label {
     font-size: var(--fs-big-text);
     display: inline-block;
@@ -500,6 +505,7 @@ form[name=user] > div label {
 form[name=registration_form] > div label,
 form[name=trick] > div label,
 form[name=specificity] > div label,
+form[name=reset_password_request_form] > div label,
 form[name=user] > div label {
     margin-bottom: 10px;
 }
