@@ -27,7 +27,7 @@
 {#    <a href="{{ path('app_trick_index') }}">back to list</a>#}
 
     {% if trick.images is not empty %}
-        <section class="images-section" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
+        <section class="images-section section-spacing" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
             <div class="wrapper">
                 <h2 class="section-title blue-logo">Images</h2>
 {#                {% if trick.images is not empty %}#}
@@ -52,7 +52,7 @@
     {% endif %}
 
     {% if trick.description is not null %}
-        <section class="description-section">
+        <section class="description-section section-spacing">
             <div class="wrapper wrapper-small">
                 <h2 class="section-title white-logo">Détails</h2>
                 <p>{{ trick.description|raw }}</p>
@@ -61,7 +61,7 @@
     {% endif %}
 
     {% if trick.specificities is not empty %}
-        <section class="specificities-section">
+        <section class="specificities-section section-spacing">
             <div class="wrapper">
                 <h2 class="section-title no-logo">Descriptif technique</h2>
                 {% if trick.specificities %}
@@ -82,7 +82,7 @@
     {% endif %}
 
     {% if trick.video is not null and trick.video is not empty %}
-        <section class="video-section">
+        <section class="video-section section-spacing">
             <div class="wrapper">
                 <h2 class="section-title white-logo">Vidéo</h2>
                 <div>
@@ -92,7 +92,7 @@
         </section>
     {% endif %}
 
-        <section class="comments-section" style="background-image: url('{{ asset('images/pine-trees-very-dark-blue-2.svg')}}');">
+        <section class="comments-section section-spacing" style="background-image: url('{{ asset('images/pine-trees-very-dark-blue-2.svg')}}');">
             <div class="wrapper wrapper-small">
                 <h2 class="section-title white-title very-dark-blue-logo">Commentaires</h2>
 

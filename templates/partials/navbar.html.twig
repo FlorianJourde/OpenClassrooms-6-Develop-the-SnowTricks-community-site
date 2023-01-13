@@ -7,15 +7,15 @@
                     <ul class="navigation-links">
                         {% if is_granted('ROLE_ADMIN') %}
                             <li>
-                                <a class="button-tertiary button-white" href="{{ path('app_admin_users') }}">Utilisateurs</a>
+                                <a class="button-tertiary button-white" href="{{ path('app_admin_users') }}"><span>Utilisateurs</span></a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_EDITOR') %}
                             <li>
-                                <a class="button-tertiary button-white" href="{{ path('app_trick_index') }}">Tricks</a>
+                                <a class="button-tertiary button-white" href="{{ path('app_trick_index') }}"><span>Tricks</span></a>
                             </li>
                             <li>
-                                <a class="button-tertiary button-white" href="{{ path('app_specificity_index') }}">Decriptif technique</a>
+                                <a class="button-tertiary button-white" href="{{ path('app_specificity_index') }}"><span>Decriptif technique</span></a>
                             </li>
                         {% endif %}
                     </ul>
@@ -36,18 +36,18 @@
                     {%if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li>
                             <a class="button-primary button-black" href="{{ path('app_logout') }}">
-                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Déconnexion
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span>Déconnexion</span>
                             </a>
                         </li>
                     {% else %}
                         <li>
                             <a class="button-secondary button-black" href="{{ path('app_register') }}">
-                                <i class="fas fa-user-plus" aria-hidden="true"></i>Inscription
+                                <i class="fas fa-user-plus" aria-hidden="true"></i><span>Inscription</span>
                             </a>
                         </li>
                         <li>
                             <a class="button-primary button-blue" href="{{ path('app_login') }}">
-                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i>Connexion
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i><span>Connexion</span>
                             </a>
                         </li>
                     {% endif %}

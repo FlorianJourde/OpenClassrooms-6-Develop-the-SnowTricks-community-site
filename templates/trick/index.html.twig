@@ -16,14 +16,15 @@
 
 	{% include 'partials/banner.html.twig' with { background_image: 'mountains-1.jpg', title: block('title') } %}
 
-	<main class="archive">
+	<main class="archive section-spacing">
         <div class="wrapper">
 
 {#            <div class="actions">#}
 {#                <a class="button-primary button-black" href="{{ path('app_trick_new') }}"><i class="fas fa-pen-nib"></i>Ajouter</a>#}
 {#            </div>#}
-            
-            <table class="table">
+
+            <div class="table-scroll">
+                <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -65,6 +66,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
         </div>
     </main>
 {% endblock %}

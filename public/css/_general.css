@@ -44,7 +44,11 @@
     color: var(--clr-white);
     text-shadow: 0 10px 20px #00000040;
     text-transform: uppercase;
-    max-width: 800px;
+    max-width: 600px;
+}
+
+.banner .title h1 + * {
+    margin-top: 20px;
 }
 
 .banner .title h2 {
@@ -76,18 +80,13 @@
     background-position: bottom 0 right -300px;
 }
 
-.archive, .single, section.users, section.login, .introduction, .images-section, .description-section, .specificities-section, .video-section, .comments-section, .edit-section {
-    padding-top: 150px;
-    padding-bottom: 150px;
-}
-
 section.archive, .comments-section {
     background-repeat: no-repeat;
     background-size: 800px;
     background-position: bottom 0 right 50px;
 }
 
-section.archive, section.login, .description-section, .video-section, .edit-section {
+section.archive, section.login, section.register, .description-section, .video-section, .edit-section {
     background-color: var(--clr-very-light-blue);
 }
 
@@ -319,7 +318,7 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
 
 .video-section iframe {
     width: 100%;
-    height: 600px;
+    height: 500px;
     border: unset;
 }
 
@@ -405,6 +404,15 @@ section.archive, section.login, .description-section, .video-section, .edit-sect
     margin-top: 50px;
 }
 
+.table-scroll {
+    overflow: auto;
+}
+
+.table {
+    white-space: nowrap;
+    width :100%;
+}
+
 .table {
     width: 100%;
     background-color: var(--clr-white);
@@ -473,7 +481,7 @@ input[type="file"] {
 form > div:has(input[type=checkbox]) input[type=checkbox] {
     width: unset;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 form[name="user"] #user_roles input:first-child {
