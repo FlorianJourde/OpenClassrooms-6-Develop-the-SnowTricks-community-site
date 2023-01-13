@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 13 jan. 2023 à 12:51
+-- Généré le : ven. 13 jan. 2023 à 13:25
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -53,8 +53,8 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (34, 'Il n\'y a pas d\'image ?', 1, '2023-01-13 12:46:01', 125, 40),
 (35, 'Peut-on vraiment appeler ceci une figure ? Je me pose la question..', 1, '2023-01-13 12:46:47', 121, 40),
 (36, 'Je n\'en ai jamais vu un en vrai, il faut être solide sur les appuis !', 1, '2023-01-13 12:47:14', 127, 40),
-(37, 'Et moi dont !', 1, '2023-01-13 12:48:01', 119, 41),
-(38, 'Non mais bon, ça fait partie du champ lexical du snow !', 1, '2023-01-13 12:50:01', 121, 41);
+(38, 'Non mais bon, ça fait partie du champ lexical du snow !', 1, '2023-01-13 12:50:01', 121, 41),
+(40, 'Et moi dont !', 1, '2023-01-13 13:15:25', 119, 41);
 
 -- --------------------------------------------------------
 
