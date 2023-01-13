@@ -2,11 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Specificity;
 use App\Entity\Trick;
 use App\Form\SpecificityType;
 use App\Form\TrickType;
+use App\Repository\CommentRepository;
 use App\Repository\SpecificityRepository;
 use App\Repository\TrickRepository;
 use DateTime;
@@ -153,6 +155,22 @@ class TrickController extends AbstractController
         }
 
         return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/comment/delete", name="app_trick_comment_delete", methods={"GET"})
+     */
+    public function deleteComment(Comment $comment, CommentRepository $commentRepository): Response
+    {
+
+//        dd($comment, $comment->getTrick()->getId());
+//        $comment->getTrick();
+//        dd($request->request->get('_token'));
+//        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+//        }
+
+        return $this->redirectToRoute('app_trick_show', ['id' => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
     }
 
     /**

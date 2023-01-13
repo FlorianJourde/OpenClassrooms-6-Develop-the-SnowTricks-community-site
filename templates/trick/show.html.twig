@@ -100,18 +100,23 @@
                     <div class="comments">
                         {% for comment in trick.comments %}
                             <div class="comment">
+
                                 <div class="header">
                                     <p class="username icon-spacing"><i class="fas fa-user" aria-hidden="true"></i>{{ comment.user.email|split('@')[0]|capitalize }}</p>
+
+                                    {% if is_granted('ROLE_EDITOR') %}
+                                        <div class="actions">
+                                            <a class="button-primary button-small button-dark-red" href="{{ path('app_trick_comment_delete', { 'id': comment.id }) }}"><i class="fas fa-trash-alt"></i> Supprimer</a>
+                                        </div>
+                                    {% endif %}
+
                                 </div>
                                 <p class="date">Le {{ comment.creationDate|date("d/m/Y") }}</p>
 {#                                <p>{{ comment.creationDate|date("m/d/Y") }} | <span>{{ comment.user.email|split('@')[0]|capitalize }}</span></p>#}
 {#                                <p>{{ comment.content }}</p>#}
-
-
                                 <p class="content">
                                     {{ comment.content }}
                                 </p>
-
                             </div>
 {#                                <p class="date">16/10/2022 à 15:22:43</p>#}
 {#                                <div class="content">#}
