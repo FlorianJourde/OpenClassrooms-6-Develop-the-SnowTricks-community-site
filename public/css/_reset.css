@@ -104,6 +104,10 @@ hr {
   max-width: 1000px;
 }
 
+.icon-spacing i {
+  margin-right: 10px;
+}
+
 .section-spacing {
   padding-top: 150px;
   padding-bottom: 150px;

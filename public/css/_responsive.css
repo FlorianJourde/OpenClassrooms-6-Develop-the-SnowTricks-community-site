@@ -46,6 +46,12 @@
         padding-top: 10px;
     }
 
+    .banner-decoration {
+        width: 400px;
+        top: 50px;
+        left: -100px;
+    }
+
     .navigation-user span {
         display: none;
     }

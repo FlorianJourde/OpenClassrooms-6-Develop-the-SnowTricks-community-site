@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 13 jan. 2023 à 11:45
+-- Généré le : ven. 13 jan. 2023 à 12:51
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,23 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `comment`
+--
+
+INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `user_id`) VALUES
+(29, 'Impressionnant ! J\'espère le réussir un jour !', 1, '2023-01-13 12:41:49', 119, 40),
+(30, 'Ça fait mal en compétition...', 1, '2023-01-13 12:44:04', 129, 40),
+(31, 'Celui-ci, je le rentre !', 1, '2023-01-13 12:44:31', 128, 40),
+(32, 'Ça a l\'air chaud !', 1, '2023-01-13 12:45:22', 123, 40),
+(33, 'Un classique !', 1, '2023-01-13 12:45:45', 120, 40),
+(34, 'Il n\'y a pas d\'image ?', 1, '2023-01-13 12:46:01', 125, 40),
+(35, 'Peut-on vraiment appeler ceci une figure ? Je me pose la question..', 1, '2023-01-13 12:46:47', 121, 40),
+(36, 'Je n\'en ai jamais vu un en vrai, il faut être solide sur les appuis !', 1, '2023-01-13 12:47:14', 127, 40),
+(37, 'Et moi dont !', 1, '2023-01-13 12:48:01', 119, 41),
+(38, 'Non mais bon, ça fait partie du champ lexical du snow !', 1, '2023-01-13 12:50:01', 121, 41);
 
 -- --------------------------------------------------------
 
@@ -230,9 +246,9 @@ INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
 (19, 121),
 (19, 128),
 (20, 119),
+(20, 123),
 (20, 126),
 (21, 122),
-(21, 123),
 (21, 127),
 (22, 128),
 (23, 119),

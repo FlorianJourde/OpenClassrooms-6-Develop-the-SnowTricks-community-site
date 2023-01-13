@@ -4,6 +4,11 @@
   <section class="banner {{ is_home is defined ? 'homepage' : '' }} {{ wide is defined ? wide : '' }}" style="background-image: url('{{ asset('images/' ~ background_image) }}');">
 {% endif %}
 
+
+  {% if is_home is defined %}
+    <img class="banner-decoration" src="{{ asset('images/snowtricks-logo-white.svg') }}" alt="">
+  {% endif %}
+
   <div class="wrapper">
     {% if actions is defined %}
       {{ actions }}
