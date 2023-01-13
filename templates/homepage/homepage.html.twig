@@ -16,48 +16,55 @@
 	<section class="archive section-spacing" style="background-image: url('{{ asset('images/pine-trees-white-2.svg')}}');">
 		<div class="wrapper">
 			<h2 class="section-title white-logo">Tous les tricks</h2>
-			<div class="tricks">
-				{% for trick in tricks %}
 
-					{% if trick.images|first %}
-						<div class="trick" style="background-image: url('{{ asset('uploads/tricks/' ~ trick.images|first.name) }}');">
-					{% else %}
-						<div class="trick" style="background-image: url('{{ asset('images/' ~ placeholder_small) }}');">
-					{% endif %}
+			{% if tricks is not empty %}
+				<div class="tricks">
+					{% for trick in tricks %}
 
-							{% if is_granted('ROLE_EDITOR') %}
-								<div class="actions">
-									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
-										<i class="fas fa-pencil-alt"></i> Modifier
-									</a>
-								</div>
-							{% endif %}
+						{% if trick.images|first %}
+							<div class="trick" style="background-image: url('{{ asset('uploads/tricks/' ~ trick.images|first.name) }}');">
+						{% else %}
+							<div class="trick" style="background-image: url('{{ asset('images/' ~ placeholder_small) }}');">
+						{% endif %}
 
-							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
-								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
-{#								<p class="description">{{ trick.id }}</p>#}
-							</a>
-						</div>
-					{% else %}
+								{% if is_granted('ROLE_EDITOR') %}
+									<div class="actions">
+										<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+											<i class="fas fa-pencil-alt"></i> Modifier
+										</a>
+									</div>
+								{% endif %}
 
-							{# <div class="actions icon-spacing white">
-								<a href="/article/modification/55">
-									<i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
-								<a href="/article/suppression/55">
-									<i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
-							</div> #}
+								<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
+									<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
+	{#								<p class="description">{{ trick.id }}</p>#}
+								</a>
+							</div>
+						{% else %}
 
-				{% endfor %}
+								{# <div class="actions icon-spacing white">
+									<a href="/article/modification/55">
+										<i class="fas fa-edit" aria-hidden="true"></i>Modifier</a>
+									<a href="/article/suppression/55">
+										<i class="fas fa-trash" aria-hidden="true"></i>Supprimer</a>
+								</div> #}
+
+					{% endfor %}
+				</div>
+					{#    {{ dump(tricks) }}#}
+					{# {% for trick in tricks %} #}
+					{# <div> #}
+					{# <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} #}
+					{# ({{ trick.id }})</a> #}
+					{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
+					{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
+					{# </div> #}
+					{# {% endfor %} #}
 			</div>
-				{#    {{ dump(tricks) }}#}
-				{# {% for trick in tricks %} #}
-				{# <div> #}
-				{# <a href="{{ path('app_trick_show', {'id': trick.id}) }}">{{ trick.name }} #}
-				{# ({{ trick.id }})</a> #}
-				{#            <a href="{{ path('app_tricks_details', { 'id' : trick.id }) }}">{{ trick.name }} ({{ trick.id }})</a>#}
-				{#            <a href="/tricks/{{ trick.id }}">{{ trick.name }} ({{ trick.id }})</a>#}
-				{# </div> #}
-				{# {% endfor %} #}
-		</div>
+			{% else %}
+				<div class="information">
+					<p>Il n'y a aucun trick à afficher.</p>
+				</div>
+			{% endif %}
 	</section>
 	{% endblock %}

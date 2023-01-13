@@ -8,58 +8,58 @@
 
 	<section class="users section-spacing">
         <div class="wrapper">
-            <div class="table-scroll">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-    {#                        <th>Rôles</th>#}
-                            <th>Utilisateur</th>
-                            <th>Éditeur</th>
-                            <th>Administrateur</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            {#        {{ dump(users) }}#}
-                    {% for user in users %}
-                        <tr>
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>
-                                {% if 'ROLE_USER' in user.roles %}
-                                    <i class="fas fa-check-circle"></i>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {% if 'ROLE_EDITOR' in user.roles %}
-                                    <i class="fas fa-check-circle"></i>
-                                {% endif %}
-                            </td>
-                            <td>
-    {#                            {% for role in user.roles %}#}
-                                {% if 'ROLE_ADMIN' in user.roles %}
-                                    <i class="fas fa-check-circle"></i>
-                                {% endif %}
-    {#                        <td>#}
-    {#                            {% for role in user.roles %}#}
-    {#                                {{ (role == 'ROLE_USER') ? 'Utilisateur' }}#}
-    {#                                {{ (role == 'ROLE_EDITOR') ? 'Editeur' }}#}
-    {#                                {{ (role == 'ROLE_ADMIN') ? 'Administrateur' }}#}
-    {#                            {% endfor %}#}
-    {#                        </td>#}
-                            <td>
-                                <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
-                                    <i class="fas fa-pencil-alt"></i> Modifier
-                                </a>
-                                {{ include('admin/_delete_user.html.twig') }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+
+            {% if users is not empty %}
+                <div class="table-scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Utilisateur</th>
+                                <th>Éditeur</th>
+                                <th>Administrateur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if 'ROLE_USER' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if 'ROLE_EDITOR' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if 'ROLE_ADMIN' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                <td>
+                                    {% if user.email not in 'admin@admin.com' %}
+                                        <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
+                                            <i class="fas fa-pencil-alt"></i> Modifier
+                                        </a>
+                                        {{ include('admin/_delete_user.html.twig') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="information">
+                    <p>Il n'y a aucun utilisateur à afficher.</p>
+                </div>
+            {% endif %}
+
         </div>
     </section>
 

@@ -1,7 +1,7 @@
 {% if (has_image is defined) and (has_image) %}
   <section class="banner {{ wide is defined ? wide : '' }}" style="background-image: url('{{ asset('uploads/tricks/' ~ background_image) }}');">
 {% else %}
-  <section class="banner {{ wide is defined ? wide : '' }}" style="background-image: url('{{ asset('images/' ~ background_image) }}');">
+  <section class="banner {{ is_home is defined ? 'homepage' : '' }} {{ wide is defined ? wide : '' }}" style="background-image: url('{{ asset('images/' ~ background_image) }}');">
 {% endif %}
 
   <div class="wrapper">
