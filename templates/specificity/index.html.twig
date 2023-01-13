@@ -39,12 +39,15 @@
                                 <img src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="">
                             </td>
                             <td>
-    {#                            <a class="button-primary button-blue" href="{{ path('app_specificity_show', {'id': specificity.id}) }}">#}
-    {#                                <i class="fas fa-eye"></i> Voir#}
-    {#                            </a>#}
-                                <a class="button-primary button-black" href="{{ path('app_specificity_edit', {'id': specificity.id}) }}">
-                                    <i class="fas fa-pencil-alt"></i> Modifier
-                                </a>
+
+                                <div class="actions">
+        {#                            <a class="button-primary button-blue" href="{{ path('app_specificity_show', {'id': specificity.id}) }}">#}
+        {#                                <i class="fas fa-eye"></i> Voir#}
+        {#                            </a>#}
+                                    <a class="button-primary button-black" href="{{ path('app_specificity_edit', {'id': specificity.id}) }}">
+                                        <i class="fas fa-pencil-alt"></i> Modifier
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     {% else %}

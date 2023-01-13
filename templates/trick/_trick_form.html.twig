@@ -5,6 +5,17 @@
 {#            {{ form_widget(trickForm) }}#}
     {{ form_row(trickForm.name) }}
     {{ form_row(trickForm.description) }}
+
+    {% if trick.images is not empty %}
+{#        <section class="images-section">#}
+            <div class="images">
+                {% for image in trick.images %}
+                    <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')"></div>
+                {% endfor %}
+            </div>
+{#        </section>#}
+    {% endif %}
+
     {{ form_row(trickForm.images) }}
     {{ form_row(trickForm.video) }}
 

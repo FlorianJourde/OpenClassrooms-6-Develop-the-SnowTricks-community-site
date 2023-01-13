@@ -12,6 +12,10 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .edit-section .images {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .video-section iframe {
         height: 400px;
     }
@@ -48,6 +52,10 @@
 
     .tricks, .images, .specificities, .edit-section .specificities {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .edit-section .images {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .tricks {

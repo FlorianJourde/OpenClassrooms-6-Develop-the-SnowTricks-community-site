@@ -42,12 +42,15 @@
                                         <i class="fas fa-check-circle"></i>
                                     {% endif %}
                                 <td>
-                                    {% if user.email not in 'admin@admin.com' %}
-                                        <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
-                                            <i class="fas fa-pencil-alt"></i> Modifier
-                                        </a>
-                                        {{ include('admin/_delete_user.html.twig') }}
-                                    {% endif %}
+
+                                    <div class="actions">
+                                        {% if user.email not in 'admin@admin.com' %}
+                                            <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
+                                                <i class="fas fa-pencil-alt"></i> Modifier
+                                            </a>
+                                            {{ include('admin/_delete_user.html.twig') }}
+                                        {% endif %}
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

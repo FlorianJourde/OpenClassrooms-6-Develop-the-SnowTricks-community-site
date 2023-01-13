@@ -69,6 +69,8 @@ class SpecificityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $icon = $specificity->getIcon();
+            unlink($this->getParameter('images_directory') . "/icons/" . $icon);
             $this->addImages($form, $specificity, $specificityRepository);
 
             $specificityRepository->add($specificity, true);
@@ -92,6 +94,7 @@ class SpecificityController extends AbstractController
             unlink($this->getParameter('images_directory') . "/icons/" . $icon);
             $specificityRepository->remove($specificity, true);
         }
+
 
         return $this->redirectToRoute('app_specificity_index', [], Response::HTTP_SEE_OTHER);
     }

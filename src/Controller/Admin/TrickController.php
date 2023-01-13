@@ -197,11 +197,11 @@ class TrickController extends AbstractController
 
     private function addVideo($trick, TrickRepository $trickRepository)
     {
-        if ($trick->getVideo()) {
-            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/') + 1);
+//        if ($trick->getVideo()) {
+//            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/') + 1);
 
-            $trick->setVideo($videoLink);
+            $trick->setVideo($trick->getVideo());
             $trickRepository->add($trick, true);
-        }
+//        }
     }
 }

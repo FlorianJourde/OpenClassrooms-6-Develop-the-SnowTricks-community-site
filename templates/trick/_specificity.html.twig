@@ -1,34 +1,35 @@
-{% if trick.id is not null %}
-    <h2 class="section-title white-logo">Descriptif technique</h2>
-    <div class="specificities-wrapper">
-        <div class="specificities">
-            {% for unselectedSpecificity in unselectedSpecificities %}
-                    <form class="specificity" method="post" action="{{ path('app_trick_add_specificity', { 'id_1': trick.id, 'id_2': unselectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to add this specificity ?');"#}>
-                        <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ unselectedSpecificity.icon ) }}" alt="">
+{% if (unselectedSpecificities is defined or selectedSpecificities is defined) and (unselectedSpecificities is not empty or selectedSpecificities is not empty) %}
+    {% if trick.id is not null %}
+        <h2 class="section-title white-logo">Descriptif technique</h2>
+        <div class="specificities-wrapper">
+            <div class="specificities">
+                {% for unselectedSpecificity in unselectedSpecificities %}
+                        <form class="specificity" method="post" action="{{ path('app_trick_add_specificity', { 'id_1': trick.id, 'id_2': unselectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to add this specificity ?');"#}>
+                            <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ unselectedSpecificity.icon ) }}" alt="">
+                            <div class="description">
+                                <h3 class="title">{{ unselectedSpecificity.name }}</h3>
+                                <p>{{ unselectedSpecificity.description }}</p>
+                            </div>
+                            <button class="button-primary button-black" type="submit">Ajouter</button>
+
+                        </form>
+        {#            </div>#}
+                {% endfor %}
+            </div>
+
+            <div class="specificities">
+                {% for selectedSpecificity in selectedSpecificities %}
+                    <form class="specificity" method="post" action="{{ path('app_trick_remove_specificity', { 'id_1': trick.id, 'id_2': selectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to remove this specificity ?');"#}>
+
+                        <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ selectedSpecificity.icon ) }}" alt="">
                         <div class="description">
-                            <h3 class="title">{{ unselectedSpecificity.name }}</h3>
-                            <p>{{ unselectedSpecificity.description }}</p>
+                            <h3 class="title">{{ selectedSpecificity.name }}</h3>
+                            <p>{{ selectedSpecificity.description }}</p>
                         </div>
-                        <button class="button-primary button-black" type="submit">Ajouter</button>
-
+                        <button class="button-primary button-red" type="submit">Supprimer</button>
                     </form>
-    {#            </div>#}
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-
-        <div class="specificities">
-            {% for selectedSpecificity in selectedSpecificities %}
-                <form class="specificity" method="post" action="{{ path('app_trick_remove_specificity', { 'id_1': trick.id, 'id_2': selectedSpecificity.id }) }}" {#onsubmit="return confirm('Are you sure you want to remove this specificity ?');"#}>
-
-                    <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ selectedSpecificity.icon ) }}" alt="">
-                    <div class="description">
-                        <h3 class="title">{{ selectedSpecificity.name }}</h3>
-                        <p>{{ selectedSpecificity.description }}</p>
-                    </div>
-                    <button class="button-primary button-red" type="submit">Supprimer</button>
-                </form>
-            {% endfor %}
-        </div>
-    </div>
-
+    {% endif %}
 {% endif %}
