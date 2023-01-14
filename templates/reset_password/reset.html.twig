@@ -3,10 +3,18 @@
 {% block title %}Réinitialisation du mot de passe{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+    {% include 'partials/banner.html.twig' with { background_image: 'mountains-5.jpg', title: block('title') } %}
+
+    <section class="register section-spacing background-image">
+        <div class="wrapper wrapper-small">
+
+        {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-primary">Reset password</button>
+        {{ form_end(resetForm) }}
+
+        </div>
+    </section>
+
 {% endblock %}

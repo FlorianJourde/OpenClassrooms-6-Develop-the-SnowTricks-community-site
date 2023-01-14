@@ -17,28 +17,28 @@ class Specificity
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $icon;
+    private ?string $icon = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Trick::class, inversedBy="specificities", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinTable(name="specificity_trick")
      */
-    private $trick;
+    private Collection $trick;
 
     public function __construct()
     {

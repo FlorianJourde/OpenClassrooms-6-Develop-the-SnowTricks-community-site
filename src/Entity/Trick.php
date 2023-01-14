@@ -31,30 +31,33 @@ class Trick
     private ?DateTimeInterface $creation_date;
 
     /**
+     * @var Collection<int, Comment>|Comment[]
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="trick", orphanRemoval=true)
      */
-    private $comments;
+    private Collection $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
+     * @var Collection<int, Image>|Image[]
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", orphanRemoval=true, cascade={"persist"}, fetch="EAGER"))
      */
-    private $images;
+    private Collection $images;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description = null;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick", cascade={"persist"}, fetch="EAGER")
+     * @var Collection<int, Specificity>|Specificity[]
+     * @ORM\ManyToMany(targetEntity=Specificity::class, mappedBy="trick", cascade={"persist"})
      * @ORM\JoinTable(name="specificity_trick")
      */
-    private $specificities;
+    private Collection $specificities;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $video;
+    private ?string $video = null;
 
     public function __construct()
     {
