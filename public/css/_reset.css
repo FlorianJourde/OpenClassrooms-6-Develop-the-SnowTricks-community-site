@@ -24,7 +24,6 @@ input, button, textarea, select {
 input, textarea, ::-webkit-file-upload-button {
   width: 100%;
   padding: 20px;
-  /* border-radius: 20px; */
   border: none;
   box-shadow: var(--bs-primary);
 }

@@ -6,7 +6,6 @@ use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Specificity;
 use App\Entity\Trick;
-use App\Form\SpecificityType;
 use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Repository\SpecificityRepository;
@@ -41,7 +40,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
+    public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
     {
         $trick = new Trick();
         $specificities = $specificityRepository->findAll();
@@ -102,9 +101,8 @@ class TrickController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_trick_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
+    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
     {
-
         $currentVideoLink = $trick->getVideo();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
@@ -113,7 +111,6 @@ class TrickController extends AbstractController
         $selectedSpecificitiesId = [];
         $selectedSpecificities = [];
         $unselectedSpecificities = [];
-
 
         foreach ($currentSpecificities as $currentSpecificity) {
             $selectedSpecificitiesId[] = $currentSpecificity->getId();
@@ -162,13 +159,7 @@ class TrickController extends AbstractController
      */
     public function deleteComment(Comment $comment, CommentRepository $commentRepository): Response
     {
-
-//        dd($comment, $comment->getTrick()->getId());
-//        $comment->getTrick();
-//        dd($request->request->get('_token'));
-//        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-            $commentRepository->remove($comment, true);
-//        }
+        $commentRepository->remove($comment, true);
 
         return $this->redirectToRoute('app_trick_show', ['id' => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
     }
@@ -215,11 +206,7 @@ class TrickController extends AbstractController
 
     private function addVideo($trick, TrickRepository $trickRepository)
     {
-//        if ($trick->getVideo()) {
-//            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/') + 1);
-
-            $trick->setVideo($trick->getVideo());
-            $trickRepository->add($trick, true);
-//        }
+        $trick->setVideo($trick->getVideo());
+        $trickRepository->add($trick, true);
     }
 }

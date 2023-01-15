@@ -1,7 +1,4 @@
 {{ form_start(specificityForm) }}
-
-{#    {{ form_widget(specificityForm) }}#}
-
     {{ form_row(specificityForm.name) }}
     {{ form_row(specificityForm.description) }}
 
@@ -12,5 +9,4 @@
     {{ form_row(specificityForm.icon) }}
 
     <button class="button-primary button-black button-large">{{ button_label|default('Mettre à jour') }}</button>
-
 {{ form_end(specificityForm) }}
