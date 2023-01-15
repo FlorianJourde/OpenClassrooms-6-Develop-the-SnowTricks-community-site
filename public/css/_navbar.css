@@ -28,7 +28,6 @@ nav {
   width: 100%;
   padding-bottom: 20px;
   padding-top: 20px;
-  /* box-shadow: var(--bs-secondary); */
   align-items: center;
 }
 
@@ -43,7 +42,6 @@ nav {
   align-items: center;
   gap: 10px 20px;
   transition: .4s;
-  /* text-transform: uppercase; */
 }
 
 .open-menu, .close-menu {
@@ -83,7 +81,6 @@ nav {
   line-height: 1em;
   color: var(--clr-dark-grey);
   word-break: keep-all;
-  /* width: 200px; */
 }
 
 .navbar-manager {
@@ -110,11 +107,3 @@ nav {
   padding-bottom: 12px;
   text-align: center;
 }
-
-/*.navbar-notification-success {*/
-/*  background-color: var(--clr-dark-green);*/
-/*}*/
-
-/*.navbar-notification-error {*/
-/*  background-color: var(--clr-dark-pink);*/
-/*}*/

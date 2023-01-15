@@ -6,7 +6,6 @@ use App\Entity\Image;
 use App\Entity\Specificity;
 use App\Form\SpecificityType;
 use App\Repository\SpecificityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,16 +49,6 @@ class SpecificityController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/{id}", name="app_specificity_show", methods={"GET"})
-//     */
-//    public function show(Specificity $specificity): Response
-//    {
-//        return $this->render('specificity/show.html.twig', [
-//            'specificity' => $specificity,
-//        ]);
-//    }
-
     /**
      * @Route("/{id}/edit", name="app_specificity_edit", methods={"GET", "POST"})
      */
@@ -94,7 +83,6 @@ class SpecificityController extends AbstractController
             unlink($this->getParameter('images_directory') . "/icons/" . $icon);
             $specificityRepository->remove($specificity, true);
         }
-
 
         return $this->redirectToRoute('app_specificity_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -4,9 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Entity\Trick;
-use App\Entity\User;
 use App\Form\CommentType;
-use App\Repository\TrickRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +27,6 @@ class TrickController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-//            dd($commentForm);
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);

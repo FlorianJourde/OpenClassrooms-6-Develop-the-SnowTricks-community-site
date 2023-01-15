@@ -38,10 +38,7 @@
                                 <td>{{ trick.name }}</td>
                                 <td>{{ trick.creationDate ? trick.creationDate|date("m/d/Y") : '' }}</td>
                                 <td>
-
                                     {% if trick.images|first %}
-                                        {#                                    {{ dump(trick.images|first.name) }}#}
-                                        {#                                    trick.images|first.name#}
                                         <img src="{{ asset('uploads/tricks/' ~ trick.images|first.name) }}" alt="">
                                     {% endif %}
                                 </td>

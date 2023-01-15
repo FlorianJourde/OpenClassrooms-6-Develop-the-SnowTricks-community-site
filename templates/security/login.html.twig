@@ -9,6 +9,7 @@
 <section class="login section-spacing background-image">
     <div class="wrapper wrapper-small">
         <form method="post">
+
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -19,7 +20,6 @@
                 </div>
             {% endif %}
 
-            {# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> #}
             <div class="form-field">
                 <label for="inputEmail" class="title">Email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>

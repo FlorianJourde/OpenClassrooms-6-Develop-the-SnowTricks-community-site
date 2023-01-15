@@ -1,18 +1,3 @@
-{#{{ form(commentForm), label: 'Envoyer' }}#}
-
-{#{{ form_start(commentForm) }}#}
-{#    {{ form_row(commentForm.content) }}#}
-{#    <button type="submit" id="comment_send" name="comment[send]" class="button-primary button-black button-large">Send</button>#}
-{#    <button type="submit" class="button-primary button-black button-large">Envoyer</button>#}
-{#{{ form_end(commentForm) }}#}
-
-
-{#{{ form_start(commentForm) }}#}
-{#    {{ form_row(commentForm.content) }}#}
-{#    <button type="submit" id="comment_send" name="comment[send]" class="button-primary button-black button-large">Send</button>#}
-{#    <button type="submit" class="button-primary button-black button-large">Envoyer</button>#}
-{#{{ form_end(commentForm) }}#}
-
 {{ form_start(commentForm) }}
     {{ form_row(commentForm.content) }}
     {{ form_row(commentForm.send) }}

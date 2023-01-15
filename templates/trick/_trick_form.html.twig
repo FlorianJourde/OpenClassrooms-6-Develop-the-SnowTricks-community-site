@@ -1,41 +1,24 @@
 {{ include('trick/_specificity.html.twig') }}
 
 <h2 class="section-title white-logo">Détails</h2>
+
 {{ form_start(trickForm) }}
-{#            {{ form_widget(trickForm) }}#}
+
     {{ form_row(trickForm.name) }}
     {{ form_row(trickForm.description) }}
 
     {% if trick.images is not empty %}
-{#        <section class="images-section">#}
-            <div class="images">
-                {% for image in trick.images %}
-                    <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')"></div>
-                {% endfor %}
-            </div>
-{#        </section>#}
+        <div class="images">
+            {% for image in trick.images %}
+                <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')"></div>
+            {% endfor %}
+        </div>
     {% endif %}
 
     {{ form_row(trickForm.images) }}
     {{ form_row(trickForm.video) }}
 
     <button class="button-primary button-black button-large">{{ button_label|default('Mettre à jour') }}</button>
-    {#    {{ dump(trick) }}#}
-    {#    {{ dump(trick.images) }}#}
-
-    {#    {% if specificities is not null and trick.id is not null %}#}
-    {#        {{ include('trick/_specificity.html.twig') }}#}
-    {#        #}{#        {% for specificity in specificities %}#}
-    {#        #}{#            <a href="{{ path('app_trick_add_specificity', { 'id': specificity.id }) }}"#}{##}{# data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"#}{##}{#>#}
-    {#        #}{#        {{ specificity.name }}#}
-    {#        #}{#        {{ specificity.description }}#}
-    {#        #}{#            </a>#}
-    {#        #}{#        {% endfor %}#}
-    {#    {% endif %}#}
-
-    {% if app.request.attributes.get('_route') == 'app_trick_edit' %}
-        {{ include('trick/_images.html.twig') }}
-    {% endif %}
 
     {% if app.request.attributes.get('_route') == 'app_trick_new' %}
         <div class="information">
@@ -44,11 +27,3 @@
     {% endif %}
 
 {{ form_end(trickForm) }}
-
-
-{#        {% for specificity in specificities %}#}
-{#            <a href="{{ path('app_trick_add_specificity', { 'id': specificity.id }) }}"#}{# data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"#}{#>#}
-{#        {{ specificity.name }}#}
-{#        {{ specificity.description }}#}
-{#            </a>#}
-{#        {% endfor %}#}

@@ -123,14 +123,11 @@ section.archive, section.login, section.register, .description-section, .video-s
     background-color: var(--clr-very-light-blue);
 }
 
-/*.archive .actions, .actions-section .actions, .edit-section .actions {*/
-
 .actions {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
     flex-wrap: wrap;
-    /*margin-bottom: 50px;*/
     z-index: 0;
 }
 
@@ -145,8 +142,6 @@ section.archive, section.login, section.register, .description-section, .video-s
 }
 
 .actions-section .actions {
-    /*margin-top: 50px;*/
-    /*margin-bottom: unset;*/
 }
 
 .introduction p, .description-section p {
@@ -214,7 +209,6 @@ section.archive, section.login, section.register, .description-section, .video-s
     padding: 20px 20px 0 20px;
     min-height: 300px;
     justify-content: flex-end;
-    /* background: var(--clr-radial-very-dark-grey); */
     color: var(--clr-dark-grey);
     background-size: cover;
     background-position: center;
@@ -248,10 +242,7 @@ section.archive, section.login, section.register, .description-section, .video-s
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
-    /*grid-auto-columns: 1fr;*/
     grid-auto-rows: 1fr;
-    /*max-height: 300px;*/
-    /*object-fit: cover;*/
 }
 
 .images .image {
@@ -259,12 +250,6 @@ section.archive, section.login, section.register, .description-section, .video-s
     min-height: 300px;
     background-position: center;
     background-size: cover;
-    /*color: var(--clr-very-light-blue);*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-    /*object-fit: cover;*/
 }
 
 
@@ -506,14 +491,6 @@ section.archive, section.login, section.register, .description-section, .video-s
 table .actions {
     justify-content: center;
 }
-
-/*.table th:has(.button-primary),*/
-/*.table td:has(.button-primary) {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    gap: 10px;*/
-/*}*/
-
 .table thead tr {
     background-color: var(--clr-dark-blue);
     color: var(--clr-white);

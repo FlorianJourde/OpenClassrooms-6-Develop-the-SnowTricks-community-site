@@ -17,19 +17,11 @@
     <section class="edit-section section-spacing">
         <div class="wrapper wrapper-small">
 
-{#            <div class="actions">#}
-{#                <a class="button-primary button-black" href="{{ path('app_admin_users') }}"><i class="fas fa-arrow-left"></i>Retour</a>#}
-{#            </div>#}
-
-            {#        {{  form(userForm) }}#}
-
-        {{ form_start(userForm) }}
-            {{ form_row(userForm.email) }}
-            {{ form_row(userForm.roles) }}
-            {{ form_row(userForm.submit) }}
-{#            <button class="button-primary button-black button-large">Mettre à jour</button>#}
-        {{ form_end(userForm) }}
-{#        <h1>Modifier l'utilisateur</h1>#}
+            {{ form_start(userForm) }}
+                {{ form_row(userForm.email) }}
+                {{ form_row(userForm.roles) }}
+                {{ form_row(userForm.submit) }}
+            {{ form_end(userForm) }}
 
         </div>
     </section>
