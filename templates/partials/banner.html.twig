@@ -1,0 +1,26 @@
+{% if (has_image is defined) and (has_image) %}
+  {% set background = asset('uploads/tricks/' ~ background_image) %}
+{% else %}
+  {% set background = asset('images/' ~ background_image) %}
+{% endif %}
+
+<section class="banner {{ is_home is defined ? 'homepage' : '' }} {{ wide is defined ? wide : '' }}" style="background-image: url('{{ background }}');">
+  {% if is_home is defined %}
+    <img class="banner-decoration" src="{{ asset('images/snowtricks-logo-white.svg') }}" alt="">
+  {% endif %}
+
+  <div class="wrapper">
+    {% if actions is defined %}
+      {{ actions }}
+    {% endif %}
+    <div class="title">
+        <h1>{{ title }}</h1>
+        {% if description is defined %}
+          <h2>{{ description }}</h2>
+        {% endif %}
+    </div>
+      {% if is_home is defined %}
+        <a id="scroll-to-next-section" href="#introduction" role="button"><i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+      {% endif %}
+  </div>
+</section>

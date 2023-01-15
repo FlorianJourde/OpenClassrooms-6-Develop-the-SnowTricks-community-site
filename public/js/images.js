@@ -17,7 +17,7 @@ window.onload = () => {
                     response => response.json()
                 ).then(data => {
                         if (data.success) {
-                            this.parentElement.remove();
+                            this.parentElement.parentElement.remove();
                         } else {
                             alert(data.error);
                         }

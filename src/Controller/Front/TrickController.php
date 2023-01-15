@@ -20,16 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/", name="app_trick_index", methods={"GET"})
-     */
-    public function index(TrickRepository $trickRepository): Response
-    {
-        return $this->render('trick/index.html.twig', [
-            'tricks' => $trickRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="app_trick_show")
      */
     public function show(Trick $trick, Request $request, /*User $user, */ManagerRegistry $doctrine): Response
@@ -39,6 +29,7 @@ class TrickController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+//            dd($commentForm);
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);

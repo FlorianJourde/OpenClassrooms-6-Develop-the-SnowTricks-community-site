@@ -1,38 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Admin !{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Users list</h1>
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Rôles</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-{#        {{ dump(users) }}#}
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                {% for role in user.roles %}
-                    {{ role }}
-                {% endfor %}
-                </td>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <td><a href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">Modifier</a></td>
-                    <td>{{ include('admin/_delete_user.html.twig') }}</td>
-                {% endif %}
-            </tr>
-        {% else %}
-            <tr>
-                <td>Il n'y a pas d'utilisateurs inscrits.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{#    {{ dump(users) }}#}
+
+	{% include 'partials/banner.html.twig' with { background_image: 'mountains-2.jpg', title: block('title') } %}
+
+	<section class="users section-spacing">
+        <div class="wrapper">
+
+            {% if users is not empty %}
+                <div class="table-scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Utilisateur</th>
+                                <th>Éditeur</th>
+                                <th>Administrateur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if 'ROLE_USER' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if 'ROLE_EDITOR' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if 'ROLE_ADMIN' in user.roles %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% endif %}
+                                <td>
+
+                                    <div class="actions">
+                                        {% if user.email not in 'admin@admin.com' %}
+                                            <a class="button-primary button-black" href="{{ path('app_admin_edit_user', { 'id' : user.id }) }}">
+                                                <i class="fas fa-pencil-alt"></i> Modifier
+                                            </a>
+                                            {{ include('admin/_delete_user.html.twig') }}
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="information">
+                    <p>Il n'y a aucun utilisateur à afficher.</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </section>
+
 {% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% include 'partials/banner.html.twig' with { wide: 'very-wide', background_image: 'mountains-3.jpg', title: 'Snowtricks', description: 'Partagez votre passion du snowboard avec une communauté de passionnés !', is_home: true } %}
+
+	<main id="introduction" class="introduction section-spacing" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
+		<div class="wrapper">
+			<h2 class="section-title">Bienvenue sur Snowtricks&nbsp;!</h2>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui deleniti voluptatem amet sapiente ullam voluptas delectus, quia ipsa consequatur aliquam expedita explicabo, praesentium deserunt! Porro amet animi voluptatum perspiciatis. Veritatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae corrupti, officiis veniam quasi, minima recusandae pariatur qui accusamus adipisci, facere maiores culpa labore animi hic consectetur. Distinctio animi accusantium perferendis.</p>
+			<br>
+			<p>Quod odio praesentium similique numquam fugit, blanditiis mollitia exercitationem dolorem cum officia voluptatum magnam reiciendis perferendis quibusdam repellendus adipisci eum maiores sint doloribus officiis molestias nemo distinctio. Cum, non natus.</p>
+		</div>
+	</main>
+
+	<section class="archive section-spacing" style="background-image: url('{{ asset('images/pine-trees-white-2.svg')}}');">
+		<div class="wrapper">
+			<h2 class="section-title white-logo">Tous les tricks</h2>
+
+			{% if tricks is not empty %}
+				<div class="tricks" id="tricks-container">
+{#					{{ dump(tricks|length % 4) }}#}
+					{% set page = 1 %}
+					{% set tricksPerPage = 4 %}
+					{% set totalPages = (tricks|length/tricksPerPage)|round %}
+
+{#					{% for i in range(1, tricks|length) %}#}
+					{% for trick in tricks %}
+
+{#						{{ loop.index }}#}
+
+						{% if trick.images|first %}
+							{% set thumbnail = asset('uploads/tricks/' ~ trick.images|first.name) %}
+						{% else %}
+							{% set thumbnail = asset('images/' ~ placeholder_small) %}
+						{% endif %}
+
+						<div class="trick {{ page != 1 ? 'hide' : '' }}" style="background-image: url('{{ thumbnail }}');" data-page="{{ page }}">
+
+							{% if is_granted('ROLE_EDITOR') %}
+								<div class="actions">
+									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+										<i class="fas fa-pencil-alt"></i> Modifier
+									</a>
+								</div>
+							{% endif %}
+
+							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
+								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
+							</a>
+						</div>
+
+{#						{{ page }}#}
+						{% if loop.index is divisible by(tricksPerPage) %}
+							{% set page = page + 1 %}
+						{% endif %}
+
+					{% endfor %}
+{#					{% endfor %}#}
+
+{#					{{ dump(k) }}#}
+{#					{{ dump(tricks|length) }}#}
+{#					{% for i in tricks|length %}#}
+{#						* {{ (i) }}#}
+{#					{% endfor %}#}
+{#					{{ dump(k) }}#}
+{#					{{ dump(tricks|length) }}#}
+
+{#					{% for trick in tricks %}#}
+
+{#						{% if trick.images|first %}#}
+{#							{% set thumbnail = asset('uploads/tricks/' ~ trick.images|first.name) %}#}
+{#						{% else %}#}
+{#							{% set thumbnail = asset('images/' ~ placeholder_small) %}#}
+{#						{% endif %}#}
+
+{#						<div class="trick" style="background-image: url('{{ thumbnail }}');">#}
+
+{#							{% if is_granted('ROLE_EDITOR') %}#}
+{#								<div class="actions">#}
+{#									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">#}
+{#										<i class="fas fa-pencil-alt"></i> Modifier#}
+{#									</a>#}
+{#								</div>#}
+{#							{% endif %}#}
+
+{#							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">#}
+{#								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>#}
+{#							</a>#}
+{#						</div>#}
+
+{#					{% endfor %}#}
+				</div>
+
+{#				<a class="button-primary button-blue" id="load-more-tricks" href="{{ path('app_trick_load_more') }}" data-page="1">#}
+{#					<i class="fas fa-eye"></i> Voir plus#}
+{#				</a>#}
+
+				<a class="button-primary button-blue" id="load-more-tricks" href="#" data-next-page="2" data-total-pages="{{ totalPages }}" >
+					<i class="fas fa-eye"></i> Voir plus
+				</a>
+
+			{% else %}
+				<div class="information">
+					<p>Il n'y a aucun trick à afficher.</p>
+				</div>
+			{% endif %}
+		</div>
+	</section>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/load-more.js') }}"></script>
+{% endblock %}

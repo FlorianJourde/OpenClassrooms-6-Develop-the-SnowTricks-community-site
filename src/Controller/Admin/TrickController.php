@@ -2,11 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Specificity;
 use App\Entity\Trick;
 use App\Form\SpecificityType;
 use App\Form\TrickType;
+use App\Repository\CommentRepository;
 use App\Repository\SpecificityRepository;
 use App\Repository\TrickRepository;
 use DateTime;
@@ -27,6 +29,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
+     * @Route("/", name="app_trick_index", methods={"GET"})
+     */
+    public function index(TrickRepository $trickRepository): Response
+    {
+        return $this->render('trick/index.html.twig', [
+            'tricks' => $trickRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_trick_new", methods={"GET", "POST"})
      */
     public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
@@ -38,13 +50,14 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
+            $this->addVideo($trick, $trickRepository);
 
             return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/new.html.twig', [
             'trick' => $trick,
-            'form' => $form,
+            'trickForm' => $form,
             'specificities' => $specificities
         ]);
     }
@@ -91,6 +104,8 @@ class TrickController extends AbstractController
      */
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository, ManagerRegistry $doctrine): Response
     {
+
+        $currentVideoLink = $trick->getVideo();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         $specificities = $specificityRepository->findAll();
@@ -98,6 +113,7 @@ class TrickController extends AbstractController
         $selectedSpecificitiesId = [];
         $selectedSpecificities = [];
         $unselectedSpecificities = [];
+
 
         foreach ($currentSpecificities as $currentSpecificity) {
             $selectedSpecificitiesId[] = $currentSpecificity->getId();
@@ -113,15 +129,17 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addImages($form, $trick, $trickRepository);
-//            dd($trick->getVideo());
-            $this->addVideo($form, $trick, $trickRepository);
+
+            if ($currentVideoLink !== $form->get('video')->getData()) {
+                $this->addVideo($trick, $trickRepository);
+            }
 
             return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
             'trick' => $trick,
-            'form' => $form,
+            'trickForm' => $form,
             'unselectedSpecificities' => $unselectedSpecificities,
             'selectedSpecificities' => $selectedSpecificities,
         ]);
@@ -137,6 +155,22 @@ class TrickController extends AbstractController
         }
 
         return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/comment/delete", name="app_trick_comment_delete", methods={"GET"})
+     */
+    public function deleteComment(Comment $comment, CommentRepository $commentRepository): Response
+    {
+
+//        dd($comment, $comment->getTrick()->getId());
+//        $comment->getTrick();
+//        dd($request->request->get('_token'));
+//        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+//        }
+
+        return $this->redirectToRoute('app_trick_show', ['id' => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -179,13 +213,13 @@ class TrickController extends AbstractController
         $trickRepository->add($trick, true);
     }
 
-    private function addVideo($form, $trick, TrickRepository $trickRepository)
+    private function addVideo($trick, TrickRepository $trickRepository)
     {
-            $videoLink = $form->get('video')->getData();
-            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/' )+1);
-//            dd($videoLink);
-            $trick->setVideo($videoLink);
+//        if ($trick->getVideo()) {
+//            $videoLink = substr($trick->getVideo(), strrpos($trick->getVideo(), '/') + 1);
 
+            $trick->setVideo($trick->getVideo());
             $trickRepository->add($trick, true);
+//        }
     }
 }

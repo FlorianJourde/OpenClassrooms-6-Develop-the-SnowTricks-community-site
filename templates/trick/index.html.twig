@@ -1,41 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick index{% endblock %}
+{% block title %}Tricks{% endblock %}
 
 {% block body %}
-    <h1>Trick index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Creation_date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for trick in tricks %}
-            <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.name }}</td>
-                <td>{{ trick.creationDate ? trick.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">show</a>
-                    {% if is_granted('ROLE_EDITOR') %}
-                        <a href="{{ path('app_trick_edit', {'id': trick.id}) }}">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% set actions %}
+        {% if is_granted('ROLE_EDITOR') %}
+            <section class="actions-section">
+                <div class="actions">
+                    <a class="button-primary button-black" href="{{ path('app_trick_new') }}"><i class="fas fa-pen-nib"></i>Ajouter</a>
+                </div>
+            </section>
+        {% endif %}
+    {% endset %}
 
-    {% if is_granted('ROLE_EDITOR') %}
-        <a href="{{ path('app_trick_new') }}">Create new</a>
-    {% endif %}
+	{% include 'partials/banner.html.twig' with { background_image: 'mountains-1.jpg', title: block('title') } %}
+
+	<main class="archive tricks-section section-spacing">
+        <div class="wrapper">
+
+            {% if tricks is not empty %}
+                <div class="table-scroll">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Création</th>
+                            <th>Vignette</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for trick in tricks %}
+                            <tr>
+                                <td>{{ trick.id }}</td>
+                                <td>{{ trick.name }}</td>
+                                <td>{{ trick.creationDate ? trick.creationDate|date("m/d/Y") : '' }}</td>
+                                <td>
+
+                                    {% if trick.images|first %}
+                                        {#                                    {{ dump(trick.images|first.name) }}#}
+                                        {#                                    trick.images|first.name#}
+                                        <img src="{{ asset('uploads/tricks/' ~ trick.images|first.name) }}" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="actions">
+                                        <a class="button-primary button-blue" href="{{ path('app_trick_show', {'id': trick.id}) }}">
+                                            <i class="fas fa-eye"></i> Voir
+                                        </a>
+                                        {% if is_granted('ROLE_EDITOR') %}
+                                            <a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+                                                <i class="fas fa-pencil-alt"></i> Modifier
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="information">
+                    <p>Il n'y a aucun trick à afficher.</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </main>
 {% endblock %}

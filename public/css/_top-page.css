@@ -1,0 +1,26 @@
+#top-page-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: -70px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--clr-dark-blue);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    width: 50px;
+    height: 50px;
+    transition: .4s;
+}
+
+#top-page-button:hover {
+    background-color: var(--clr-very-dark-grey);
+}
+
+#top-page-button.appear {
+    right: 20px;
+}

@@ -34,15 +34,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private ?string $password;
 
     /**
+     * @var Collection<int, Comment>|Comment[]
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {

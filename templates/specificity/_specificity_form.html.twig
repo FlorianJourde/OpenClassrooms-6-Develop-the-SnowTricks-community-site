@@ -1,0 +1,16 @@
+{{ form_start(specificityForm) }}
+
+{#    {{ form_widget(specificityForm) }}#}
+
+    {{ form_row(specificityForm.name) }}
+    {{ form_row(specificityForm.description) }}
+
+    {% if specificity.icon is not null %}
+        <img class="specificity-icon" src="{{ asset('/uploads/icons/' ~ specificity.icon ) }}" alt="">
+    {% endif %}
+
+    {{ form_row(specificityForm.icon) }}
+
+    <button class="button-primary button-black button-large">{{ button_label|default('Mettre à jour') }}</button>
+
+{{ form_end(specificityForm) }}

@@ -46,19 +46,19 @@ class SpecificityController extends AbstractController
 
         return $this->renderForm('specificity/new.html.twig', [
             'specificity' => $specificity,
-            'form' => $form,
+            'specificityForm' => $form,
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_specificity_show", methods={"GET"})
-     */
-    public function show(Specificity $specificity): Response
-    {
-        return $this->render('specificity/show.html.twig', [
-            'specificity' => $specificity,
-        ]);
-    }
+//    /**
+//     * @Route("/{id}", name="app_specificity_show", methods={"GET"})
+//     */
+//    public function show(Specificity $specificity): Response
+//    {
+//        return $this->render('specificity/show.html.twig', [
+//            'specificity' => $specificity,
+//        ]);
+//    }
 
     /**
      * @Route("/{id}/edit", name="app_specificity_edit", methods={"GET", "POST"})
@@ -69,6 +69,8 @@ class SpecificityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $icon = $specificity->getIcon();
+            unlink($this->getParameter('images_directory') . "/icons/" . $icon);
             $this->addImages($form, $specificity, $specificityRepository);
 
             $specificityRepository->add($specificity, true);
@@ -78,7 +80,7 @@ class SpecificityController extends AbstractController
 
         return $this->renderForm('specificity/edit.html.twig', [
             'specificity' => $specificity,
-            'form' => $form,
+            'specificityForm' => $form,
         ]);
     }
 
@@ -92,6 +94,7 @@ class SpecificityController extends AbstractController
             unlink($this->getParameter('images_directory') . "/icons/" . $icon);
             $specificityRepository->remove($specificity, true);
         }
+
 
         return $this->redirectToRoute('app_specificity_index', [], Response::HTTP_SEE_OTHER);
     }

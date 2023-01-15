@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,12 +37,12 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    private Trick $trick;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      */
-    private $user;
+    private User $user;
 
     public function getId(): ?int
     {
@@ -92,7 +90,7 @@ class Comment
         return $this->trick;
     }
 
-    public function setTrick(?Trick $trick): self
+    public function setTrick(Trick $trick): self
     {
         $this->trick = $trick;
 
@@ -104,7 +102,7 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 

@@ -1,15 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Trick{% endblock %}
+{% block title %}Modifier un trick{% endblock %}
 
 {% block body %}
-    <h1>Edit Trick</h1>
 
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+    {% if trick.images|first %}
+        {% set banner_image, has_image = trick.images|first.name, true %}
+    {% else %}
+        {% set banner_image, has_image = placeholder, false %}
+    {% endif %}
 
-    <a href="{{ path('app_trick_show', {'id': trick.id}) }}">back to trick</a>
+    {% set actions %}
+        {% if is_granted('ROLE_EDITOR') %}
+            <section class="actions-section">
+                <div class="actions">
+                    <a class="button-primary button-blue" href="{{ path('app_trick_index') }}"><i class="fas fa-snowboarding"></i>Tricks</a>
+                    <a class="button-primary button-blue" href="{{ path('app_trick_show', {'id': trick.id}) }}"><i class="fas fa-eye"></i>Voir</a>
+                    {{ include('trick/_delete_form.html.twig') }}
+                </div>
+            </section>
+        {% endif %}
+    {% endset %}
 
-    {{ include('trick/_delete_form.html.twig') }}
+    {% include 'partials/banner.html.twig' with { background_image: banner_image, title: block('title'), has_image: has_image } %}
+
+    <section class="edit-section section-spacing">
+        <div class="wrapper wrapper-small">
+
+{#        <div class="actions">#}
+{#            <a class="button-primary button-blue" href="{{ path('app_trick_index') }}"><i class="fas fa-snowboarding"></i>Tricks</a>#}
+{#            <a class="button-primary button-blue" href="{{ path('app_trick_show', {'id': trick.id}) }}"><i class="fas fa-eye"></i>Voir</a>#}
+{#            {{ include('trick/_delete_form.html.twig') }}#}
+{#        </div>#}
+
+        {{ include('trick/_trick_form.html.twig') }}
+
+        </div>
+    </section>
+
 {% endblock %}
 
 {% block javascripts %}

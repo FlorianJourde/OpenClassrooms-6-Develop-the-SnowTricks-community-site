@@ -25,15 +25,17 @@ class UserType extends AbstractType
              ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'user' => 'ROLE_USER',
-                    'editor' => 'ROLE_EDITOR',
-                    'admin' => 'ROLE_ADMIN',
+                    'Utilisateur' => 'ROLE_USER',
+                    'Éditeur' => 'ROLE_EDITOR',
+                    'Administrateur' => 'ROLE_ADMIN',
                 ],
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Rôles'
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Mettre à jour'
+            ])
         ;
     }
 
