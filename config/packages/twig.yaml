@@ -1,8 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
-        placeholder: 'mountains-5-desaturated.jpg'
-        placeholder_small: 'mountains-5-desaturated-small.jpg'
+        placeholder: 'mountains-5-transparent.png'
+        placeholder_small: 'mountains-5-transparent-small.png'
+    cache: false
 
 when@test:
     twig:
