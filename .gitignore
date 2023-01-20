@@ -20,4 +20,4 @@
 ###< symfony/phpunit-bridge ###
 
 .idea
-ressources/server
+/ressources/server/
