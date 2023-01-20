@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 jan. 2023 à 22:08
+-- Généré le : ven. 20 jan. 2023 à 23:14
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -307,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_D8F0A91EA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
