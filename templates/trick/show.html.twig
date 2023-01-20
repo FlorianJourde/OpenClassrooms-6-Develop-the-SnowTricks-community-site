@@ -95,12 +95,11 @@
             {% if trick.comments is not empty %}
                 <div class="comments" id="comments-container">
                     {% set page = 1 %}
-                    {% set commentsPerPage = 2 %}
+                    {% set commentsPerPage = 3 %}
                     {% set totalPages = (trick.comments|length/commentsPerPage)|round(0, 'ceil') %}
 
                     {% for comment in trick.comments|reverse %}
                         <div class="comment {{ page != 1 ? 'hide' : '' }}" data-page="{{ page }}">
-
                             <div class="header">
                                 <p class="username icon-spacing"><i class="fas fa-user" aria-hidden="true"></i>{{ comment.user.email|split('@')[0]|capitalize }}</p>
 
@@ -119,6 +118,7 @@
                             {% set page = page + 1 %}
                         {% endif %}
                     {% endfor %}
+
                 </div>
 
                 {% if trick.comments|length > commentsPerPage %}

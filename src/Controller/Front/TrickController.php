@@ -30,6 +30,7 @@ class TrickController extends AbstractController
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);
+            $comment->setUser($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($comment);

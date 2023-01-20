@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 jan. 2023 à 12:38
+-- Généré le : ven. 20 jan. 2023 à 15:45
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -56,7 +56,14 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (38, 'Non mais bon, ça fait partie du champ lexical du snow !', 1, '2023-01-13 12:50:01', 121, 41),
 (40, 'Et moi dont !', 1, '2023-01-13 13:15:25', 119, 41),
 (41, 'Bonjour !', 1, '2023-01-20 09:06:49', 121, 40),
-(42, 'Hello !', 1, '2023-01-20 09:27:55', 120, 41);
+(42, 'Hello !', 1, '2023-01-20 09:27:55', 120, 41),
+(43, 'Bonjour tout le monde !', 1, '2023-01-20 12:41:20', 119, 39),
+(46, 'Salut !', 1, '2023-01-20 12:44:31', 119, 39),
+(48, 'Bonjour !', 1, '2023-01-20 12:45:45', 119, 39),
+(49, 'Ça marche ?', 1, '2023-01-20 12:45:57', 119, 39),
+(50, 'Wahou, sympa, le système de pagination !', 1, '2023-01-20 15:01:23', 119, 39),
+(51, 'Rotation ?', 1, '2023-01-20 15:12:37', 120, 39),
+(52, 'C\'est limité à seulement deux commentaires par pages ?', 1, '2023-01-20 15:13:15', 119, 39);
 
 -- --------------------------------------------------------
 
@@ -307,7 +314,7 @@ INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`, `slu
 (120, 'Rotation frontside et backside', '2023-01-20 11:51:33', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w', 'rotation-frontside-et-backside'),
 (121, 'Switch', '2023-01-20 11:51:49', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL, 'switch'),
 (122, 'McTwist', '2023-01-20 11:52:02', 'Un grand classique des rotations tête en bas qui se fait en backside, sur un mur backside de pipe. Le Mc Twist est généralement fait en japan, un grab très tweaké (action d\'accentuer un grab en se contorsionnant).', NULL, 'mctwist'),
-(123, 'Crippler', '2023-01-20 11:52:20', 'Une autre rotation tête en bas classique qui s\'apparente à un backflip sur un mur frontside de pipe ou un quarter.', 'tkyU8bodbDk', 'crippler'),
+(123, 'Crippler', '2023-01-20 15:20:17', 'Une autre rotation tête en bas classique qui s\'apparente à un backflip sur un mur frontside de pipe ou un quarter.', 'tkyU8bodbDk', 'crippler'),
 (124, 'Backside rodeo', '2023-01-20 11:52:36', 'Une rotation tête en bas backside tournant dans le sens d\'un backflip qui peut se faire aussi bien sur un kicker, un pipe ou un hip.', 'QX6yvs6uTVg', 'backside-rodeo'),
 (125, 'Air to fakie', '2023-01-20 11:53:04', 'En pipe, sur un quarter ou un hip, ce terme désigne un saut sans rotation où le rider retombe dans le sens inverse.', NULL, 'air-to-fakie'),
 (126, 'Handplant', '2023-01-20 11:53:23', 'Un trick inspiré du skate qui consiste à tenir en équilibre sur une ou deux mains au sommet d\'une courbe. Existe avec de nombreuses variantes dans les grabs et les rotations.', 'us8tZcQ1GrY', 'handplant'),
