@@ -50,7 +50,7 @@ class TrickController extends AbstractController
 
         $trick = new Trick();
         $specificities = $specificityRepository->findAll();
-        $form = $this->createForm(TrickType::class, $trick/*, ['specificities' => $specificities]*/);
+        $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -136,40 +136,42 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id_1}/add-specificity/{id_2}", name="app_trick_add_specificity", methods={"POST"})
-     * @ParamConverter("id_1", options={"mapping": {" id_1 " : "trick.id"}})
-     * @ParamConverter("id_2", options={"mapping": {" id_2 " : "specificity.id"}})
+     * @Route("/{slug}/add-specificity/{id}", name="app_trick_add_specificity", methods={"POST"})
+     * @ParamConverter("slug", options={"mapping": {" slug " : "trick.slug"}})
+     * @ParamConverter("id", options={"mapping": {" id " : "specificity.id"}})
      * @Template()
      */
     public function addSpecificity(Request $request, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
-        $trick = $em->getRepository(Trick::class)->find($request->get('id_1'));
-        $specificity = $em->getRepository(Specificity::class)->find($request->get('id_2'));
+        $trickId = $em->getRepository(Trick::class)->findBy(['slug' => $request->get('slug')])[0]->getId();
+        $trick = $em->getRepository(Trick::class)->find($trickId);
+        $specificity = $em->getRepository(Specificity::class)->find($request->get('id'));
         $specificity->addTrick($trick);
         $em->persist($specificity);
         $em->persist($trick);
         $em->flush();
 
-        return $this->redirectToRoute('app_trick_edit', ['id' => $request->get('id_1')], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_edit', ['slug' => $request->get('slug')], Response::HTTP_SEE_OTHER);
     }
 
     /**
-     * @Route("/{id_1}/remove-specificity/{id_2}", name="app_trick_remove_specificity", methods={"POST"})
-     * @ParamConverter("id_1", options={"mapping": {" id_1 " : "trick.id"}})
-     * @ParamConverter("id_2", options={"mapping": {" id_2 " : "specificity.id"}})
+     * @Route("/{slug}/remove-specificity/{id}", name="app_trick_remove_specificity", methods={"POST"})
+     * @ParamConverter("slug", options={"mapping": {" slug " : "trick.slug"}})
+     * @ParamConverter("id", options={"mapping": {" id " : "specificity.id"}})
      * @Template()
      */
     public function removeSpecificity(Request $request, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
-        $trick = $em->getRepository(Trick::class)->find($request->get('id_1'));
-        $specificity = $em->getRepository(Specificity::class)->find($request->get('id_2'));
+        $trickId = $em->getRepository(Trick::class)->findBy(['slug' => $request->get('slug')])[0]->getId();
+        $trick = $em->getRepository(Trick::class)->find($trickId);
+        $specificity = $em->getRepository(Specificity::class)->find($request->get('id'));
         $specificity->removeTrick($trick);
         $em->persist($specificity);
         $em->flush();
 
-        return $this->redirectToRoute('app_trick_edit', ['id' => $request->get('id_1')], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_edit', ['slug' => $request->get('slug')], Response::HTTP_SEE_OTHER);
     }
 
     /**

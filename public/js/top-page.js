@@ -4,9 +4,7 @@ function topPage() {
     let windowHeight;
     let scrollToTopButton = document.querySelector('#top-page-button');
 
-    if (!scrollToTopButton) {
-        return false;
-    }
+    if (!scrollToTopButton) return false;
 
     windowHeight = window.innerHeight / 2;
 

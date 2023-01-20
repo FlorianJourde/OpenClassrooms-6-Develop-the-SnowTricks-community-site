@@ -7,9 +7,7 @@ function loadMoreTricks() {
     let nextPage = parseInt(document.querySelector('#load-more-tricks').getAttribute('data-next-page'));
     let nextTricks = document.querySelectorAll("[data-page='" + nextPage + "']");
 
-    if (!everyTricks.length) {
-        return false;
-    }
+    if (!everyTricks.length) return false;
 
     loadMoreButton.addEventListener('click', function(e) {
         e.preventDefault();

@@ -2,14 +2,13 @@ loadMoreComments();
 
 function loadMoreComments() {
     let everyComments = document.querySelectorAll('.comment[data-page]');
+
+    if (!everyComments.length) return false;
+
     let totalPages = parseInt(document.querySelector('#comments-pagination').getAttribute('data-total-pages'));
     let nextPageButton = document.querySelector('#load-next-comments');
     let previousPageButton = document.querySelector('#load-previous-comments');
     let currentPage = parseInt(document.querySelector('#comments-pagination').getAttribute('data-current-page'));
-
-    if (!everyComments.length) {
-        return false;
-    }
 
     nextPageButton.addEventListener('click', function (e) {
         e.preventDefault();

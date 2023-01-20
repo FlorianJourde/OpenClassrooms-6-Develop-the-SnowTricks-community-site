@@ -116,6 +116,14 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    #modal-image-container {
+        padding: 20px;
+    }
+
+    .images {
+        gap: 20px;
+    }
+
     .tricks {
         gap: 50px;
     }

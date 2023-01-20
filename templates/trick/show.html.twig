@@ -31,7 +31,7 @@
                 <div class="images">
 
                     {% for image in trick.images %}
-                        <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')">
+                        <div class="image" style="background-image: url('{{ asset('/uploads/tricks/' ~ image.name) }}')" data-image="{{ asset('/uploads/tricks/' ~ image.name) }}">
                             {% if is_granted('ROLE_EDITOR') %}
                                 <div class="actions">
                                     <a class="button-primary button-dark-red" href="{{ path('app_trick_delete_image', { 'id': image.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"><i class="fas fa-trash-alt"></i> Supprimer</a>

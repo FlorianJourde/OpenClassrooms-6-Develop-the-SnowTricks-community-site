@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 jan. 2023 à 19:11
+-- Généré le : ven. 20 jan. 2023 à 22:08
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `specificity` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `specificity`
@@ -284,7 +284,7 @@ INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
 (25, 122),
 (25, 124),
 (25, 127),
-(26, 129),
+(25, 129),
 (27, 119),
 (27, 120),
 (27, 123),
@@ -307,14 +307,14 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_D8F0A91EA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
 INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`, `slug`, `user_id`) VALUES
-(119, 'Backside Air', '2023-01-20 18:53:34', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA', 'backside-air', 39),
+(119, 'Backside Air', '2023-01-20 20:57:36', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA', 'backside-air', 39),
 (120, 'Rotation frontside et backside', '2023-01-20 19:01:15', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w', 'rotation-frontside-et-backside', 39),
 (121, 'Switch', '2023-01-20 18:54:34', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL, 'switch', 39),
 (122, 'McTwist', '2023-01-20 11:52:02', 'Un grand classique des rotations tête en bas qui se fait en backside, sur un mur backside de pipe. Le Mc Twist est généralement fait en japan, un grab très tweaké (action d\'accentuer un grab en se contorsionnant).', NULL, 'mctwist', 41),
@@ -324,7 +324,7 @@ INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`, `slu
 (126, 'Handplant', '2023-01-20 11:53:23', 'Un trick inspiré du skate qui consiste à tenir en équilibre sur une ou deux mains au sommet d\'une courbe. Existe avec de nombreuses variantes dans les grabs et les rotations.', 'us8tZcQ1GrY', 'handplant', 41),
 (127, 'Cork', '2023-01-20 11:53:37', 'Le diminutif de corkscrew qui signifie littéralement tire-bouchon et désignait les premières simples rotations têtes en bas en frontside. <br><br> Désormais, on utilise le mot cork à toute les sauces pour qualifier les figures où le rider passe la tête en bas, peu importe le sens de rotation. Et dorénavant en compétition, on parle souvent de double cork, triple cork et certains riders vont jusqu\'au quadruple cork !', 'FMHiSF0rHF8', 'cork', 41),
 (128, '270', '2023-01-20 11:53:52', 'Désigne le degré de rotation, soit 3/4 de tour, fait en entrée ou en sortie sur un jib. Certains riders font également des rotations en 450 degrés avant ou après les jibs.', 'orD3GNRTJAc', '270', 39),
-(129, 'Revert', '2023-01-20 11:54:10', 'Un revert n\'est pas une figure à part entière mais c\'est le fait de continuer à tourner sur la neige après une rotation aérienne. Cela montre ainsi que la rotation n\'est pas contrôlée et ça fait perdre des points en compétition.', 'gQ0x8oUKbrE', 'revert', 41);
+(129, 'Revert', '2023-01-20 20:45:55', 'Un revert n\'est pas une figure à part entière mais c\'est le fait de continuer à tourner sur la neige après une rotation aérienne. Cela montre ainsi que la rotation n\'est pas contrôlée et ça fait perdre des points en compétition.', 'gQ0x8oUKbrE', 'revert', 39);
 
 -- --------------------------------------------------------
 
