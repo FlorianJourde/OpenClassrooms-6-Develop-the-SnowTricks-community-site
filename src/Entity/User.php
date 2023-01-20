@@ -45,9 +45,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     /**
+     * @var Collection<int, Trick>|Trick[]
      * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="user")
      */
-    private $tricks;
+    private Collection $tricks;
 
     public function __construct()
     {
