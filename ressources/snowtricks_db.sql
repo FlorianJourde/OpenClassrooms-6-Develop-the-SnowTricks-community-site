@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 jan. 2023 à 09:55
+-- Généré le : ven. 20 jan. 2023 à 12:38
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -97,7 +97,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230108180906', '2023-01-08 18:09:11', 120),
 ('DoctrineMigrations\\Version20230108181302', '2023-01-08 18:13:08', 103),
 ('DoctrineMigrations\\Version20230108190704', '2023-01-08 19:07:10', 86),
-('DoctrineMigrations\\Version20230108194334', '2023-01-08 19:43:41', 40);
+('DoctrineMigrations\\Version20230108194334', '2023-01-08 19:43:41', 40),
+('DoctrineMigrations\\Version20230120114452', '2023-01-20 11:44:58', 80);
 
 -- --------------------------------------------------------
 
@@ -144,10 +145,7 @@ INSERT INTO `image` (`id`, `trick_id`, `name`) VALUES
 (87, 126, '63c140a718dfb.bin'),
 (88, 127, '63c1410eceeb8.jpg'),
 (89, 129, '63c142064da91.jpg'),
-(90, 129, '63c14213d254b.jpg'),
-(92, 130, '63ca5b5332af0.jpg'),
-(93, 130, '63ca5b5333f74.jpg'),
-(94, 130, '63ca5b53342be.jpg');
+(90, 129, '63c14213d254b.jpg');
 
 -- --------------------------------------------------------
 
@@ -263,14 +261,12 @@ INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
 (19, 120),
 (19, 121),
 (19, 128),
-(19, 130),
 (20, 119),
 (20, 123),
 (20, 126),
 (21, 122),
 (21, 127),
 (22, 128),
-(22, 130),
 (23, 124),
 (23, 126),
 (24, 120),
@@ -283,7 +279,6 @@ INSERT INTO `specificity_trick` (`specificity_id`, `trick_id`) VALUES
 (27, 119),
 (27, 120),
 (27, 123),
-(27, 130),
 (28, 122);
 
 -- --------------------------------------------------------
@@ -299,26 +294,26 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `creation_date` datetime NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci,
   `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
-INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`) VALUES
-(119, 'Backside Air', '2023-01-15 02:00:54', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA'),
-(120, 'Rotation frontside et backside', '2023-01-13 10:52:51', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w'),
-(121, 'Switch', '2023-01-13 11:05:09', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL),
-(122, 'McTwist', '2023-01-13 11:10:22', 'Un grand classique des rotations tête en bas qui se fait en backside, sur un mur backside de pipe. Le Mc Twist est généralement fait en japan, un grab très tweaké (action d\'accentuer un grab en se contorsionnant).', NULL),
-(123, 'Crippler', '2023-01-13 11:16:15', 'Une autre rotation tête en bas classique qui s\'apparente à un backflip sur un mur frontside de pipe ou un quarter.', 'tkyU8bodbDk'),
-(124, 'Backside rodeo', '2023-01-13 11:24:29', 'Une rotation tête en bas backside tournant dans le sens d\'un backflip qui peut se faire aussi bien sur un kicker, un pipe ou un hip.', 'QX6yvs6uTVg'),
-(125, 'Air to fakie', '2023-01-13 11:25:50', 'En pipe, sur un quarter ou un hip, ce terme désigne un saut sans rotation où le rider retombe dans le sens inverse.', NULL),
-(126, 'Handplant', '2023-01-13 11:30:02', 'Un trick inspiré du skate qui consiste à tenir en équilibre sur une ou deux mains au sommet d\'une courbe. Existe avec de nombreuses variantes dans les grabs et les rotations.', 'us8tZcQ1GrY'),
-(127, 'Cork', '2023-01-13 11:43:17', 'Le diminutif de corkscrew qui signifie littéralement tire-bouchon et désignait les premières simples rotations têtes en bas en frontside. <br><br> Désormais, on utilise le mot cork à toute les sauces pour qualifier les figures où le rider passe la tête en bas, peu importe le sens de rotation. Et dorénavant en compétition, on parle souvent de double cork, triple cork et certains riders vont jusqu\'au quadruple cork !', 'FMHiSF0rHF8'),
-(128, '270', '2023-01-13 11:32:55', 'Désigne le degré de rotation, soit 3/4 de tour, fait en entrée ou en sortie sur un jib. Certains riders font également des rotations en 450 degrés avant ou après les jibs.', 'orD3GNRTJAc'),
-(129, 'Revert', '2023-01-13 11:35:47', 'Un revert n\'est pas une figure à part entière mais c\'est le fait de continuer à tourner sur la neige après une rotation aérienne. Cela montre ainsi que la rotation n\'est pas contrôlée et ça fait perdre des points en compétition.', 'gQ0x8oUKbrE'),
-(130, 'MFM Butter', '2023-01-20 09:13:55', 'L’appelation “MFM” vient du nom de <b>Mark Frank Montoya</b>, snowboarder México Américain né dans les années 70 et dont le nom est entré dans la légende du snowboard.\r\n<br><br>\r\nLes butters sont quant à eux, les figures effectuées sur les spatules de la board (nose ou tail) qui généralement combinent ce que l’on appelle des <b>tail press</b> ou des <b>nose press</b>, avec des rotations. Les butters sont des tricks de flat, c’est à dire souvent effectués sur le plat qu’offrent les pistes des stations de ski. Les <b>tricks de flat</b> caractérisent bien l’aspect ludique et simple du snowboard car il suffit d’un petit peu de pente et d’un snowboard pour pouvoir s’amuser à l’infini. De plus, il n’est pas nécessaire de prendre des risques démesurés pour s’y essayer. Cela rend la pratique du flat en snowboard, accessible à tous, fun et populaire.\r\n<br><br>\r\nMark Frank Montaya a influencé le monde du snowboard avec un butter relativement technique et très visuel qui aujourd’hui porte son nom, le <b>MFM butter</b>. Nous allons voir dans cet article, comment réaliser un MFM butter.\r\nLa complexité de ce tricks vient du fait qu’il rassemble plusieurs figures en une seule. En effet, on retrouve dans ce tricks une impulsion en <b>nollie</b> ou en <b>fackie</b>, une rotation telle que le 180° (ou plus), le tail press et le mouvement de shifty (caractérisé par la contre rotation).', '8AjS0rIqzJw');
+INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`, `slug`) VALUES
+(119, 'Backside Air', '2023-01-20 12:30:06', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA', 'backside-air'),
+(120, 'Rotation frontside et backside', '2023-01-20 11:51:33', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w', 'rotation-frontside-et-backside'),
+(121, 'Switch', '2023-01-20 11:51:49', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL, 'switch'),
+(122, 'McTwist', '2023-01-20 11:52:02', 'Un grand classique des rotations tête en bas qui se fait en backside, sur un mur backside de pipe. Le Mc Twist est généralement fait en japan, un grab très tweaké (action d\'accentuer un grab en se contorsionnant).', NULL, 'mctwist'),
+(123, 'Crippler', '2023-01-20 11:52:20', 'Une autre rotation tête en bas classique qui s\'apparente à un backflip sur un mur frontside de pipe ou un quarter.', 'tkyU8bodbDk', 'crippler'),
+(124, 'Backside rodeo', '2023-01-20 11:52:36', 'Une rotation tête en bas backside tournant dans le sens d\'un backflip qui peut se faire aussi bien sur un kicker, un pipe ou un hip.', 'QX6yvs6uTVg', 'backside-rodeo'),
+(125, 'Air to fakie', '2023-01-20 11:53:04', 'En pipe, sur un quarter ou un hip, ce terme désigne un saut sans rotation où le rider retombe dans le sens inverse.', NULL, 'air-to-fakie'),
+(126, 'Handplant', '2023-01-20 11:53:23', 'Un trick inspiré du skate qui consiste à tenir en équilibre sur une ou deux mains au sommet d\'une courbe. Existe avec de nombreuses variantes dans les grabs et les rotations.', 'us8tZcQ1GrY', 'handplant'),
+(127, 'Cork', '2023-01-20 11:53:37', 'Le diminutif de corkscrew qui signifie littéralement tire-bouchon et désignait les premières simples rotations têtes en bas en frontside. <br><br> Désormais, on utilise le mot cork à toute les sauces pour qualifier les figures où le rider passe la tête en bas, peu importe le sens de rotation. Et dorénavant en compétition, on parle souvent de double cork, triple cork et certains riders vont jusqu\'au quadruple cork !', 'FMHiSF0rHF8', 'cork'),
+(128, '270', '2023-01-20 11:53:52', 'Désigne le degré de rotation, soit 3/4 de tour, fait en entrée ou en sortie sur un jib. Certains riders font également des rotations en 450 degrés avant ou après les jibs.', 'orD3GNRTJAc', '270'),
+(129, 'Revert', '2023-01-20 11:54:10', 'Un revert n\'est pas une figure à part entière mais c\'est le fait de continuer à tourner sur la neige après une rotation aérienne. Cela montre ainsi que la rotation n\'est pas contrôlée et ça fait perdre des points en compétition.', 'gQ0x8oUKbrE', 'revert');
 
 -- --------------------------------------------------------
 

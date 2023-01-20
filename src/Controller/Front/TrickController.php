@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrickController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="app_trick_show")
+     * @Route("/{slug}", name="app_trick_show")
      */
     public function show(Trick $trick, Request $request, /*User $user, */ManagerRegistry $doctrine): Response
     {

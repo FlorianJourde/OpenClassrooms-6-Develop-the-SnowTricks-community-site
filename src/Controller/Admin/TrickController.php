@@ -69,12 +69,13 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_trick_edit", methods={"GET", "POST"})
+     * @Route("/{slug}/edit", name="app_trick_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
     {
 
         $tricksNames = [];
+        $previousTrickName = $trick->getName();
 
         foreach ($trickRepository->findAll() as $trickName) {
             $tricksNames[] = $trickName->getName();
@@ -102,14 +103,14 @@ class TrickController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->isUnique($trick->getName(), $tricksNames);
+            $this->isUnique($trick->getName(), $tricksNames, $previousTrickName);
             $this->addImages($form, $trick, $trickRepository);
 
             if ($currentVideoLink !== $form->get('video')->getData()) {
                 $this->addVideo($trick, $trickRepository);
             }
 
-            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('trick/edit.html.twig', [
@@ -219,8 +220,18 @@ class TrickController extends AbstractController
         $trickRepository->add($trick, true);
     }
 
-    private function isUnique($newTrickName, $tricksNames)
+    private function isUnique($newTrickName, $tricksNames, $previousTrickName = null)
     {
+        if (isset($previousTrickName)) {
+            if ($newTrickName !== $previousTrickName) {
+                $this->checkNamesUnicity($newTrickName, $tricksNames);
+            }
+        } else {
+            $this->checkNamesUnicity($newTrickName, $tricksNames);
+        }
+    }
+
+    private function checkNamesUnicity($newTrickName, $tricksNames) {
         foreach ($tricksNames as $trickName) {
             if (strtolower($trickName) === strtolower($newTrickName)) {
                 throw $this->createNotFoundException('Le trick ' . $newTrickName . ' existe déjà.');

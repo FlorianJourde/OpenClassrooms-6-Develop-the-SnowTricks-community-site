@@ -34,13 +34,13 @@
 
 							{% if is_granted('ROLE_EDITOR') %}
 								<div class="actions">
-									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'slug': trick.slug}) }}">
 										<i class="fas fa-pencil-alt"></i> Modifier
 									</a>
 								</div>
 							{% endif %}
 
-							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
+							<a href="{{ path('app_trick_show', {'slug': trick.slug}) }}" class="icon-spacing content">
 								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
 							</a>
 						</div>
