@@ -156,7 +156,7 @@ section.archive, section.login, section.register, .description-section, .video-s
     position: absolute;
     word-break: keep-all;
     color: var(--clr-white);
-    font-family: var(--ff-primary);
+    font-family: var(--ff-secondary);
     margin-top: 50px;
 }
 
