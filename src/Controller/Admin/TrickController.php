@@ -54,6 +54,7 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setUser($this->getUser());
             $this->isUnique($trick->getName(), $tricksNames);
             $this->addImages($form, $trick, $trickRepository);
             $this->addVideo($trick, $trickRepository);
@@ -103,6 +104,7 @@ class TrickController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setUser($this->getUser());
             $this->isUnique($trick->getName(), $tricksNames, $previousTrickName);
             $this->addImages($form, $trick, $trickRepository);
 

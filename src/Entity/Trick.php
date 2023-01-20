@@ -30,7 +30,7 @@ class Trick
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $slug;
+    private ?string $slug = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -65,6 +65,11 @@ class Trick
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $video = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks", cascade={"persist"})
+     */
+    private ?User $user;
 
     public function __construct()
     {
@@ -221,6 +226,18 @@ class Trick
     public function setVideo(?string $video): self
     {
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

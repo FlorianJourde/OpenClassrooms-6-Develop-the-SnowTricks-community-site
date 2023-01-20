@@ -22,7 +22,7 @@
         {% endif %}
     {% endset %}
 
-    {% include 'partials/banner.html.twig' with { wide: 'wide', background_image: banner_image, title: block('title'), has_image: has_image } %}
+    {% include 'partials/banner.html.twig' with { wide: 'wide', background_image: banner_image, author: trick.user.email|split('@')[0]|capitalize, title: block('title'), has_image: has_image } %}
 
     {% if trick.images is not empty %}
         <section class="images-section section-spacing" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">

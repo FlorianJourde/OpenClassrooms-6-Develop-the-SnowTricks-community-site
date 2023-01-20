@@ -71,6 +71,10 @@
     font-size: var(--fs-title);
 }
 
+.banner .title h2.author span {
+    opacity: 0.5;
+}
+
 #scroll-to-next-section {
     display: flex;
     justify-content: flex-end;

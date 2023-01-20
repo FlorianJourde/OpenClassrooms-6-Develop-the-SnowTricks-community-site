@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 	{% include 'partials/banner.html.twig' with { wide: 'very-wide', background_image: 'mountains-3.jpg', title: 'Snowtricks', description: 'Partagez votre passion du snowboard avec une communauté de passionnés !', is_home: true } %}
 
 	<main id="introduction" class="introduction section-spacing" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
