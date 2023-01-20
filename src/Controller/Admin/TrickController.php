@@ -74,7 +74,6 @@ class TrickController extends AbstractController
      */
     public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
     {
-
         $tricksNames = [];
         $previousTrickName = $trick->getName();
 
@@ -128,7 +127,6 @@ class TrickController extends AbstractController
      */
     public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
     {
-
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             foreach ($trick->getImages() as $image) {
                 $name = $image->getName();
@@ -241,7 +239,8 @@ class TrickController extends AbstractController
         }
     }
 
-    private function checkNamesUnicity($newTrickName, $tricksNames) {
+    private function checkNamesUnicity($newTrickName, $tricksNames)
+    {
         foreach ($tricksNames as $trickName) {
             if (strtolower($trickName) === strtolower($newTrickName)) {
                 throw $this->createNotFoundException('Le trick ' . $newTrickName . ' existe déjà.');
