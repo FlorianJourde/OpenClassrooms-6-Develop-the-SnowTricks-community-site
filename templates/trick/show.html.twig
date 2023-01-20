@@ -93,9 +93,13 @@
             <h2 class="section-title white-title very-dark-blue-logo">Commentaires</h2>
 
             {% if trick.comments is not empty %}
-                <div class="comments">
-                    {% for comment in trick.comments %}
-                        <div class="comment">
+                <div class="comments" id="comments-container">
+                    {% set page = 1 %}
+                    {% set commentsPerPage = 2 %}
+                    {% set totalPages = (trick.comments|length/commentsPerPage)|round(0, 'ceil') %}
+
+                    {% for comment in trick.comments|reverse %}
+                        <div class="comment {{ page != 1 ? 'hide' : '' }}" data-page="{{ page }}">
 
                             <div class="header">
                                 <p class="username icon-spacing"><i class="fas fa-user" aria-hidden="true"></i>{{ comment.user.email|split('@')[0]|capitalize }}</p>
@@ -110,8 +114,24 @@
                             <p class="date">Le {{ comment.creationDate|date("d/m/Y") }}</p>
                             <p class="content">{{ comment.content }}</p>
                         </div>
+
+                        {% if loop.index is divisible by(commentsPerPage) %}
+                            {% set page = page + 1 %}
+                        {% endif %}
                     {% endfor %}
                 </div>
+
+                {% if trick.comments|length > commentsPerPage %}
+                    <div class="actions comments-pagination" id="comments-pagination" data-total-pages="{{ totalPages }}" data-current-page="1">
+                        <a class="button-primary button-white hide" id="load-previous-comments" href="#">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a class="button-primary button-white" id="load-next-comments" href="#">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                {% endif %}
+
             {% else %}
                 <div class="information">
                     <p>Il n'y a pas de commentaires à afficher.</p>
@@ -133,4 +153,5 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/images.js') }}"></script>
+    <script src="{{ asset('js/load-more-comments.js') }}"></script>
 {% endblock %}

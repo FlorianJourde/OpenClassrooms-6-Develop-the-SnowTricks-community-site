@@ -20,7 +20,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/{slug}", name="app_trick_show")
      */
-    public function show(Trick $trick, Request $request, /*User $user, */ManagerRegistry $doctrine): Response
+    public function show(Trick $trick, Request $request, ManagerRegistry $doctrine): Response
     {
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
@@ -30,7 +30,6 @@ class TrickController extends AbstractController
             $comment->setCreationDate(new DateTime());
             $comment->setTrick($trick);
             $comment->setStatus(true);
-            $comment->setUser($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($comment);

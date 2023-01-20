@@ -130,6 +130,21 @@ section.archive, section.login, section.register, .description-section, .video-s
     z-index: 0;
 }
 
+.actions.comments-pagination {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.comments-pagination #load-previous-comments {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.comments-pagination #load-next-comments {
+    margin-left: auto;
+    margin-right: 0;
+}
+
 .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
     border: 2px solid var(--clr-white);
     box-shadow: var(--bs-secondary);
@@ -220,7 +235,7 @@ section.archive, section.login, section.register, .description-section, .video-s
     margin-top: 70px;
 }
 
-.trick.hide {
+.hide, .trick.hide, .comment.hide {
     display: none;
 }
 

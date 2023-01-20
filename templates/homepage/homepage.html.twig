@@ -20,7 +20,7 @@
 				<div class="tricks" id="tricks-container">
 					{% set page = 1 %}
 					{% set tricksPerPage = 4 %}
-					{% set totalPages = (tricks|length/tricksPerPage)|round %}
+					{% set totalPages = (tricks|length/tricksPerPage)|round(0, 'ceil') %}
 
 					{% for trick in tricks %}
 
