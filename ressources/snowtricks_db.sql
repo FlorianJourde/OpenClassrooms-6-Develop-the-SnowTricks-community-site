@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 jan. 2023 à 17:27
+-- Généré le : ven. 20 jan. 2023 à 19:11
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB281BE2E` (`trick_id`),
   KEY `IDX_9474526CA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -58,12 +58,12 @@ INSERT INTO `comment` (`id`, `content`, `status`, `creation_date`, `trick_id`, `
 (41, 'Bonjour !', 1, '2023-01-20 09:06:49', 121, 40),
 (42, 'Hello !', 1, '2023-01-20 09:27:55', 120, 41),
 (43, 'Bonjour tout le monde !', 1, '2023-01-20 12:41:20', 119, 39),
-(46, 'Salut !', 1, '2023-01-20 12:44:31', 119, 39),
 (48, 'Bonjour !', 1, '2023-01-20 12:45:45', 119, 39),
 (49, 'Ça marche ?', 1, '2023-01-20 12:45:57', 119, 39),
 (50, 'Wahou, sympa, le système de pagination !', 1, '2023-01-20 15:01:23', 119, 39),
 (51, 'Rotation ?', 1, '2023-01-20 15:12:37', 120, 39),
-(52, 'C\'est limité à seulement deux commentaires par pages ?', 1, '2023-01-20 15:13:15', 119, 39);
+(52, 'C\'est limité à seulement deux commentaires par pages ?', 1, '2023-01-20 15:13:15', 119, 39),
+(53, 'Oui, on peut appeler ça une figure, bien qu\'elle puisse être combinée.', 1, '2023-01-20 18:15:27', 120, 39);
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C53D045FB281BE2E` (`trick_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `image`
@@ -307,16 +307,16 @@ CREATE TABLE IF NOT EXISTS `trick` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_D8F0A91EA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `trick`
 --
 
 INSERT INTO `trick` (`id`, `name`, `creation_date`, `description`, `video`, `slug`, `user_id`) VALUES
-(119, 'Backside Air', '2023-01-20 17:26:52', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA', 'backside-air', 39),
-(120, 'Rotation frontside et backside', '2023-01-20 16:44:47', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w', 'rotation-frontside-et-backside', 39),
-(121, 'Switch', '2023-01-20 11:51:49', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL, 'switch', 41),
+(119, 'Backside Air', '2023-01-20 18:53:34', 'Le grab star du snowboard qui peut être fait d\'autant de façon différentes qu\'il y a de styles de riders. Il consiste à attraper la carre arrière entre les pieds, ou légèrement devant, et à pousser avec sa jambe arrière pour ramener la planche devant. <br><br> C\'est une figure phare en pipe ou sur un hip en backside. C\'est généralement avec ce trick que les riders vont le plus haut.', 'RJc5cYp7HNA', 'backside-air', 39),
+(120, 'Rotation frontside et backside', '2023-01-20 19:01:15', 'Un snowboarder peut faire des rotations déclenchées du côté de ses pointes de pied, en frontside ou de ses talons, en backside. On parle aussi de frontside et backside pour les murs de halfpipe et les hips. <br><br> Les rotations vont du demi-tour en 180 degrés jusqu\'à des 1800 degrés, soit cinq tours !', '0eWY6-O4O7w', 'rotation-frontside-et-backside', 39),
+(121, 'Switch', '2023-01-20 18:54:34', 'Lorsque l\'on ride de son mauvais côté, tous les noms de figures sont précédées de la dénomination switch. Un regular fera donc ses tricks en switch, comme un goofie, et inversement.', NULL, 'switch', 39),
 (122, 'McTwist', '2023-01-20 11:52:02', 'Un grand classique des rotations tête en bas qui se fait en backside, sur un mur backside de pipe. Le Mc Twist est généralement fait en japan, un grab très tweaké (action d\'accentuer un grab en se contorsionnant).', NULL, 'mctwist', 41),
 (123, 'Crippler', '2023-01-20 15:20:17', 'Une autre rotation tête en bas classique qui s\'apparente à un backflip sur un mur frontside de pipe ou un quarter.', 'tkyU8bodbDk', 'crippler', 39),
 (124, 'Backside rodeo', '2023-01-20 11:52:36', 'Une rotation tête en bas backside tournant dans le sens d\'un backflip qui peut se faire aussi bien sur un kicker, un pipe ou un hip.', 'QX6yvs6uTVg', 'backside-rodeo', 41),
