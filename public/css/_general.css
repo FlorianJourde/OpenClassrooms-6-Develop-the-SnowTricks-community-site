@@ -135,18 +135,16 @@ section.archive, section.login, section.register, .description-section, .video-s
 }
 
 .actions.comments-pagination {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.actions.comments-pagination a {
+    position: absolute;
 }
 
 .comments-pagination #load-previous-comments {
-    margin-left: 0;
-    margin-right: auto;
-}
-
-.comments-pagination #load-next-comments {
-    margin-left: auto;
-    margin-right: 0;
+    right: 80px;
 }
 
 .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
@@ -449,6 +447,12 @@ section.archive, section.login, section.register, .description-section, .video-s
     gap: 10px;
     justify-content: space-between;
     align-items: center;
+}
+
+.title-header {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
 }
 
 .comment .date {

@@ -88,15 +88,30 @@
         </section>
     {% endif %}
 
+    {% set page = 1 %}
+    {% set commentsPerPage = 3 %}
+    {% set totalPages = (trick.comments|length/commentsPerPage)|round(0, 'ceil') %}
+
     <section class="comments-section section-spacing" style="background-image: url('{{ asset('images/pine-trees-very-dark-blue-2.svg')}}');">
         <div class="wrapper wrapper-small">
-            <h2 class="section-title white-title very-dark-blue-logo">Commentaires</h2>
+
+            <div class="title-header">
+                <h2 class="section-title white-title very-dark-blue-logo">Commentaires</h2>
+
+                {% if trick.comments|length > commentsPerPage %}
+                    <div class="actions comments-pagination" id="comments-pagination" data-total-pages="{{ totalPages }}" data-current-page="1">
+                        <a class="button-primary button-white hide" id="load-previous-comments" href="#">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a class="button-primary button-white" id="load-next-comments" href="#">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
 
             {% if trick.comments is not empty %}
                 <div class="comments" id="comments-container">
-                    {% set page = 1 %}
-                    {% set commentsPerPage = 3 %}
-                    {% set totalPages = (trick.comments|length/commentsPerPage)|round(0, 'ceil') %}
 
                     {% for comment in trick.comments|reverse %}
                         <div class="comment {{ page != 1 ? 'hide' : '' }}" data-page="{{ page }}">
@@ -120,17 +135,6 @@
                     {% endfor %}
 
                 </div>
-
-                {% if trick.comments|length > commentsPerPage %}
-                    <div class="actions comments-pagination" id="comments-pagination" data-total-pages="{{ totalPages }}" data-current-page="1">
-                        <a class="button-primary button-white hide" id="load-previous-comments" href="#">
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                        <a class="button-primary button-white" id="load-next-comments" href="#">
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                {% endif %}
 
             {% else %}
                 <div class="information">

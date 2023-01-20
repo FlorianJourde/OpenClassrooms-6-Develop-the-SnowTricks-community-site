@@ -167,6 +167,14 @@
         padding: 30px;
     }
 
+    .actions.comments-pagination {
+        margin-top: 8px;
+    }
+
+    .comments-pagination #load-previous-comments {
+        right: 50px;
+    }
+
     .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
         font-size: var(--fs-regular-text);
     }
