@@ -266,6 +266,9 @@ section.archive, section.login, section.register, .description-section, .video-s
     min-height: 300px;
     background-position: center;
     background-size: cover;
+}
+
+.images-section .images .image {
     cursor: pointer;
 }
 

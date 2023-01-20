@@ -33,7 +33,7 @@ function ajaxImages() {
 }
 
 function enlargeImages() {
-    let images = document.querySelectorAll('.images .image');
+    let images = document.querySelectorAll('.images-section .images .image');
 
     if (!images.length) return false;
 
