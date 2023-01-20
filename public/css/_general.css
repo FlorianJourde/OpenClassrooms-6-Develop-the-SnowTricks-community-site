@@ -71,6 +71,10 @@
     font-size: var(--fs-title);
 }
 
+.banner .title h2.author span {
+    opacity: 0.5;
+}
+
 #scroll-to-next-section {
     display: flex;
     justify-content: flex-end;
@@ -106,7 +110,7 @@
     scroll-margin-top: 80px;
 }
 
-.introduction, .images-section {
+.introduction, .images-section, .error {
     background-repeat: no-repeat;
     background-size: 1000px;
     background-position: bottom 0 right -300px;
@@ -128,6 +132,21 @@ section.archive, section.login, section.register, .description-section, .video-s
     gap: 20px;
     flex-wrap: wrap;
     z-index: 0;
+}
+
+.actions.comments-pagination {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.comments-pagination #load-previous-comments {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.comments-pagination #load-next-comments {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
@@ -220,7 +239,7 @@ section.archive, section.login, section.register, .description-section, .video-s
     margin-top: 70px;
 }
 
-.trick.hide {
+.hide, .trick.hide, .comment.hide {
     display: none;
 }
 

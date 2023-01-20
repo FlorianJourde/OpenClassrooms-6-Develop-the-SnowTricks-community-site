@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TrickRepository::class)
@@ -24,6 +25,12 @@ class Trick
      * @ORM\Column(type="string", length=255)
      */
     private ?string $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $slug = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,6 +66,11 @@ class Trick
      */
     private ?string $video = null;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks", cascade={"persist"})
+     */
+    private ?User $user;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -79,6 +91,18 @@ class Trick
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -202,6 +226,18 @@ class Trick
     public function setVideo(?string $video): self
     {
         $this->video = $video;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

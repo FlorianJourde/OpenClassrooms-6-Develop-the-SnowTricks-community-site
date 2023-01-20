@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 	{% include 'partials/banner.html.twig' with { wide: 'very-wide', background_image: 'mountains-3.jpg', title: 'Snowtricks', description: 'Partagez votre passion du snowboard avec une communauté de passionnés !', is_home: true } %}
 
 	<main id="introduction" class="introduction section-spacing" style="background-image: url('{{ asset('images/snowtricks-background.svg')}}');">
@@ -20,7 +21,7 @@
 				<div class="tricks" id="tricks-container">
 					{% set page = 1 %}
 					{% set tricksPerPage = 4 %}
-					{% set totalPages = (tricks|length/tricksPerPage)|round %}
+					{% set totalPages = (tricks|length/tricksPerPage)|round(0, 'ceil') %}
 
 					{% for trick in tricks %}
 
@@ -34,13 +35,13 @@
 
 							{% if is_granted('ROLE_EDITOR') %}
 								<div class="actions">
-									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'id': trick.id}) }}">
+									<a class="button-primary button-black" href="{{ path('app_trick_edit', {'slug': trick.slug}) }}">
 										<i class="fas fa-pencil-alt"></i> Modifier
 									</a>
 								</div>
 							{% endif %}
 
-							<a href="{{ path('app_trick_show', {'id': trick.id}) }}" class="icon-spacing content">
+							<a href="{{ path('app_trick_show', {'slug': trick.slug}) }}" class="icon-spacing content">
 								<h3 class="title"><i class="fas fa-snowboarding"></i> {{ trick.name }}</h3>
 							</a>
 						</div>

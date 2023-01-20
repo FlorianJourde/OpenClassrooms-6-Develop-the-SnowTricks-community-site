@@ -42,12 +42,20 @@ class TrickController extends AbstractController
      */
     public function new(Request $request, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
     {
+        $tricksNames = [];
+
+        foreach ($trickRepository->findAll() as $trickName) {
+            $tricksNames[] = $trickName->getName();
+        }
+
         $trick = new Trick();
         $specificities = $specificityRepository->findAll();
         $form = $this->createForm(TrickType::class, $trick/*, ['specificities' => $specificities]*/);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setUser($this->getUser());
+            $this->isUnique($trick->getName(), $tricksNames);
             $this->addImages($form, $trick, $trickRepository);
             $this->addVideo($trick, $trickRepository);
 
@@ -59,6 +67,72 @@ class TrickController extends AbstractController
             'trickForm' => $form,
             'specificities' => $specificities
         ]);
+    }
+
+    /**
+     * @Route("/{slug}/edit", name="app_trick_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
+    {
+
+        $tricksNames = [];
+        $previousTrickName = $trick->getName();
+
+        foreach ($trickRepository->findAll() as $trickName) {
+            $tricksNames[] = $trickName->getName();
+        }
+
+        $currentVideoLink = $trick->getVideo();
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+        $specificities = $specificityRepository->findAll();
+        $currentSpecificities = $trick->getSpecificities();
+        $selectedSpecificitiesId = [];
+        $selectedSpecificities = [];
+        $unselectedSpecificities = [];
+
+        foreach ($currentSpecificities as $currentSpecificity) {
+            $selectedSpecificitiesId[] = $currentSpecificity->getId();
+        }
+
+        foreach ($specificities as $specificity) {
+            if (!(in_array($specificity->getId(), $selectedSpecificitiesId))) {
+                $unselectedSpecificities[] = $specificity;
+            } else {
+                $selectedSpecificities[] = $specificity;
+            }
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setUser($this->getUser());
+            $this->isUnique($trick->getName(), $tricksNames, $previousTrickName);
+            $this->addImages($form, $trick, $trickRepository);
+
+            if ($currentVideoLink !== $form->get('video')->getData()) {
+                $this->addVideo($trick, $trickRepository);
+            }
+
+            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('trick/edit.html.twig', [
+            'trick' => $trick,
+            'trickForm' => $form,
+            'unselectedSpecificities' => $unselectedSpecificities,
+            'selectedSpecificities' => $selectedSpecificities,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/delete", name="app_trick_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
+            $trickRepository->remove($trick, true);
+        }
+
+        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -99,69 +173,13 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_trick_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, Trick $trick, TrickRepository $trickRepository, SpecificityRepository $specificityRepository): Response
-    {
-        $currentVideoLink = $trick->getVideo();
-        $form = $this->createForm(TrickType::class, $trick);
-        $form->handleRequest($request);
-        $specificities = $specificityRepository->findAll();
-        $currentSpecificities = $trick->getSpecificities();
-        $selectedSpecificitiesId = [];
-        $selectedSpecificities = [];
-        $unselectedSpecificities = [];
-
-        foreach ($currentSpecificities as $currentSpecificity) {
-            $selectedSpecificitiesId[] = $currentSpecificity->getId();
-        }
-
-        foreach ($specificities as $specificity) {
-            if (!(in_array($specificity->getId(), $selectedSpecificitiesId))) {
-                $unselectedSpecificities[] = $specificity;
-            } else {
-                $selectedSpecificities[] = $specificity;
-            }
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->addImages($form, $trick, $trickRepository);
-
-            if ($currentVideoLink !== $form->get('video')->getData()) {
-                $this->addVideo($trick, $trickRepository);
-            }
-
-            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('trick/edit.html.twig', [
-            'trick' => $trick,
-            'trickForm' => $form,
-            'unselectedSpecificities' => $unselectedSpecificities,
-            'selectedSpecificities' => $selectedSpecificities,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/delete", name="app_trick_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Trick $trick, TrickRepository $trickRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
-            $trickRepository->remove($trick, true);
-        }
-
-        return $this->redirectToRoute('app_trick_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    /**
      * @Route("/{id}/comment/delete", name="app_trick_comment_delete", methods={"GET"})
      */
     public function deleteComment(Comment $comment, CommentRepository $commentRepository): Response
     {
         $commentRepository->remove($comment, true);
 
-        return $this->redirectToRoute('app_trick_show', ['id' => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['slug' => $comment->getTrick()->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -202,6 +220,25 @@ class TrickController extends AbstractController
         }
 
         $trickRepository->add($trick, true);
+    }
+
+    private function isUnique($newTrickName, $tricksNames, $previousTrickName = null)
+    {
+        if (isset($previousTrickName)) {
+            if ($newTrickName !== $previousTrickName) {
+                $this->checkNamesUnicity($newTrickName, $tricksNames);
+            }
+        } else {
+            $this->checkNamesUnicity($newTrickName, $tricksNames);
+        }
+    }
+
+    private function checkNamesUnicity($newTrickName, $tricksNames) {
+        foreach ($tricksNames as $trickName) {
+            if (strtolower($trickName) === strtolower($newTrickName)) {
+                throw $this->createNotFoundException('Le trick ' . $newTrickName . ' existe déjà.');
+            }
+        }
     }
 
     private function addVideo($trick, TrickRepository $trickRepository)
