@@ -26,8 +26,6 @@ class HomeController extends AbstractController
     {
         $isAuthenticated = false;
 
-        session_start();
-
         $tricks = $tricksRepository->findAll();
         $users = $usersRepository->findAll();
         $comments = $commentsRepository->findAll();
@@ -38,7 +36,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/load-more", name="app_trick_load_more", methods={"GET", "POST"})
      */
-    public function loadMoreTricks(Request $request, TrickRepository $trickRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): JsonResponse
+    /*public function loadMoreTricks(Request $request, TrickRepository $trickRepository, ImageRepository $imageRepository, ManagerRegistry $doctrine): JsonResponse
     {
         $tricks = $trickRepository->findAll();
 
@@ -52,5 +50,5 @@ class HomeController extends AbstractController
 
         echo json_encode($tricksArray);
         exit();
-    }
+    }*/
 }
