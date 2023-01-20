@@ -147,6 +147,19 @@ section.archive, section.login, section.register, .description-section, .video-s
     right: 80px;
 }
 
+.pagination-number > *:last-child {
+    opacity: .5;
+}
+
+.pagination-number {
+    right: 0;
+    position: absolute;
+    word-break: keep-all;
+    color: var(--clr-white);
+    font-family: var(--ff-primary);
+    margin-top: 50px;
+}
+
 .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
     border: 2px solid var(--clr-white);
     box-shadow: var(--bs-secondary);

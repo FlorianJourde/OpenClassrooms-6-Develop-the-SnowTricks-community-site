@@ -9,16 +9,19 @@ function loadMoreComments() {
     let nextPageButton = document.querySelector('#load-next-comments');
     let previousPageButton = document.querySelector('#load-previous-comments');
     let currentPage = parseInt(document.querySelector('#comments-pagination').getAttribute('data-current-page'));
+    let currentPageNumber = document.querySelector('#current-page-number');
 
     nextPageButton.addEventListener('click', function (e) {
         e.preventDefault();
         currentPage++;
+        currentPageNumber.textContent = String(currentPage);
         updatePage();
     })
 
     previousPageButton.addEventListener('click', function (e) {
         e.preventDefault();
         currentPage--;
+        currentPageNumber.textContent = String(currentPage);
         updatePage();
     })
 

@@ -100,6 +100,7 @@
 
                 {% if trick.comments|length > commentsPerPage %}
                     <div class="actions comments-pagination" id="comments-pagination" data-total-pages="{{ totalPages }}" data-current-page="1">
+                        <p class="pagination-number"><span id="current-page-number">1</span><span>/{{ totalPages }}</span></p>
                         <a class="button-primary button-white hide" id="load-previous-comments" href="#">
                             <i class="fas fa-arrow-left"></i>
                         </a>
