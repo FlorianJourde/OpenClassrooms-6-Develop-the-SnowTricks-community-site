@@ -177,7 +177,7 @@ class TrickController extends AbstractController
     {
         $commentRepository->remove($comment, true);
 
-        return $this->redirectToRoute('app_trick_show', ['id' => $comment->getTrick()->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_trick_show', ['slug' => $comment->getTrick()->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
     /**

@@ -36,9 +36,9 @@ class TrickController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('app_trick_show', ['id' => $trick->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_trick_show', ['slug' => $trick->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('trick/show.html.twig', ['id' => $trick->getId(), 'trick' => $trick, 'commentForm' => $commentForm->createView()]);
+        return $this->render('trick/show.html.twig', ['slug' => $trick->getSlug(), 'trick' => $trick, 'commentForm' => $commentForm->createView()]);
     }
 }
