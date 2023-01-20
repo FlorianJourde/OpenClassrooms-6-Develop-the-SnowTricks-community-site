@@ -1,5 +1,11 @@
-window.onload = () => {
+ajaxImages();
+
+function ajaxImages() {
     let links = document.querySelectorAll('[data-delete]');
+
+    if (!links.length) {
+        return false;
+    }
 
     for (link of links) {
         link.addEventListener('click', function(e) {
@@ -16,13 +22,13 @@ window.onload = () => {
                 }).then(
                     response => response.json()
                 ).then(data => {
-                        if (data.success) {
-                            this.parentElement.parentElement.remove();
-                        } else {
-                            alert(data.error);
-                        }
+                    if (data.success) {
+                        this.parentElement.parentElement.remove();
+                    } else {
+                        alert(data.error);
+                    }
                 }).catch(e => alert(e))
-             }
+            }
         })
     }
 }

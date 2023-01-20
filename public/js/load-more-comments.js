@@ -1,24 +1,30 @@
-window.onload = () => {
-    let totalPages = parseInt(document.querySelector('#comments-pagination').getAttribute('data-total-pages'));
+loadMoreComments();
+
+function loadMoreComments() {
     let everyComments = document.querySelectorAll('.comment[data-page]');
+    let totalPages = parseInt(document.querySelector('#comments-pagination').getAttribute('data-total-pages'));
     let nextPageButton = document.querySelector('#load-next-comments');
     let previousPageButton = document.querySelector('#load-previous-comments');
     let currentPage = parseInt(document.querySelector('#comments-pagination').getAttribute('data-current-page'));
 
-    nextPageButton.addEventListener('click', function(e) {
+    if (!everyComments.length) {
+        return false;
+    }
+
+    nextPageButton.addEventListener('click', function (e) {
         e.preventDefault();
         currentPage++;
         updatePage();
     })
 
-    previousPageButton.addEventListener('click', function(e) {
+    previousPageButton.addEventListener('click', function (e) {
         e.preventDefault();
         currentPage--;
         updatePage();
     })
 
     function updatePage() {
-        everyComments.forEach(function(comment) {
+        everyComments.forEach(function (comment) {
             if (parseInt(comment.getAttribute('data-page')) !== currentPage) {
                 comment.classList.add('hide');
             } else {

@@ -1,19 +1,25 @@
-let windowHeight;
-let scrollToTopButton = document.querySelector('#top-page-button');
+topPage();
 
-windowHeight = window.innerHeight / 2;
+function topPage() {
+    let windowHeight;
+    let scrollToTopButton = document.querySelector('#top-page-button');
 
-if (scrollToTopButton !== null) {
-    window.onscroll = function() {
-        topPageAppear();
-    };
+    if (!scrollToTopButton) {
+        return false;
+    }
+
+    windowHeight = window.innerHeight / 2;
+
+    window.addEventListener('scroll', function () {
+        topPageAppear(windowHeight, scrollToTopButton);
+    });
 
     scrollToTopButton.addEventListener('click', function () {
         scrollToTop();
     })
 }
 
-function topPageAppear() {
+function topPageAppear(windowHeight, scrollToTopButton) {
     if (document.body.scrollTop > windowHeight || document.documentElement.scrollTop > windowHeight) {
         scrollToTopButton.classList.add('appear');
     } else {
