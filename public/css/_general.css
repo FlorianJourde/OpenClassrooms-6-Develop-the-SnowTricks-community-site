@@ -106,7 +106,7 @@
     scroll-margin-top: 80px;
 }
 
-.introduction, .images-section {
+.introduction, .images-section, .error {
     background-repeat: no-repeat;
     background-size: 1000px;
     background-position: bottom 0 right -300px;
