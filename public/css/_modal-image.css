@@ -13,6 +13,7 @@
     object-fit: contain;
     background-color: var(--clr-transparent);
     transition: background-color .4s;
+    cursor: pointer;
 }
 
 #modal-image-container img {
@@ -23,15 +24,14 @@
     transform: translateY(-20px);
     box-shadow: var(--bs-secondary);
     transition: opacity .4s, transform .4s;
-    cursor: pointer;
 }
 
-#modal-image-container img.appear {
+#modal-image-container.active img {
     transform: translateY(0);
     opacity: 1;
 }
 
-#modal-image-container:has(.modal-image) {
+#modal-image-container.active {
     background-color: var(--clr-transparent-black);
     pointer-events: unset;
 }

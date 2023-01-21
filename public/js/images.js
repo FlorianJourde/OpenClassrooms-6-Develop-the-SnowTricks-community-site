@@ -48,7 +48,7 @@ function enlargeImages() {
             img.classList.add('modal-image');
             modalImageContainer.appendChild(img);
             setTimeout(function () {
-                modalImageContainer.querySelector('img').classList.add('appear');
+                modalImageContainer.classList.add('active');
             }, 0);
         })
     })
@@ -62,7 +62,7 @@ function enlargeImages() {
     });
 
     function closeModalImage() {
-        modalImageContainer.querySelector('img').classList.remove('appear');
+        modalImageContainer.classList.remove('active');
         setTimeout(function () {
             modalImageContainer.removeChild(modalImageContainer.querySelector('img'));
         }, 200);
