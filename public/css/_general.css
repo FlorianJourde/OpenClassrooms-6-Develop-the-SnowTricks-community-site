@@ -1,547 +1,548 @@
 .banner {
-    width: 100%;
-    padding-top: 150px;
-    padding-bottom: 150px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    gap: 50px;
-    overflow: hidden;
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 50px;
+  overflow: hidden;
 }
 
 .fa-check-circle {
-    color: var(--clr-dark-blue);
+  color: var(--clr-dark-blue);
 }
 
 .banner.wide {
-    padding-top: 350px;
-    padding-bottom: 150px;
+  padding-top: 350px;
+  padding-bottom: 150px;
 }
 
 .banner.very-wide, .banner.wide:has(.actions) {
-    padding-top: 150px;
-    padding-bottom: 150px;
-    gap: 150px;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  gap: 150px;
 }
 
 .banner::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    opacity: 0.5;
-    background-color: var(--clr-dark-grey);
-    pointer-events: none;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.5;
+  background-color: var(--clr-dark-grey);
+  pointer-events: none;
 }
 
 .banner.homepage .title {
-    max-width: 600px;
+  max-width: 600px;
 }
 
 .banner-decoration {
-    width: 600px;
-    object-fit: contain;
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    right: auto;
-    bottom: auto;
-    transform: rotate(-8deg);
-    opacity: .1;
+  width: 600px;
+  object-fit: contain;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: auto;
+  bottom: auto;
+  transform: rotate(-8deg);
+  opacity: .1;
 }
 
 .banner .title {
-    font-size: var(--fs-big-title);
-    font-family: var(--ff-primary);
-    color: var(--clr-white);
-    text-shadow: 0 10px 20px #00000040;
-    text-transform: uppercase;
-    max-width: 800px;
+  font-size: var(--fs-big-title);
+  font-family: var(--ff-primary);
+  color: var(--clr-white);
+  text-shadow: 0 10px 20px #00000040;
+  text-transform: uppercase;
+  max-width: 800px;
 }
 
 .banner .title h1 + * {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .banner .title h2 {
-    font-size: var(--fs-title);
+  font-size: var(--fs-title);
 }
 
 .banner .title h2.author span {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 #scroll-to-next-section {
-    display: flex;
-    justify-content: flex-end;
-    font-size: var(--fs-big-title);
-    animation: up-down 3s infinite;
-    opacity: .5;
-    transition: .4s;
-    cursor: pointer;
-    background-color: unset;
-    border: none;
-    outline: none;
-    color: var(--clr-white);
-    margin-right: 300px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--fs-big-title);
+  animation: up-down 3s infinite;
+  opacity: .5;
+  transition: .4s;
+  cursor: pointer;
+  background-color: unset;
+  border: none;
+  outline: none;
+  color: var(--clr-white);
+  margin-right: 300px;
 }
 
 #scroll-to-next-section:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 @keyframes up-down {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(10px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .introduction {
-    scroll-margin-top: 80px;
+  scroll-margin-top: 80px;
 }
 
 .introduction, .images-section, .error {
-    background-repeat: no-repeat;
-    background-size: 1000px;
-    background-position: bottom 0 right -300px;
+  background-repeat: no-repeat;
+  background-size: 1000px;
+  background-position: bottom 0 right -300px;
 }
 
-section.archive, .comments-section, .register, .login  {
-    background-repeat: no-repeat;
-    background-size: 800px;
-    background-position: bottom 0 right 50px;
+section.archive, .comments-section, .register, .login {
+  background-repeat: no-repeat;
+  background-size: 800px;
+  background-position: bottom 0 right 50px;
 }
 
 section.archive, section.login, section.register, .description-section, .video-section, .edit-section {
-    background-color: var(--clr-very-light-blue);
+  background-color: var(--clr-very-light-blue);
 }
 
 .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    flex-wrap: wrap;
-    z-index: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  z-index: 0;
 }
 
 .actions.comments-pagination {
-    margin-top: 15px;
-    position: relative;
+  margin-top: 15px;
+  position: relative;
 }
 
 .actions.comments-pagination a {
-    position: absolute;
+  position: absolute;
 }
 
 .comments-pagination #load-previous-comments {
-    right: 80px;
+  right: 80px;
 }
 
 .pagination-number > *:last-child {
-    opacity: .5;
+  opacity: .5;
 }
 
 .pagination-number {
-    right: 0;
-    position: absolute;
-    word-break: keep-all;
-    color: var(--clr-white);
-    font-family: var(--ff-secondary);
-    margin-top: 50px;
+  right: 0;
+  position: absolute;
+  word-break: keep-all;
+  color: var(--clr-white);
+  font-family: var(--ff-secondary);
+  margin-top: 50px;
 }
 
 .actions-section .button-primary, .actions-section .button-secondary, .actions-section form button[type=submit] {
-    border: 2px solid var(--clr-white);
-    box-shadow: var(--bs-secondary);
-    background-color: var(--clr-transparent);
+  border: 2px solid var(--clr-white);
+  box-shadow: var(--bs-secondary);
+  background-color: var(--clr-transparent);
 }
 
 .actions-section .button-primary.button-dark-red:hover {
-    background-color: var(--clr-dark-red);
+  background-color: var(--clr-dark-red);
 }
 
 .actions-section .actions {
 }
 
 .introduction p, .description-section p {
-    font-size: var(--fs-big-text);
+  font-size: var(--fs-big-text);
 }
 
 .section-title {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    font-size: var(--fs-big-title);
-    font-family: var(--ff-secondary);
-    font-weight: 600;
-    z-index: 1;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-size: var(--fs-big-title);
+  font-family: var(--ff-secondary);
+  font-weight: 600;
+  z-index: 1;
 }
 
 .section-title.white-title {
-    color: var(--clr-white);
+  color: var(--clr-white);
 }
 
 .section-title::before {
-    content: "";
-    width: 200px;
-    height: 120px;
-    background-size: contain;
-    top: -40px;
-    left: 0;
-    transform: translateX(-50%);
-    background-image: url(../images/snowtricks-logo-very-light-blue.svg);
-    z-index: -1;
-    opacity: 1;
-    background-position: top;
-    background-repeat: no-repeat;
-    position: absolute;
-    pointer-events: none;
+  content: "";
+  width: 200px;
+  height: 120px;
+  background-size: contain;
+  top: -40px;
+  left: 0;
+  transform: translateX(-50%);
+  background-image: url(../images/snowtricks-logo-very-light-blue.svg);
+  z-index: -1;
+  opacity: 1;
+  background-position: top;
+  background-repeat: no-repeat;
+  position: absolute;
+  pointer-events: none;
 }
 
 .section-title.white-logo::before {
-    background-image: url(../images/snowtricks-logo-white.svg);
+  background-image: url(../images/snowtricks-logo-white.svg);
 }
 
 .section-title.very-dark-blue-logo::before {
-    background-image: url(../images/snowtricks-logo-very-dark-blue.svg);
+  background-image: url(../images/snowtricks-logo-very-dark-blue.svg);
 }
 
 .section-title.no-logo::before {
-    content: unset;
+  content: unset;
 }
 
 .comments-section {
-    background-color: var(--clr-dark-blue);
+  background-color: var(--clr-dark-blue);
 }
 
 .tricks {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 70px 50px;
-    grid-auto-rows: 1fr;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 70px 50px;
+  grid-auto-rows: 1fr;
 }
 
 .trick {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 20px 0 20px;
-    min-height: 300px;
-    justify-content: flex-end;
-    color: var(--clr-dark-grey);
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+  min-height: 300px;
+  justify-content: flex-end;
+  color: var(--clr-dark-grey);
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
 #load-more-tricks {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
 }
 
 .hide, .trick.hide, .comment.hide {
-    display: none;
+  display: none;
 }
 
 .trick .actions {
-    margin-bottom: auto;
+  margin-bottom: auto;
 }
 
 .edit-section .images {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .edit-section .images .image {
-    min-height: 150px;
+  min-height: 150px;
 }
 
 .images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    grid-auto-rows: 1fr;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  grid-auto-rows: 1fr;
 }
 
 .images .image {
-    padding: 20px;
-    min-height: 300px;
-    background-position: center;
-    background-size: cover;
+  padding: 20px;
+  min-height: 300px;
+  background-position: center;
+  background-size: cover;
 }
 
 .images-section .images .image {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .images .image .actions, .trick .actions, .comment .actions {
-    display: flex;
-    justify-content: flex-end;
-    font-size: var(--fs-small-text);
-    flex-wrap: wrap;
-    gap: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--fs-small-text);
+  flex-wrap: wrap;
+  gap: 10px 20px;
 }
 
 .specificities {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 60px;
-    grid-auto-rows: 1fr;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+  grid-auto-rows: 1fr;
 }
 
 .specificity {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    gap: 40px;
-    padding: 60px;
-    background-color: var(--clr-very-light-blue);
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 40px;
+  padding: 60px;
+  background-color: var(--clr-very-light-blue);
 }
 
 .background-image {
-    background-image: url(../images/pine-trees-very-dark-blue-2.svg);
-    background-repeat: no-repeat;
-    background-size: 800px;
-    background-position: bottom 0 right 50px;
-    position: relative;
+  background-image: url(../images/pine-trees-very-dark-blue-2.svg);
+  background-repeat: no-repeat;
+  background-size: 800px;
+  background-position: bottom 0 right 50px;
+  position: relative;
 }
 
 .specificity.background-image {
-    background-size: 300px;
+  background-size: 300px;
 }
 
 .background-image > * {
-    z-index: 0;
+  z-index: 0;
 }
 
 .background-image::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    opacity: 0.9;
-    background-color: var(--clr-very-light-blue);
-    pointer-events: none;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.9;
+  background-color: var(--clr-very-light-blue);
+  pointer-events: none;
 }
 
 .specificity-icon {
-    height: 60px;
-    width: 60px;
-    object-fit: contain;
-    margin-left: auto;
-    margin-right: auto;
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .specificity .description {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .edit-section .specificities {
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-    gap: 20px;
+  gap: 20px;
 }
 
 .edit-section .specificity {
-    grid-template-areas:
+  grid-template-areas:
             "a b"
             ". c";
-    grid-template-rows: 1fr auto;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
-    background-color: var(--clr-white);
+  grid-template-rows: 1fr auto;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--clr-white);
 }
 
 .edit-section .specificity img {
-    grid-area: a;
+  grid-area: a;
 }
 
 .edit-section .specificity .description {
-    gap: 10px;
-    grid-area: b;
+  gap: 10px;
+  grid-area: b;
 }
 
 .edit-section .specificity button {
-    grid-area: c;
+  grid-area: c;
 }
 
 .specificities-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .specificities-wrapper + * {
-    margin-top: 150px;
+  margin-top: 150px;
 }
 
 .video-section iframe {
-    width: 100%;
-    height: 500px;
-    border: unset;
+  width: 100%;
+  height: 500px;
+  border: unset;
 }
 
 .trick::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    opacity: 0.25;
-    background-color: var(--clr-dark-grey);
-    pointer-events: none;
-    transition: opacity .4s;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.25;
+  background-color: var(--clr-dark-grey);
+  pointer-events: none;
+  transition: opacity .4s;
 }
 
 .trick .title {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .tricks .trick:hover::before {
-    opacity: 0;
+  opacity: 0;
 }
 
 .tricks .trick:hover .content {
-    transform: translateY(-20px);
+  transform: translateY(-20px);
 }
 
 .trick .content {
-    background-color: var(--clr-white);
-    box-shadow: var(--bs-secondary);
-    padding: 20px;
-    transform: translateY(20px);
-    transition: transform .4s, color .4s;
-    color: var(--clr-dark-blue);
+  background-color: var(--clr-white);
+  box-shadow: var(--bs-secondary);
+  padding: 20px;
+  transform: translateY(20px);
+  transition: transform .4s, color .4s;
+  color: var(--clr-dark-blue);
 }
 
 .trick .content:hover {
-    color: var(--clr-very-dark-grey);
+  color: var(--clr-very-dark-grey);
 }
 
 .trick .content i {
-    opacity: .25;
+  opacity: .25;
 }
 
 .comments {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .comment {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: var(--bs-secondary);
-    width: 100%;
-    padding: 40px;
-    background-color: var(--clr-white);
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--bs-secondary);
+  width: 100%;
+  padding: 40px;
+  background-color: var(--clr-white);
+  position: relative;
 }
 
 .comment .header {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title-header {
-    display: flex;
-    gap: 50px;
-    justify-content: space-between;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
 }
 
 .comment .date {
-    color: var(--clr-grey);
+  color: var(--clr-grey);
 }
 
 .information {
-    width: fit-content;
-    text-transform: uppercase;
-    font-family: var(--ff-secondary);
-    font-weight: 500;
+  width: fit-content;
+  text-transform: uppercase;
+  font-family: var(--ff-secondary);
+  font-weight: 500;
 }
 
 .comments-section .information {
-    color: var(--clr-white);
+  color: var(--clr-white);
 }
 
-.comments-section .comments +.information, .comments-section .information +.information {
-    margin-top: 50px;
+.comments-section .comments + .information, .comments-section .information + .information {
+  margin-top: 50px;
 }
 
 .table-scroll {
-    overflow: auto;
+  overflow: auto;
 }
 
 .table {
-    white-space: nowrap;
-    width :100%;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .table {
-    width: 100%;
-    background-color: var(--clr-white);
+  width: 100%;
+  background-color: var(--clr-white);
 }
 
 .table tbody {
-    text-align: center;
+  text-align: center;
 }
 
 .archive .table tbody td img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
 
 .archive.tricks-section .table tbody td img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
 }
 
 .table th,
 .table td {
-    padding: 10px;
+  padding: 10px;
 }
 
 table .actions {
-    justify-content: center;
+  justify-content: center;
 }
+
 .table thead tr {
-    background-color: var(--clr-dark-blue);
-    color: var(--clr-white);
+  background-color: var(--clr-dark-blue);
+  color: var(--clr-white);
 }
 
 .table tbody tr:nth-child(odd) {
-    background-color: var(--clr-very-light-blue);
+  background-color: var(--clr-very-light-blue);
 }
 
 .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .form-field .title,
@@ -550,9 +551,9 @@ form[name=trick] > div label,
 form[name=specificity] > div label,
 form[name=reset_password_request_form] > div label,
 form[name=user] > div label {
-    font-size: var(--fs-big-text);
-    display: inline-block;
-    font-weight: 600;
+  font-size: var(--fs-big-text);
+  display: inline-block;
+  font-weight: 600;
 }
 
 form[name=registration_form] > div label,
@@ -560,29 +561,29 @@ form[name=trick] > div label,
 form[name=specificity] > div label,
 form[name=reset_password_request_form] > div label,
 form[name=user] > div label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 input[type="file"] {
-    padding: unset;
-    border-radius: unset;
-    box-shadow: unset;
+  padding: unset;
+  border-radius: unset;
+  box-shadow: unset;
 }
 
 form > div:has(input[type=checkbox]) input[type=checkbox] {
-    width: unset;
-    margin-left: 20px;
-    margin-right: 10px;
+  width: unset;
+  margin-left: 20px;
+  margin-right: 10px;
 }
 
 form[name="user"] #user_roles input:first-child {
-    margin-left: unset;
+  margin-left: unset;
 }
 
 form #comment button[type=submit] {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 form[name=comment] {
-    margin-top: 50px;
+  margin-top: 50px;
 }

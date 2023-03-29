@@ -1,37 +1,37 @@
 #modal-image-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 100px;
-    object-fit: contain;
-    background-color: var(--clr-transparent);
-    transition: background-color .4s;
-    cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  object-fit: contain;
+  background-color: var(--clr-transparent);
+  transition: background-color .4s;
+  cursor: pointer;
 }
 
 #modal-image-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transform: translateY(-20px);
-    box-shadow: var(--bs-secondary);
-    transition: opacity .4s, transform .4s;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(-20px);
+  box-shadow: var(--bs-secondary);
+  transition: opacity .4s, transform .4s;
 }
 
 #modal-image-container.active img {
-    transform: translateY(0);
-    opacity: 1;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 #modal-image-container.active {
-    background-color: var(--clr-transparent-black);
-    pointer-events: unset;
+  background-color: var(--clr-transparent-black);
+  pointer-events: unset;
 }
