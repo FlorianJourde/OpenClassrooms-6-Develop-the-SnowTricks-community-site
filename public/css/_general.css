@@ -239,6 +239,7 @@ section.archive, section.login, section.register, .description-section, .video-s
   min-height: 300px;
   justify-content: flex-end;
   color: var(--clr-dark-grey);
+  border: 10px solid var(--clr-white);
   background-size: cover;
   background-position: center;
   position: relative;
@@ -275,6 +276,7 @@ section.archive, section.login, section.register, .description-section, .video-s
 }
 
 .images .image {
+  border: 10px solid var(--clr-white);
   padding: 20px;
   min-height: 300px;
   background-position: center;

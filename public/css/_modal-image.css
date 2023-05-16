@@ -24,6 +24,7 @@
   transform: translateY(-20px);
   box-shadow: var(--bs-secondary);
   transition: opacity .4s, transform .4s;
+  border: 10px solid var(--clr-white);
 }
 
 #modal-image-container.active img {
