@@ -36,11 +36,12 @@ footer .rights {
   color: var(--clr-grey);
 }
 
-footer .links i {
+footer .links a {
   transition: .4s;
+  display: inline-block;
 }
 
-footer .links a:hover i {
+footer .links a:hover {
   transform: translateY(-5px);
   color: var(--clr-yellow);
 }

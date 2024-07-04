@@ -6,6 +6,7 @@
 
 <section class="banner {{ is_home is defined ? 'homepage' : '' }} {{ wide is defined ? wide : '' }}" style="background-image: url('{{ background }}');">
   {% if is_home is defined %}
+    {% include 'partials/snow.html.twig' %}
     <img class="banner-decoration pulse-1" src="{{ asset('images/snowtricks-logo-white.svg') }}" alt="">
   {% endif %}
 
