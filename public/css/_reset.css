@@ -1,21 +1,3 @@
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #232b31 #ffffff;
-  scrollbar-width: thin;
-}
-
-*::-webkit-scrollbar {
-  width: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #ffffff;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--clr-very-dark-grey);
-}
-
 ::selection {
   background-color: var(--clr-light-grey);
   color: var(--clr-very-dark-grey);
