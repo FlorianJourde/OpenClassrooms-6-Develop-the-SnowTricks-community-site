@@ -20,7 +20,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --optimize-autoloader
+        run: composer install --prefer-dist --no-progress --optimize-autoloader --no-scripts
 
       - name: Set up SSH
         run: |
